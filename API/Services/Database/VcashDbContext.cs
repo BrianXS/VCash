@@ -6,9 +6,6 @@ namespace API.Services.Database
 {
     public class VcashDbContext : IdentityDbContext<User, Role, int>
     {
-        public VcashDbContext(DbContextOptions options) : base()
-        {
-            
-        }
+        public VcashDbContext(DbContextOptions options) : base(options) { }
     }
 }

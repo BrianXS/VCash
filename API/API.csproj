@@ -18,14 +18,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Constants" />
-      <Folder Include="Controllers" />
       <Folder Include="Enums" />
       <Folder Include="Profiles" />
-      <Folder Include="Repositories" />
-      <Folder Include="Resources\Incoming" />
-      <Folder Include="Resources\Outgoing" />
-      <Folder Include="Utils" />
     </ItemGroup>
 
 

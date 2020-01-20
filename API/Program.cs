@@ -33,7 +33,7 @@ namespace API
             using (var scope = host.Services.CreateScope())
             {
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
-                SeedingClass.SeedUsers(userManager);
+                SeedingClass.SeedUsers(userManager).Wait();
             }
         }
     }
