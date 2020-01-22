@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using API.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -27,36 +28,14 @@ namespace API.Services.Database
                 new Role { Name = Constants.Roles.CashCenterManager },
                 new Role { Name = Constants.Roles.MachineryManager },
                 new Role { Name = Constants.Roles.LogisticsManager },
-                new Role { Name = Constants.Roles.InvoicingManager }
+                new Role { Name = Constants.Roles.InvoicingManager },
+                new Role { Name = Constants.Roles.Employee }
             };
 
             foreach (var role in roles)
             {
                 await roleManager.CreateAsync(role);
             }
-        }
-
-        public static async Task SeedClaims(UserManager<Role> roleManager)
-        {
-            if(roleManager.Users.Any())
-                return;
-            
-            var roles = new List<Role>
-            {
-                new Role { Name = Constants.Roles.CashCenterManager },
-                new Role { Name = Constants.Roles.MachineryManager },
-                new Role { Name = Constants.Roles.LogisticsManager },
-                new Role { Name = Constants.Roles.InvoicingManager }
-            };
-
-            foreach (var role in roles)
-            {
-                await roleManager.CreateAsync(role);
-            }
-            
-            //I'm lost
-            //I'm trying store claims on the db and attach
-            //them to users whenever they are needed
         }
     }
 }
