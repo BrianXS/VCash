@@ -24,9 +24,9 @@ namespace API.Entities
         public DateTime From { get; set; }
         public DateTime Until { get; set; }
 
-        public int CityId { get; set; }
-        public City City { get; set; }
-
         public BusinessUnit Unit { get; set; }
+        
+        public int BranchId { get; set; }
+        public Branch Branch { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 namespace API.Entities
 {
-    public class Office
+    public class ATM
     {
         public int Id { get; set; }
 

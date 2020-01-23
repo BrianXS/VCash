@@ -32,7 +32,7 @@ namespace API.Entities
         public string Phone { get; set; }
         public bool Active { get; set; }
 
-        public List<Office> Offices { get; set; }
+        public List<Location> Locations { get; set; }
         public List<Cashier> Cashiers { get; set; }
     }
 }

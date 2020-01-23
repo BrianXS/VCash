@@ -16,12 +16,11 @@ namespace API.Entities
 
         public BusinessUnit BusinessUnit { get; set; }
         public VehicleType VehicleType { get; set; }
-        
-        public int BranchId { get; set; }
-        public Branch Branch { get; set; }
 
         [Column(TypeName = "decimal(18, 6)")]
         public decimal AllowedAmmount { get; set; }
-
+        
+        public int BranchId { get; set; }
+        public Branch Branch { get; set; }
     }
 }
