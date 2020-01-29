@@ -1,6 +1,6 @@
 namespace API.Enums
 {
-    public enum LocationType
+    public enum OfficeType
     {
         NA,
         Office,

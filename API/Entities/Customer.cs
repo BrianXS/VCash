@@ -12,10 +12,10 @@ namespace API.Entities
         public CorporateDocumentType DocumentType { get; set; }
         public string Document { get; set; }
 
-        public int? HeadquartersId { get; set; }
+        public int HeadquartersId { get; set; }
         public City Headquarters { get; set; }
         
-        public int? InvoicingCityId { get; set; }
+        public int InvoicingCityId { get; set; }
         public City InvoicingCity { get; set; }
         
         public string FirstKeyPerson { get; set; }
@@ -32,7 +32,7 @@ namespace API.Entities
         public string Phone { get; set; }
         public bool Active { get; set; }
 
-        public List<Location> Locations { get; set; }
+        public List<Office> Offices { get; set; }
         public List<Cashier> Cashiers { get; set; }
     }
 }
