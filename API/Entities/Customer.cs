@@ -30,9 +30,12 @@ namespace API.Entities
         public string Address { get; set; }
         public string Website { get; set; }
         public string Phone { get; set; }
-        public bool Active { get; set; }
 
         public List<Office> Offices { get; set; }
         public List<Cashier> Cashiers { get; set; }
+
+        public ICollection<CustomerFund> CustomerFunds { get; set; }
+        
+        public bool Active { get; set; }
     }
 }

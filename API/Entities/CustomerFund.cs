@@ -3,14 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Entities
 {
-    public class OfficeFund
+    public class CustomerFund
     {
-        [Key, Column(Order = 0)]
+        public int CustomerId { get; set; }
+        public Customer Customer { get; set; }
+        
         public int OfficeId { get; set; }
         public Office Office { get; set; }
-
-        [Key, Column(Order = 1)]
-        public Office FundId { get; set; }
-        public Office Fund { get; set; }
     }
 }

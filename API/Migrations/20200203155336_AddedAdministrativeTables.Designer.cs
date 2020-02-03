@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(VcashDbContext))]
-    [Migration("20200129215145_AddedAdministrativeTables")]
+    [Migration("20200203155336_AddedAdministrativeTables")]
     partial class AddedAdministrativeTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -248,6 +248,21 @@ namespace API.Migrations
                     b.ToTable("Customers");
                 });
 
+            modelBuilder.Entity("API.Entities.CustomerFund", b =>
+                {
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OfficeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CustomerId", "OfficeId");
+
+                    b.HasIndex("OfficeId");
+
+                    b.ToTable("OfficesAndFunds");
+                });
+
             modelBuilder.Entity("API.Entities.Employee", b =>
                 {
                     b.Property<int>("Id")
@@ -419,33 +434,6 @@ namespace API.Migrations
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Offices");
-                });
-
-            modelBuilder.Entity("API.Entities.OfficeFund", b =>
-                {
-                    b.Property<int>("OfficeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("FundId1")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("FundIdId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("OfficeId1")
-                        .HasColumnType("int");
-
-                    b.HasKey("OfficeId");
-
-                    b.HasIndex("FundId1");
-
-                    b.HasIndex("FundIdId");
-
-                    b.HasIndex("OfficeId1");
-
-                    b.ToTable("OfficesAndFunds");
                 });
 
             modelBuilder.Entity("API.Entities.Role", b =>
@@ -766,6 +754,21 @@ namespace API.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("API.Entities.CustomerFund", b =>
+                {
+                    b.HasOne("API.Entities.Customer", "Customer")
+                        .WithMany("CustomerFunds")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Office", "Office")
+                        .WithMany("CustomerFunds")
+                        .HasForeignKey("OfficeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("API.Entities.Employee", b =>
                 {
                     b.HasOne("API.Entities.Branch", "Branch")
@@ -792,23 +795,6 @@ namespace API.Migrations
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("API.Entities.OfficeFund", b =>
-                {
-                    b.HasOne("API.Entities.Office", "Fund")
-                        .WithMany()
-                        .HasForeignKey("FundId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API.Entities.Office", "FundId")
-                        .WithMany()
-                        .HasForeignKey("FundIdId");
-
-                    b.HasOne("API.Entities.Office", "Office")
-                        .WithMany()
-                        .HasForeignKey("OfficeId1");
                 });
 
             modelBuilder.Entity("API.Entities.State", b =>

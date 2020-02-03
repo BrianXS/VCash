@@ -339,33 +339,24 @@ namespace API.Migrations
                 name: "OfficesAndFunds",
                 columns: table => new
                 {
+                    CustomerId = table.Column<int>(nullable: false),
                     OfficeId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OfficeId1 = table.Column<int>(nullable: true),
-                    FundIdId = table.Column<int>(nullable: true),
-                    FundId1 = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OfficesAndFunds", x => x.OfficeId);
+                    table.PrimaryKey("PK_OfficesAndFunds", x => new { x.CustomerId, x.OfficeId });
                     table.ForeignKey(
-                        name: "FK_OfficesAndFunds_Offices_FundId1",
-                        column: x => x.FundId1,
+                        name: "FK_OfficesAndFunds_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_OfficesAndFunds_Offices_OfficeId",
+                        column: x => x.OfficeId,
                         principalTable: "Offices",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OfficesAndFunds_Offices_FundIdId",
-                        column: x => x.FundIdId,
-                        principalTable: "Offices",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_OfficesAndFunds_Offices_OfficeId1",
-                        column: x => x.OfficeId1,
-                        principalTable: "Offices",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(
@@ -424,19 +415,9 @@ namespace API.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OfficesAndFunds_FundId1",
+                name: "IX_OfficesAndFunds_OfficeId",
                 table: "OfficesAndFunds",
-                column: "FundId1");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OfficesAndFunds_FundIdId",
-                table: "OfficesAndFunds",
-                column: "FundIdId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OfficesAndFunds_OfficeId1",
-                table: "OfficesAndFunds",
-                column: "OfficeId1");
+                column: "OfficeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_States_CountryId",

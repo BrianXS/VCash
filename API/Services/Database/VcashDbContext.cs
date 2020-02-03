@@ -13,7 +13,7 @@ namespace API.Services.Database
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
 
-        public DbSet<OfficeFund> OfficesAndFunds { get; set; }
+        public DbSet<CustomerFund> OfficesAndFunds { get; set; }
         public DbSet<Office> Offices { get; set; }
         public DbSet<ATM> ATMs { get; set; }
         public DbSet<AtmBattery> AtmBatteries { get; set; }
@@ -28,6 +28,20 @@ namespace API.Services.Database
         
         public DbSet<Failure> Failures { get; set; }
 
-        
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            
+            builder.Entity<CustomerFund>()
+                .HasKey(entity => new { entity.CustomerId, entity.OfficeId });
+
+            builder.Entity<CustomerFund>()
+                .HasOne(internalEntity => internalEntity.Customer)
+                .WithMany(externalEntity => externalEntity.CustomerFunds);
+            
+            builder.Entity<CustomerFund>()
+                .HasOne(internalEntity => internalEntity.Office)
+                .WithMany(externalEntity => externalEntity.CustomerFunds);
+        }
     }
 }
