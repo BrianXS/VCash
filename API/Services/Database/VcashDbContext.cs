@@ -1,6 +1,7 @@
 using API.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace API.Services.Database
 {
@@ -8,7 +9,9 @@ namespace API.Services.Database
     {
         public VcashDbContext(DbContextOptions options) : base(options) { }
 
-        
+        /// <summary>
+        /// Administrative Entities
+        /// </summary>
         public DbSet<Branch> Branches { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
@@ -27,7 +30,24 @@ namespace API.Services.Database
         public DbSet<City> Cities { get; set; }
         
         public DbSet<Failure> Failures { get; set; }
+        
+        
+        /// <summary>
+        /// Movements Related Entities
+        /// </summary>
+        public DbSet<Movement> Movements { get; set; }
 
+        public DbSet<Bag> Bags { get; set; }
+        public DbSet<BagDenomination> BagDenominations { get; set; }
+        public DbSet<BagNotification> BagNotifications { get; set; }
+
+        public DbSet<Envelope> Envelopes { get; set; }
+        public DbSet<EnvelopeDenomination> EnvelopeDenominations { get; set; }
+        public DbSet<EnvelopeNotification> EnvelopeNotifications { get; set; }
+
+        public DbSet<DenominationType> DenominationTypes { get; set; }
+        public DbSet<NotificationType> NotificationTypes { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
