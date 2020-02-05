@@ -1,11 +1,11 @@
 namespace API.Constants.Claims
 {
-    public static class Machinery
+    public static class Machineryw
     {
-        public static string Access = "Machinery Access Section";
-        public static string Create = "Machinery Create";
-        public static string View = "Machinery View";
-        public static string Edit = "Machinery Edit";
-        public static string Disable = "Machinery Disable";
+        public const string Access = "Machinery Access Section";
+        public const string Create = "Machinery Create";
+        public const string View = "Machinery View";
+        public const string Edit = "Machinery Edit";
+        public const string Disable = "Machinery Disable";
     }
 }

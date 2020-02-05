@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Entities;
 using API.Services.Database;
+using API.Services.Policies;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -51,6 +52,14 @@ namespace API
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => { options.TokenValidationParameters = Utils.TokenUtility.TokenValidationParameters(); });
+
+            services.AddAuthorization(options =>
+            {
+                foreach (var policy in Policies.GetAllPolicies())
+                {
+                    options.AddPolicy(policy.Type, p => p.RequireClaim(policy.Value));
+                }
+            });
             
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddRouting(options => options.LowercaseUrls = true);

@@ -25,6 +25,7 @@ namespace API.Services.Database
             
             var roles = new List<Role>
             {
+                new Role { Name = Constants.Roles.Administrator },
                 new Role { Name = Constants.Roles.CashCenterManager },
                 new Role { Name = Constants.Roles.MachineryManager },
                 new Role { Name = Constants.Roles.LogisticsManager },

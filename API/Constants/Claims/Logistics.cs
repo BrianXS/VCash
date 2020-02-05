@@ -2,10 +2,10 @@ namespace API.Constants.Claims
 {
     public static class Logistics
     {
-        public static string Access = "Logistics Access Section";
-        public static string Create = "Logistics Create";
-        public static string View = "Logistics View";
-        public static string Edit = "Logistics Edit";
-        public static string Disable = "Logistics Disable";
+        public const string Access = "Logistics Access Section";
+        public const string Create = "Logistics Create";
+        public const string View = "Logistics View";
+        public const string Edit = "Logistics Edit";
+        public const string Disable = "Logistics Disable";
     }
 }
