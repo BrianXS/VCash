@@ -1,4 +1,5 @@
 using API.Entities;
+using API.Resources.Incoming;
 using API.Resources.Outgoing;
 using AutoMapper;
 
@@ -8,7 +9,13 @@ namespace API.Profiles
     {
         public UserProfile()
         {
-            CreateMap<User, UserResource>();
+            CreateMap<User, UserResponse>();
+            CreateMap<CreateUserRequest, User>();
+            
+            CreateMap<UpdateUserRequest, User>()
+                .ForAllMembers(members => 
+                    members.Condition((src, dest, srcMember) => 
+                        string.IsNullOrEmpty(srcMember.ToString())));
         }
     }
 }

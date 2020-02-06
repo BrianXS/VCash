@@ -1,6 +1,6 @@
 namespace API.Resources.Outgoing
 {
-    public class UserResource
+    public class UserResponse
     {
         public string UserName { get; set; }
         public string Names { get; set; }

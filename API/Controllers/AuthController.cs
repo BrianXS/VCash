@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using API.Entities;
@@ -36,6 +37,8 @@ namespace API.Controllers
             if (loginResult.Succeeded)
             {
                 var userData = await _userRepository.FindUserByUserName(request.UserName);
+                var roles = await _userRepository.GetAllUserRoles(userData);
+                
                 userData.RefreshToken = TokenUtility.GenerateRefreshToken();
                 await _userRepository.Update(userData);
                 
@@ -44,8 +47,7 @@ namespace API.Controllers
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.UniqueName, request.UserName)
                 };
-                
-                claims.AddRange(await _userRepository.GetUserClaims(userData));
+                roles.ForEach(role => claims.Add(new Claim(ClaimTypes.Role, role)));
                 
                 var token = TokenUtility.GenerateToken(claims);
                 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using API.Entities;
 using API.Services.Database;
@@ -33,7 +34,7 @@ namespace API
         {
             services.AddDbContext<VcashDbContext>(options =>
             {
-                options.UseSqlServer(_configuration.GetConnectionString("local-brian"));
+                options.UseSqlServer(_configuration.GetConnectionString("vatco-qa"));
             });
 
             services.AddIdentity<User, Role>(options =>
@@ -57,7 +58,8 @@ namespace API
             {
                 foreach (var policy in Policies.GetAllPolicies())
                 {
-                    options.AddPolicy(policy.Type, p => p.RequireClaim(policy.Value));
+                    options.AddPolicy(policy.Value, p =>
+                        p.RequireClaim(policy.Type, policy.Value));
                 }
             });
             
