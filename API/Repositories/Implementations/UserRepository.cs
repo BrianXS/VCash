@@ -32,5 +32,10 @@ namespace API.Repositories.Implementations
         {
             await _userManager.UpdateAsync(user);
         }
+
+        public List<User> FindAll()
+        {
+            return _userManager.Users.ToList();
+        }
     }
 }

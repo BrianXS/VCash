@@ -11,5 +11,6 @@ namespace API.Repositories.Interfaces
         Task<User> FindUserByUserName(string userName);
         Task<List<Claim>> GetUserClaims(User user);
         Task Update(User user);
+        List<User> FindAll();
     }
 }

@@ -33,7 +33,7 @@ namespace API
         {
             services.AddDbContext<VcashDbContext>(options =>
             {
-                options.UseSqlServer(_configuration.GetConnectionString("vatco-qa"));
+                options.UseSqlServer(_configuration.GetConnectionString("local-brian"));
             });
 
             services.AddIdentity<User, Role>(options =>

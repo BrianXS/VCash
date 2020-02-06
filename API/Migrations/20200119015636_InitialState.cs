@@ -42,6 +42,8 @@ namespace API.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
+                    Names = table.Column<string>(nullable: true),
+                    Surnames = table.Column<string>(nullable: true),
                     RefreshToken = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

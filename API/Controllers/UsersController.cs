@@ -10,10 +10,9 @@ namespace API.Controllers
                Roles = Constants.Roles.Administrator)]
     public class UsersController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult LogTest()
+        public UsersController()
         {
-            return Ok();
+            
         }
     }
 }
