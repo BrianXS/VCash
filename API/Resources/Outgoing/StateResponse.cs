@@ -7,6 +7,6 @@ namespace API.Resources.Outgoing
     {
         public string Name { get; set; }
         public string Country { get; set; }
-        public List<City> Cities { get; set; }
+        public List<string> Cities { get; set; }
     }
 }

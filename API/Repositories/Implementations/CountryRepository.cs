@@ -58,12 +58,14 @@ namespace API.Repositories.Implementations
             _mapper.Map(country, countryToUpdate);
             
             _dbContext.Countries.Update(countryToUpdate);
+            _dbContext.SaveChanges();
             return _mapper.Map<CountryResponse>(countryToUpdate);
         }
 
         public void DeleteCountry(Country country)
         {
             _dbContext.Countries.Remove(country);
+            _dbContext.SaveChanges();
         }
     }
 }
