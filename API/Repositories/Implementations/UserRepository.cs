@@ -34,7 +34,7 @@ namespace API.Repositories.Implementations
             return await _userManager.FindByIdAsync(id);
         }
 
-        public async Task<IdentityResult> CreateUser(CreateUserRequest request)
+        public async Task<IdentityResult> CreateUser(UserCreateRequest request)
         {
             return await _userManager.CreateAsync(_mapper.Map<User>(request), request.PlainPassword);
         }

@@ -34,7 +34,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{Id}")]
-        public ActionResult<UserResponse> GetUserById(string Id)
+        public ActionResult<UserResponse> FindUserById(string Id)
         {
             var userData = _userRepository.FindUserById(Id);
             
@@ -45,7 +45,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUser(CreateUserRequest request)
+        public async Task<IActionResult> CreateUser(UserCreateRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
@@ -59,7 +59,7 @@ namespace API.Controllers
         }
 
         [HttpPost("{Id}")]
-        public async Task<IActionResult> UpdateUser(UpdateUserRequest request, string Id)
+        public async Task<IActionResult> UpdateUser(UserUpdateRequest request, string Id)
         {
             var userData = await _userRepository.FindUserById(Id);
 

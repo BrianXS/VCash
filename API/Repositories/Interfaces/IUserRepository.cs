@@ -12,7 +12,7 @@ namespace API.Repositories.Interfaces
     {
         Task<User> FindUserByUserName(string userName);
         Task<User> FindUserById(string id);
-        Task<IdentityResult> CreateUser(CreateUserRequest request);
+        Task<IdentityResult> CreateUser(UserCreateRequest request);
         Task<IdentityResult> DeleteUser(User user);
         Task<List<string>> GetAllUserRoles(User user);
         Task<List<Claim>> GetUserClaims(User user);

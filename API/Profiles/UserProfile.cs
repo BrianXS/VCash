@@ -10,9 +10,9 @@ namespace API.Profiles
         public UserProfile()
         {
             CreateMap<User, UserResponse>();
-            CreateMap<CreateUserRequest, User>();
+            CreateMap<UserCreateRequest, User>();
             
-            CreateMap<UpdateUserRequest, User>()
+            CreateMap<UserUpdateRequest, User>()
                 .ForAllMembers(members => 
                     members.Condition((src, dest, srcMember) => 
                         string.IsNullOrEmpty(srcMember.ToString())));
