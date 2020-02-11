@@ -13,6 +13,7 @@ namespace API.Services.Database
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IStateRepository, StateRepository>();
             services.AddScoped<ICityRepository, CityRepository>();
+            services.AddScoped<IBranchRepository, BranchRepository>();
         }
     }
 }

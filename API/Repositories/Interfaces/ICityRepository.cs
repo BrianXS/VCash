@@ -9,7 +9,6 @@ namespace API.Repositories.Interfaces
     {
         CityResponse FindCityResponseById(int id);
         City FindCityById(int id);
-
         List<CityResponse> GetAllCities();
         void CreateCity(CityCreateRequest city);
         CityResponse UpdateCity(int id, CityUpdateRequest updatedCity);
