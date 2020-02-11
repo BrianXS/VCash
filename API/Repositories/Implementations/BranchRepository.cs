@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using API.Entities;
 using API.Repositories.Interfaces;
+using API.Resources.Incoming;
 using API.Resources.Outgoing;
 using API.Services.Database;
 using AutoMapper;
@@ -19,7 +20,7 @@ namespace API.Repositories.Implementations
             _mapper = mapper;
         }
         
-        public BranchResponse FindBranchResourceById(int id)
+        public BranchResponse FindBranchResponseById(int id)
         {
             var branch = _dbContext.Branches.FirstOrDefault(x => x.Id.Equals(id));
             return _mapper.Map<BranchResponse>(branch);
@@ -27,7 +28,7 @@ namespace API.Repositories.Implementations
 
         public Branch FindBranchById(int id)
         {
-            throw new System.NotImplementedException();
+            return _dbContext.Branches.FirstOrDefault(x => x.Id.Equals(id));
         }
 
         public List<BranchResponse> GetAllBranches()
@@ -36,13 +37,13 @@ namespace API.Repositories.Implementations
             return _mapper.Map<List<BranchResponse>>(branches);
         }
 
-        public void CreateBranch(BranchResponse branch)
+        public void CreateBranch(BranchCreateRequest branch)
         {
             _dbContext.Branches.Add(_mapper.Map<Branch>(branch));
             _dbContext.SaveChanges();
         }
 
-        public BranchResponse UpdateBranch(int id, BranchResponse updatedBranch)
+        public BranchResponse UpdateBranch(int id, BranchUpdateRequest updatedBranch)
         {
             var branchToUpdate = _dbContext.Branches.FirstOrDefault(x => x.Id.Equals(id));
             _mapper.Map(updatedBranch, branchToUpdate);

@@ -55,7 +55,7 @@ namespace API.Repositories.Implementations
 
             _dbContext.Cities.Update(cityToBeUpdated);
             _dbContext.SaveChanges();
-            return new CityResponse();
+            return _mapper.Map<CityResponse>(cityToBeUpdated);
         }
 
         public void DeleteCity(City city)

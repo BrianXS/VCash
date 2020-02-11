@@ -25,7 +25,7 @@ namespace API.Controllers
         [HttpGet]
         public ActionResult<List<CountryResponse>> GetAll()
         {
-            return _countryRepository.GetAllCountries();
+            return Ok(_countryRepository.GetAllCountries());
         }
 
         [HttpGet("{id}")]

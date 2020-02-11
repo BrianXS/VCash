@@ -14,6 +14,8 @@ namespace API.Services.Database
             services.AddScoped<IStateRepository, StateRepository>();
             services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<IBranchRepository, BranchRepository>();
+            services.AddScoped<IVehicleRepository, VehicleRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
         }
     }
 }

@@ -20,8 +20,6 @@ namespace API.Controllers
         {
             _stateRepository = stateRepository;
         }
-        
-        //Todo: update
 
         [HttpGet("{id}")]
         public ActionResult<StateResponse> FindByStateId(int id)

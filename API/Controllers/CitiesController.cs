@@ -23,11 +23,11 @@ namespace API.Controllers
         [HttpGet]
         public ActionResult<List<CityResponse>> GetAll()
         {
-            return _cityRepository.GetAllCities();
+            return Ok(_cityRepository.GetAllCities());
         }
 
         [HttpGet("{id}")]
-        public ActionResult<CityResponse> FindCountryById(int id)
+        public ActionResult<CityResponse> FindCityById(int id)
         {
             var result = _cityRepository.FindCityResponseById(id);
             
@@ -38,7 +38,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateCountry(CityCreateRequest request)
+        public IActionResult CreateCity(CityCreateRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
@@ -48,11 +48,11 @@ namespace API.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult<CityResponse> UpdateCountry(int id, CityUpdateRequest request)
+        public ActionResult<CityResponse> UpdateCity(int id, CityUpdateRequest request)
         {
-            var countryToUpdate = _cityRepository.FindCityResponseById(id);
+            var cityToUpdate = _cityRepository.FindCityResponseById(id);
             
-            if (countryToUpdate == null) 
+            if (cityToUpdate == null) 
                 return NotFound();
             
             if (!ModelState.IsValid)
@@ -63,14 +63,14 @@ namespace API.Controllers
         }
         
         [HttpDelete("{id}")]
-        public IActionResult DeleteCountry(int id)
+        public IActionResult DeleteCity(int id)
         {
-            var country = _cityRepository.FindCityById(id);
+            var city = _cityRepository.FindCityById(id);
             
-            if (country == null)
+            if (city == null)
                 return NotFound();
             
-            _cityRepository.DeleteCity(country);
+            _cityRepository.DeleteCity(city);
             return Ok();
         }
     }
