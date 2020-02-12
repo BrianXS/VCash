@@ -317,7 +317,7 @@ namespace API.Migrations
                     Mode = table.Column<int>(nullable: false),
                     From = table.Column<DateTime>(nullable: false),
                     OfficeId = table.Column<int>(nullable: false),
-                    AtmBatteryId = table.Column<int>(nullable: false)
+                    AtmBatteryId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {

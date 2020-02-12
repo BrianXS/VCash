@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace API.Entities
 {
-    public class AtmBattery
+    public class ATMBattery
     {
         public int Id { get; set; }
         public string Code { get; set; }

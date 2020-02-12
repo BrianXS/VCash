@@ -19,7 +19,7 @@ namespace API.Services.Database
         public DbSet<CustomerFund> OfficesAndFunds { get; set; }
         public DbSet<Office> Offices { get; set; }
         public DbSet<ATM> ATMs { get; set; }
-        public DbSet<AtmBattery> AtmBatteries { get; set; }
+        public DbSet<ATMBattery> AtmBatteries { get; set; }
         public DbSet<BusinessType> BusinessTypes { get; set; }
 
         public DbSet<Customer> Customers { get; set; }

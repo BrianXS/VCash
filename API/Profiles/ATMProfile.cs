@@ -1,0 +1,22 @@
+using API.Entities;
+using API.Resources.Incoming;
+using API.Resources.Outgoing;
+using AutoMapper;
+
+namespace API.Profiles
+{
+    public class ATMProfile : Profile
+    {
+        public ATMProfile()
+        {
+            CreateMap<ATM, ATMResponse>()
+                .ForMember(to => to.AtmBattery, from => 
+                    from.MapFrom(src => src.AtmBattery.Code))
+                .ForMember(to => to.Office, from => 
+                    from.MapFrom(src => src.Office.Name));
+            
+            CreateMap<ATMCreateRequest, ATM>();
+            CreateMap<ATMUpdateRequest, ATM>();
+        }
+    }
+}

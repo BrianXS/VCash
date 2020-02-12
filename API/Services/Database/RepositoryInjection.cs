@@ -16,6 +16,10 @@ namespace API.Services.Database
             services.AddScoped<IBranchRepository, BranchRepository>();
             services.AddScoped<IVehicleRepository, VehicleRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IFailureRepository, FailureRepository>();
+            services.AddScoped<IATMRepository, ATMRepository>();
+            services.AddScoped<IATMBatteryRepostiory, ATMBatteryRepository>();
         }
     }
 }
