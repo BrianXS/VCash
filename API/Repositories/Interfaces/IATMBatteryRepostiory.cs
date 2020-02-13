@@ -10,8 +10,8 @@ namespace API.Repositories.Interfaces
         ATMBatteryResponse FindATMBatteryResponseById(int id);
         ATMBattery FindATMBatteryById(int id);
         List<ATMBatteryResponse> GetAllATMBatteries();
-        void CreateATMBattery(ATMBatteryCreateRequest branch);
-        ATMBatteryResponse UpdateATMBattery(int id, ATMBatteryUpdateRequest branch);
-        void DeleteATMBattery(ATMBattery branch);
+        void CreateATMBattery(ATMBatteryCreateRequest battery);
+        ATMBatteryResponse UpdateATMBattery(int id, ATMBatteryUpdateRequest battery);
+        void DeleteATMBattery(ATMBattery battery);
     }
 }

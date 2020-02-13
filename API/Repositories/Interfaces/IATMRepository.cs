@@ -10,8 +10,8 @@ namespace API.Repositories.Interfaces
         ATMResponse FindATMResponseById(int id);
         ATM FindATMById(int id);
         List<ATMResponse> GetAllATM();
-        void CreateATM(ATMCreateRequest branch);
-        ATMResponse UpdateATM(int id, ATMUpdateRequest branch);
-        void DeleteATM(ATM branch);
+        void CreateATM(ATMCreateRequest atm);
+        ATMResponse UpdateATM(int id, ATMUpdateRequest atm);
+        void DeleteATM(ATM atm);
     }
 }

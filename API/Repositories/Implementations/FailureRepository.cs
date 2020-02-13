@@ -6,6 +6,7 @@ using API.Resources.Incoming;
 using API.Resources.Outgoing;
 using API.Services.Database;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Repositories.Implementations
 {
@@ -21,7 +22,8 @@ namespace API.Repositories.Implementations
         }
         public FailureResponse FindFailureResponseById(int id)
         {
-            throw new System.NotImplementedException();
+            var failure = _dbContext.Failures.FirstOrDefault(x => x.Id.Equals(id));
+            return _mapper.Map<FailureResponse>(failure);
         }
 
         public Failure FindFailureById(int id)

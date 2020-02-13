@@ -2,15 +2,20 @@ using System.Collections.Generic;
 using API.Repositories.Interfaces;
 using API.Resources.Incoming;
 using API.Resources.Outgoing;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    public class ATMBatteries : ControllerBase
+    [ApiController]
+    [Route("[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = Constants.Roles.Administrator)]
+    public class ATMBatteriesController : ControllerBase
     {
         private readonly IATMBatteryRepostiory _ATMBatteryRepository;
 
-        public ATMBatteries(IATMBatteryRepostiory ATMBatteryRepository)
+        public ATMBatteriesController(IATMBatteryRepostiory ATMBatteryRepository)
         {
             _ATMBatteryRepository = ATMBatteryRepository;
         }

@@ -23,13 +23,20 @@ namespace API.Repositories.Implementations
         
         public CityResponse FindCityResponseById(int id)
         {
-            var city = _dbContext.Cities.FirstOrDefault(x => x.Id.Equals(id));
+            var city = _dbContext.Cities.Where(x => x.Id.Equals(id))
+                .Include(x => x.State).ThenInclude(x => x.Country)
+                .Include(x => x.Branch)
+                .FirstOrDefault();
+            
             return _mapper.Map<CityResponse>(city);
         }
 
         public City FindCityById(int id)
         {
-            return _dbContext.Cities.FirstOrDefault(x => x.Id.Equals(id));
+            return _dbContext.Cities.Where(x => x.Id.Equals(id))
+                .Include(x => x.State).ThenInclude(x => x.Country)
+                .Include(x => x.Branch)
+                .FirstOrDefault();
         }
 
         public List<CityResponse> GetAllCities()
@@ -50,7 +57,11 @@ namespace API.Repositories.Implementations
 
         public CityResponse UpdateCity(int id, CityUpdateRequest updatedCity)
         {
-            var cityToBeUpdated = _dbContext.Cities.FirstOrDefault(x => x.Id.Equals(id));
+            var cityToBeUpdated = _dbContext.Cities.Where(x => x.Id.Equals(id))
+                .Include(x => x.State).ThenInclude(x => x.Country)
+                .Include(x => x.Branch)
+                .FirstOrDefault();
+            
             _mapper.Map(updatedCity, cityToBeUpdated);
 
             _dbContext.Cities.Update(cityToBeUpdated);

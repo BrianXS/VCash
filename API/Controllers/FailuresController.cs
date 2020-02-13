@@ -2,15 +2,20 @@ using System.Collections.Generic;
 using API.Repositories.Interfaces;
 using API.Resources.Incoming;
 using API.Resources.Outgoing;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    public class FailuresControler : ControllerBase
+    [ApiController]
+    [Route("[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = Constants.Roles.Administrator)]
+    public class FailuresController : ControllerBase
     {
         private readonly IFailureRepository _failureRepository;
 
-        public FailuresControler(IFailureRepository failureRepository)
+        public FailuresController(IFailureRepository failureRepository)
         {
             _failureRepository = failureRepository;
         }

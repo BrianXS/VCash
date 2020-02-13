@@ -10,8 +10,8 @@ namespace API.Repositories.Interfaces
         FailureResponse FindFailureResponseById(int id);
         Failure FindFailureById(int id);
         List<FailureResponse> GetAllFailures();
-        void CreateFailure(FailureCreateRequest branch);
-        FailureResponse UpdateFailure(int id, FailureUpdateRequest branch);
-        void DeleteFailure(Failure branch);
+        void CreateFailure(FailureCreateRequest failure);
+        FailureResponse UpdateFailure(int id, FailureUpdateRequest failure);
+        void DeleteFailure(Failure failure);
     }
 }
