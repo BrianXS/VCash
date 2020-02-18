@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using API.Entities;
 using API.Repositories.Interfaces;
 using API.Resources.Incoming;
 using API.Resources.Outgoing;
@@ -10,7 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers
+namespace API.Controllers.AdministrativeControllers
 {
     [ApiController]
     [Route("[controller]")]

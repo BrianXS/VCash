@@ -2,12 +2,11 @@ using System.Collections.Generic;
 using API.Repositories.Interfaces;
 using API.Resources.Incoming;
 using API.Resources.Outgoing;
-using API.Services.Database;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers
+namespace API.Controllers.AdministrativeControllers
 {
     [ApiController]
     [Route("[controller]")]
