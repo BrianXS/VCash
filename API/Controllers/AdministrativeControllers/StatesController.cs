@@ -26,7 +26,7 @@ namespace API.Controllers.AdministrativeControllers
         {
             var result = _stateRepository.FindStateResourceById(id);
 
-            if (result != null)
+            if (result == null)
                 return NotFound();
 
             return Ok(result);

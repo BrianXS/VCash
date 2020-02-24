@@ -28,10 +28,11 @@ namespace API.Controllers.AdministrativeControllers
             return Ok(_customerFundRepository.GetAllCustomerFunds());
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<CustomerFundResponse> FindCustomerFundById(int id)
+        [HttpGet("{customerId}/{officeId}")]
+        public ActionResult<CustomerFundResponse> FindCustomerFundById(int customerId, int officeId)
         {
-            var result = _customerFundRepository.FindCustomerFundResponseById(id);
+            var result = _customerFundRepository
+                .FindCustomerFundResponseById(customerId, officeId);
             
             if (result == null)
                 return NotFound();
@@ -49,10 +50,11 @@ namespace API.Controllers.AdministrativeControllers
             return Ok();
         }
 
-        [HttpPut("{id}")]
-        public ActionResult<CustomerFundResponse> UpdateCustomerFund(int id, CustomerFundUpdateRequest request)
+        [HttpPut("{customerId}/{officeId}")]
+        public ActionResult<CustomerFundResponse> UpdateCustomerFund(int customerId, int officeId, CustomerFundUpdateRequest request)
         {
-            var customerFundToUpdate = _customerFundRepository.FindCustomerFundResponseById(id);
+            var customerFundToUpdate = _customerFundRepository
+                .FindCustomerFundResponseById(customerId, officeId);
             
             if (customerFundToUpdate == null) 
                 return NotFound();
@@ -60,14 +62,16 @@ namespace API.Controllers.AdministrativeControllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var result = _customerFundRepository.UpdateCustomerFund(id, request);
+            var result = _customerFundRepository
+                .UpdateCustomerFund(customerId, officeId, request);
             return Ok(result);
         }
         
-        [HttpDelete("{id}")]
-        public IActionResult DeleteCustomerFund(int id)
+        [HttpDelete("{customerId}/{officeId}")]
+        public IActionResult DeleteCustomerFund(int customerId, int officeId)
         {
-            var customerFund = _customerFundRepository.FindCustomerFundById(id);
+            var customerFund = _customerFundRepository
+                .FindCustomerFundByCustomerAndOffice(customerId, officeId);
             
             if (customerFund == null)
                 return NotFound();

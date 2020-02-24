@@ -32,11 +32,11 @@ namespace API
         {
             using (var scope = host.Services.CreateScope())
             {
-                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
-                SeedingClass.SeedUsers(userManager).Wait();
-
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<Role>>();
                 SeedingClass.SeedRoles(roleManager).Wait();
+                
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+                SeedingClass.SeedUsers(userManager).Wait();
             }
         }
     }

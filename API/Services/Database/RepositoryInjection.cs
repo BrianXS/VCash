@@ -9,11 +9,11 @@ namespace API.Services.Database
     {
         public static void Initialize(IServiceCollection services)
         {
-            
             services.AddScoped<IATMRepository, ATMRepository>();
             services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IStateRepository, StateRepository>();
+            services.AddScoped<IOfficeRepository, OfficeRepository>();
             services.AddScoped<IBranchRepository, BranchRepository>();
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IFailureRepository, FailureRepository>();
@@ -23,6 +23,7 @@ namespace API.Services.Database
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IATMBatteryRepostiory, ATMBatteryRepository>();
             services.AddScoped<IBusinessTypeRepository, BusinessTypeRepository>();
+            services.AddScoped<ICustomerFundRepository, CustomerFundRepository>();
             services.AddScoped<INotificationTypeRepository, NotificationTypeRepository>();
             services.AddScoped<IDenominationTypeRepository, DenominationTypeRepository>();
         }

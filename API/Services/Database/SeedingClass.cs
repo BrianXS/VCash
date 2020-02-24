@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using API.Entities;
@@ -15,6 +16,8 @@ namespace API.Services.Database
             {
                 var admin = new User {UserName = "ATIBOG0001", Email = "test@gmail.com"};
                 await userManager.CreateAsync(admin, "123123");
+
+                await userManager.AddToRoleAsync(admin, Constants.Roles.Administrator);
             }
         }
 

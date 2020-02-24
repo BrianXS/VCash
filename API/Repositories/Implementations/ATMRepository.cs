@@ -43,7 +43,7 @@ namespace API.Repositories.Implementations
 
         public void CreateATM(ATMCreateRequest atm)
         {
-            throw new System.NotImplementedException();
+            _dbContext.ATMs.Add(_mapper.Map<ATM>(atm));
             _dbContext.SaveChanges();
         }
 

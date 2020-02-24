@@ -30,11 +30,8 @@ namespace API.Services.Database
         public DbSet<City> Cities { get; set; }
         
         public DbSet<Failure> Failures { get; set; }
-        
-        
-        /// <summary>
-        /// Movements Related Entities
-        /// </summary>
+
+
         public DbSet<Movement> Movements { get; set; }
 
         public DbSet<Bag> Bags { get; set; }

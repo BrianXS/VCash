@@ -13,7 +13,7 @@ namespace API.Profiles
                 from => from.MapFrom(src => src.Customer.Name));
             
             CreateMap<CashierCreateRequest, Cashier>();
-            CreateMap<CashierCreateRequest, Cashier>();
+            CreateMap<CashierUpdateRequest, Cashier>();
         }
     }
 }
