@@ -32,9 +32,9 @@ namespace API.Controllers.AdministrativeControllers
         }
 
         [HttpGet("{Id}")]
-        public ActionResult<UserResponse> FindUserById(string Id)
+        public async Task<ActionResult<UserResponse>> FindUserById(string Id)
         {
-            var userData = _userRepository.FindUserById(Id);
+            var userData = await _userRepository.FindUserResponseById(Id);
             
             if (userData == null) 
                 return NotFound();
@@ -56,7 +56,7 @@ namespace API.Controllers.AdministrativeControllers
             return Ok();
         }
 
-        [HttpPost("{Id}")]
+        [HttpPut("{Id}")]
         public async Task<IActionResult> UpdateUser(UserUpdateRequest request, string Id)
         {
             var userData = await _userRepository.FindUserById(Id);

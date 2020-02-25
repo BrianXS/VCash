@@ -29,6 +29,12 @@ namespace API.Repositories.Implementations
             return _userManager.FindByNameAsync(userName);
         }
 
+        public async Task<UserResponse> FindUserResponseById(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            return _mapper.Map<UserResponse>(user);
+        }
+
         public async Task<User> FindUserById(string id)
         {
             return await _userManager.FindByIdAsync(id);

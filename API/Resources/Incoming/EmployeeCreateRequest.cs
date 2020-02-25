@@ -44,8 +44,6 @@ namespace API.Resources.Incoming
         
         [Required]
         public DateTime From { get; set; }
-        
-        [Required]
         public DateTime Until { get; set; }
         
         [Required]

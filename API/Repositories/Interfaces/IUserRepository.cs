@@ -11,6 +11,7 @@ namespace API.Repositories.Interfaces
     public interface IUserRepository
     {
         Task<User> FindUserByUserName(string userName);
+        Task<UserResponse> FindUserResponseById(string id);
         Task<User> FindUserById(string id);
         Task<IdentityResult> CreateUser(UserCreateRequest request);
         Task<IdentityResult> DeleteUser(User user);
