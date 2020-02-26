@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using API.Entities;
 using API.Repositories.Interfaces;
 using API.Resources.Incoming;
+using API.Resources.Incoming.AdministrativeResources;
 using API.Resources.Outgoing;
+using API.Resources.Outgoing.AdministrativeResources;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 

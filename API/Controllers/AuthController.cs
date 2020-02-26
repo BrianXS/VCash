@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 using API.Entities;
 using API.Repositories.Interfaces;
 using API.Resources.Incoming;
+using API.Resources.Incoming.AdministrativeResources;
 using API.Resources.Outgoing;
+using API.Resources.Outgoing.AdministrativeResources;
 using API.Utils;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -47,6 +49,7 @@ namespace API.Controllers
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.UniqueName, request.UserName)
                 };
+                
                 roles.ForEach(role => claims.Add(new Claim(ClaimTypes.Role, role)));
                 
                 var token = TokenUtility.GenerateToken(claims);
