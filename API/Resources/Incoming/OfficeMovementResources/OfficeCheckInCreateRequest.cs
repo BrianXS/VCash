@@ -2,11 +2,13 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using API.Enums;
 using API.Enums.ATM;
+using API.Utils.ResourceAnnotations;
 using ValueType = API.Enums.ValueType;
 
 namespace API.Resources.Incoming.OfficeMovementResources
 {
-    public class OfficeMovementCreateRequest
+    [OfficeCheckInVerification]
+    public class OfficeCheckInCreateRequest
     {
         [Required]
         public string PayrollNumber { get; set; }
@@ -51,10 +53,8 @@ namespace API.Resources.Incoming.OfficeMovementResources
         public decimal DeclaredCash { get; set; }
 
         public bool Failed { get; set; }
-        public int FailureId { get; set; }
-        
         public bool Custody { get; set; }
-        public bool Counted { get; set; }
+        public int FailureId { get; set; }
         
         [Required]
         public int OriginId { get; set; }

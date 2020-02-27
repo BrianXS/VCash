@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using API.Entities;
+using API.Resources.Incoming.OfficeMovementResources;
 using API.Resources.Outgoing;
 using API.Resources.Outgoing.OfficeMovementResources;
 
@@ -8,12 +10,17 @@ namespace API.Repositories.Interfaces
     public interface IOfficeCheckInRepository
     {
         OfficeCheckInResponse FindById(int id);
-        List<OfficeCheckInResponse> FindByOptions(int SucursalId, DateTime from, DateTime until);
-        void CreateCheckInWithFailure();
-        void CreateCheckInWithCustody();
-        void CreateLogisticsOnlyCheckIn();
-        void CreateNormalCheckIn();
-        OfficeCheckInResponse UpdateCheckIn();
-        void DeleteCheckIn();
+
+        Movement FindMovementById(int id);
+        List<OfficeCheckInResponse> FindByOptions(int branchId, DateTime from, DateTime until);
+        string CreateCheckInWithFailure(OfficeCheckInCreateRequest movement);
+        OfficeCheckInResponse UpdateCheckInWithFailure();
+        string CreateCheckInWithCustody(OfficeCheckInCreateRequest movement);
+        OfficeCheckInResponse UpdateCheckInWithCustody();
+        string CreateLogisticsOnlyCheckIn(OfficeCheckInCreateRequest movement);
+        OfficeCheckInResponse UpdateLogisticsOnlyCheckIn();
+        string CreateNormalCheckIn(OfficeCheckInCreateRequest movement);
+        OfficeCheckInResponse UpdateNormalCheckIn();
+        void DeleteCheckIn(Movement movement);
     }
 }

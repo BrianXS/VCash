@@ -258,6 +258,9 @@ namespace API.Migrations
 
                     b.Property<int>("OfficeId")
                         .HasColumnType("int");
+                    
+                    b.Property<int>("ClosedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("CustomerId", "OfficeId");
 

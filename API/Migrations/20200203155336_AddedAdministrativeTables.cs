@@ -341,7 +341,8 @@ namespace API.Migrations
                 columns: table => new
                 {
                     CustomerId = table.Column<int>(nullable: false),
-                    OfficeId = table.Column<int>(nullable: false)
+                    OfficeId = table.Column<int>(nullable: false),
+                    ClosedAt = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
