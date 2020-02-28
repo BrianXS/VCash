@@ -4,6 +4,7 @@ using API.Entities;
 using API.Resources.Incoming.OfficeMovementResources;
 using API.Resources.Outgoing;
 using API.Resources.Outgoing.OfficeMovementResources;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API.Repositories.Interfaces
 {
@@ -13,14 +14,14 @@ namespace API.Repositories.Interfaces
 
         Movement FindMovementById(int id);
         List<OfficeCheckInResponse> FindByOptions(int branchId, DateTime from, DateTime until);
-        string CreateCheckInWithFailure(OfficeCheckInCreateRequest movement);
-        OfficeCheckInResponse UpdateCheckInWithFailure();
-        string CreateCheckInWithCustody(OfficeCheckInCreateRequest movement);
-        OfficeCheckInResponse UpdateCheckInWithCustody();
-        string CreateLogisticsOnlyCheckIn(OfficeCheckInCreateRequest movement);
-        OfficeCheckInResponse UpdateLogisticsOnlyCheckIn();
-        string CreateNormalCheckIn(OfficeCheckInCreateRequest movement);
-        OfficeCheckInResponse UpdateNormalCheckIn();
+        IActionResult CreateCheckInWithFailure(OfficeCheckInCreateRequest movement);
+        IActionResult UpdateCheckInWithFailure(int id, OfficeCheckInUpdateRequest movement);
+        IActionResult CreateCheckInWithCustody(OfficeCheckInCreateRequest movement);
+        IActionResult UpdateCheckInWithCustody(int id, OfficeCheckInUpdateRequest movement);
+        IActionResult CreateLogisticsOnlyCheckIn(OfficeCheckInCreateRequest movement);
+        IActionResult UpdateLogisticsOnlyCheckIn(int id, OfficeCheckInUpdateRequest movement);
+        IActionResult CreateNormalCheckIn(OfficeCheckInCreateRequest movement);
+        IActionResult UpdateNormalCheckIn(int id, OfficeCheckInUpdateRequest movement);
         void DeleteCheckIn(Movement movement);
     }
 }

@@ -2,10 +2,12 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using API.Enums;
 using API.Enums.ATM;
+using API.Utils.ResourceAnnotations;
 using ValueType = API.Enums.ValueType;
 
 namespace API.Resources.Incoming.OfficeMovementResources
 {
+    [OfficeCheckInVerification]
     public class OfficeCheckInUpdateRequest
     {
         [Required]

@@ -24,8 +24,11 @@ namespace API.Services.Database
             services.AddScoped<IATMBatteryRepostiory, ATMBatteryRepository>();
             services.AddScoped<IBusinessTypeRepository, BusinessTypeRepository>();
             services.AddScoped<ICustomerFundRepository, CustomerFundRepository>();
+            services.AddScoped<IOfficeCheckInRepository, OfficeCheckInRepository>();
             services.AddScoped<INotificationTypeRepository, NotificationTypeRepository>();
             services.AddScoped<IDenominationTypeRepository, DenominationTypeRepository>();
+
+            
         }
     }
 }
