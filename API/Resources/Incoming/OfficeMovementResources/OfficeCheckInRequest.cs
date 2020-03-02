@@ -8,7 +8,7 @@ using ValueType = API.Enums.ValueType;
 namespace API.Resources.Incoming.OfficeMovementResources
 {
     [OfficeCheckInVerification]
-    public class OfficeCheckInUpdateRequest
+    public class OfficeCheckInRequest
     {
         [Required]
         public string PayrollNumber { get; set; }
@@ -54,6 +54,7 @@ namespace API.Resources.Incoming.OfficeMovementResources
 
         public bool Failed { get; set; }
         public bool Custody { get; set; }
+        public bool OfficeToOffice { get; set; }
         public bool Counted { get; set; }
         public int FailureId { get; set; }
         

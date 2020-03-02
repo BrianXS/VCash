@@ -7,7 +7,7 @@ namespace API.Utils.ResourceAnnotations
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var movement = (OfficeCheckInCreateRequest) validationContext.ObjectInstance;
+            var movement = (OfficeCheckInRequest) validationContext.ObjectInstance;
             
             if (movement.MainVehicleId.Equals(movement.SecondaryVehicleId))
                 return new ValidationResult("Vehicles can't be the same");

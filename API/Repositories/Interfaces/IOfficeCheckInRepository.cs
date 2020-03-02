@@ -11,17 +11,19 @@ namespace API.Repositories.Interfaces
     public interface IOfficeCheckInRepository
     {
         OfficeCheckInResponse FindById(int id);
-
         Movement FindMovementById(int id);
+        List<OfficeCheckInResponse> GetAll();
         List<OfficeCheckInResponse> FindByOptions(int branchId, DateTime from, DateTime until);
-        IActionResult CreateCheckInWithFailure(OfficeCheckInCreateRequest movement);
-        IActionResult UpdateCheckInWithFailure(int id, OfficeCheckInUpdateRequest movement);
-        IActionResult CreateCheckInWithCustody(OfficeCheckInCreateRequest movement);
-        IActionResult UpdateCheckInWithCustody(int id, OfficeCheckInUpdateRequest movement);
-        IActionResult CreateLogisticsOnlyCheckIn(OfficeCheckInCreateRequest movement);
-        IActionResult UpdateLogisticsOnlyCheckIn(int id, OfficeCheckInUpdateRequest movement);
-        IActionResult CreateNormalCheckIn(OfficeCheckInCreateRequest movement);
-        IActionResult UpdateNormalCheckIn(int id, OfficeCheckInUpdateRequest movement);
+        IActionResult CreateCheckInWithFailure(OfficeCheckInRequest movement);
+        ActionResult<OfficeCheckInResponse> UpdateCheckInWithFailure(int id, OfficeCheckInRequest movement);
+        IActionResult CreateCheckInWithCustody(OfficeCheckInRequest movement);
+        ActionResult<OfficeCheckInResponse> UpdateCheckInWithCustody(int id, OfficeCheckInRequest movement);
+        IActionResult CreateLogisticsOnlyCheckIn(OfficeCheckInRequest movement);
+        ActionResult<OfficeCheckInResponse> UpdateLogisticsOnlyCheckIn(int id, OfficeCheckInRequest movement);
+        IActionResult CreateIncomingCheckIn(OfficeCheckInRequest movement);
+        ActionResult<OfficeCheckInResponse> UpdateIncomingCheckIn(int id, OfficeCheckInRequest movement);
+        IActionResult CreateOutgoingCheckIn(OfficeCheckInRequest movement);
+        ActionResult<OfficeCheckInResponse> UpdateOutgoingCheckIn(int id, OfficeCheckInRequest movement);
         void DeleteCheckIn(Movement movement);
     }
 }

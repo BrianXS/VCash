@@ -5,6 +5,7 @@ namespace API.Enums
         Bag,
         Envelope,
         Cheque,
+        Document,
         Other
     }
 }

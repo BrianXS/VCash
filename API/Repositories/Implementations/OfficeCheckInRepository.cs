@@ -33,6 +33,12 @@ namespace API.Repositories.Implementations
             return _dbContext.Movements.FirstOrDefault(x => x.Id.Equals(id));
         }
 
+        public List<OfficeCheckInResponse> GetAll()
+        {
+            var results = _dbContext.Movements.ToList();
+            return _mapper.Map<List<OfficeCheckInResponse>>(results);
+        }
+
         public List<OfficeCheckInResponse> FindByOptions(int branchId, DateTime from, DateTime until)
         {
             var movements = _dbContext.Movements
@@ -44,7 +50,7 @@ namespace API.Repositories.Implementations
             return _mapper.Map<List<OfficeCheckInResponse>>(movements);
         }
 
-        public IActionResult CreateCheckInWithFailure(OfficeCheckInCreateRequest movement)
+        public IActionResult CreateCheckInWithFailure(OfficeCheckInRequest movement)
         {
             var failure = _dbContext.Failures.FirstOrDefault(x => x.Id.Equals(movement.FailureId));
             
@@ -70,7 +76,7 @@ namespace API.Repositories.Implementations
             return new OkObjectResult("Movement processed successfully");
         }
 
-        public IActionResult UpdateCheckInWithFailure(int id, OfficeCheckInUpdateRequest movement)
+        public ActionResult<OfficeCheckInResponse> UpdateCheckInWithFailure(int id, OfficeCheckInRequest movement)
         {
             var existingMovement = _dbContext.Movements.FirstOrDefault(x => x.Id.Equals(id));
             var failure = _dbContext.Failures.FirstOrDefault(x => x.Id.Equals(movement.FailureId));
@@ -95,10 +101,10 @@ namespace API.Repositories.Implementations
             _dbContext.Movements.Update(existingMovement);
             _dbContext.SaveChanges();
             
-            return new OkObjectResult("Movement processed successfully");
+            return new OkObjectResult(existingMovement);
         }
 
-        public IActionResult CreateCheckInWithCustody(OfficeCheckInCreateRequest movement)
+        public IActionResult CreateCheckInWithCustody(OfficeCheckInRequest movement)
         {
             var originOffice = _dbContext.Offices
                 .FirstOrDefault(x => x.Id.Equals(movement.OriginId));
@@ -118,7 +124,7 @@ namespace API.Repositories.Implementations
             return new OkObjectResult("Movement processed successfully");
         }
 
-        public IActionResult UpdateCheckInWithCustody(int id, OfficeCheckInUpdateRequest movement)
+        public ActionResult<OfficeCheckInResponse> UpdateCheckInWithCustody(int id, OfficeCheckInRequest movement)
         {
             var existingMovement = _dbContext.Movements.FirstOrDefault(x => x.Id.Equals(id));
             var originOffice = _dbContext.Offices
@@ -140,10 +146,10 @@ namespace API.Repositories.Implementations
             _dbContext.Movements.Update(existingMovement);
             _dbContext.SaveChanges();
             
-            return new OkObjectResult("Movement processed successfully");
+            return new OkObjectResult(existingMovement);
         }
 
-        public IActionResult CreateLogisticsOnlyCheckIn(OfficeCheckInCreateRequest movement)
+        public IActionResult CreateLogisticsOnlyCheckIn(OfficeCheckInRequest movement)
         {
             var originOffice = _dbContext.Offices
                 .FirstOrDefault(x => x.Id.Equals(movement.OriginId));
@@ -163,7 +169,7 @@ namespace API.Repositories.Implementations
             return new OkObjectResult("Movement processed successfully");
         }
 
-        public IActionResult UpdateLogisticsOnlyCheckIn(int id, OfficeCheckInUpdateRequest movement)
+        public ActionResult<OfficeCheckInResponse> UpdateLogisticsOnlyCheckIn(int id, OfficeCheckInRequest movement)
         {
             var existingMovement = _dbContext.Movements.FirstOrDefault(x => x.Id.Equals(id));
             var originOffice = _dbContext.Offices
@@ -185,20 +191,28 @@ namespace API.Repositories.Implementations
             _dbContext.Movements.Update(existingMovement);
             _dbContext.SaveChanges();
             
-            return new OkObjectResult("Movement processed successfully");
+            return new OkObjectResult(existingMovement);
         }
 
-        public IActionResult CreateNormalCheckIn(OfficeCheckInCreateRequest movement)
+        public IActionResult CreateIncomingCheckIn(OfficeCheckInRequest movement)
         {
             var originOffice = _dbContext.Offices
                 .FirstOrDefault(x => x.Id.Equals(movement.OriginId));
 
             if (originOffice == null || originOffice.IsFund)
                 return new BadRequestObjectResult("Invalid Origin");
+            
+            
+            var destinationOffice = _dbContext.Offices
+                .FirstOrDefault(x => x.Id.Equals(movement.DestinationId));
+
+            if (destinationOffice == null || !destinationOffice.IsFund)
+                return new BadRequestObjectResult("Invalid destination");
+            
 
             var fund = _dbContext.OfficesAndFunds
-                .Where(x => x.CustomerId.Equals(movement.DestinationId))
-                .FirstOrDefault(x => x.OfficeId.Equals(movement.DestinationId));
+                .Where(x => x.CustomerId.Equals(destinationOffice.CustomerId))
+                .FirstOrDefault(x => x.OfficeId.Equals(destinationOffice.Id));
             
             if (fund == null || fund.ClosedAt.CompareTo(movement.ServiceDate) >= 0)
                 return new NotFoundObjectResult("No funds were found");
@@ -209,17 +223,26 @@ namespace API.Repositories.Implementations
             return new OkObjectResult("Movement processed successfully");
         }
 
-        public IActionResult UpdateNormalCheckIn(int id, OfficeCheckInUpdateRequest movement)
+        public ActionResult<OfficeCheckInResponse> UpdateIncomingCheckIn(int id, OfficeCheckInRequest movement)
         {
             var existingMovement = _dbContext.Movements.FirstOrDefault(x => x.Id.Equals(id));
             var originOffice = _dbContext.Offices
                 .FirstOrDefault(x => x.Id.Equals(movement.OriginId));
+            
             
             if (existingMovement == null)
                 return new BadRequestObjectResult("Invalid Request");
 
             if (originOffice == null || originOffice.IsFund)
                 return new BadRequestObjectResult("Invalid Origin");
+            
+            
+            var destinationOffice = _dbContext.Offices
+                .FirstOrDefault(x => x.Id.Equals(movement.DestinationId));
+
+            if (destinationOffice == null || !destinationOffice.IsFund)
+                return new BadRequestObjectResult("Invalid destination");
+            
 
             var fund = _dbContext.OfficesAndFunds
                 .Where(x => x.CustomerId.Equals(movement.DestinationId))
@@ -232,7 +255,71 @@ namespace API.Repositories.Implementations
             _dbContext.Movements.Update(existingMovement);
             _dbContext.SaveChanges();
             
-            return new OkObjectResult("Movement Processed Successfully");
+            return new OkObjectResult(existingMovement);
+        }
+
+        public IActionResult CreateOutgoingCheckIn(OfficeCheckInRequest movement)
+        {
+            var originOffice = _dbContext.Offices
+                .FirstOrDefault(x => x.Id.Equals(movement.OriginId));
+            
+            if (originOffice == null || !originOffice.IsFund)
+                return new BadRequestObjectResult("Invalid Origin");
+            
+            
+            var fund = _dbContext.OfficesAndFunds
+                .Where(x => x.CustomerId.Equals(originOffice.CustomerId))
+                .FirstOrDefault(x => x.OfficeId.Equals(originOffice.Id));
+            
+            if (fund == null || fund.ClosedAt.CompareTo(movement.ServiceDate) >= 0)
+                return new NotFoundObjectResult("No funds were found");
+            
+            
+            var destinationOffice = _dbContext.Offices
+                .FirstOrDefault(x => x.Id.Equals(movement.DestinationId));
+
+            if (destinationOffice == null || destinationOffice.IsFund)
+                return new BadRequestObjectResult("Invalid destination");
+
+            _dbContext.Movements.Add(_mapper.Map<Movement>(movement));
+            _dbContext.SaveChanges();
+            
+            return new OkObjectResult("Movement processed successfully");
+        }
+
+        public ActionResult<OfficeCheckInResponse> UpdateOutgoingCheckIn(int id, OfficeCheckInRequest movement)
+        {
+            var existingMovement = _dbContext.Movements.FirstOrDefault(x => x.Id.Equals(id));
+            
+            if (existingMovement == null)
+                return new BadRequestObjectResult("Invalid Request");
+
+            var originOffice = _dbContext.Offices
+                .FirstOrDefault(x => x.Id.Equals(movement.OriginId));
+            
+            if (originOffice == null || !originOffice.IsFund)
+                return new BadRequestObjectResult("Invalid Origin");
+            
+            
+            var fund = _dbContext.OfficesAndFunds
+                .Where(x => x.CustomerId.Equals(originOffice.CustomerId))
+                .FirstOrDefault(x => x.OfficeId.Equals(originOffice.Id));
+            
+            if (fund == null || fund.ClosedAt.CompareTo(movement.ServiceDate) >= 0)
+                return new NotFoundObjectResult("No funds were found");
+            
+            
+            var destinationOffice = _dbContext.Offices
+                .FirstOrDefault(x => x.Id.Equals(movement.DestinationId));
+
+            if (destinationOffice == null || destinationOffice.IsFund)
+                return new BadRequestObjectResult("Invalid destination");
+
+            _mapper.Map(_mapper.Map<Movement>(movement), existingMovement);
+            _dbContext.Movements.Update(existingMovement);
+            _dbContext.SaveChanges();
+            
+            return new OkObjectResult("Movement processed successfully");
         }
 
         public void DeleteCheckIn(Movement movement)
