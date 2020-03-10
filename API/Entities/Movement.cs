@@ -56,7 +56,7 @@ namespace API.Entities
 
         public bool Failed { get; set; }
         public bool Custody { get; set; }
-        public bool Counted { get; set; }
+        public bool OfficeToOffice { get; set; }
         
         public int OriginId { get; set; }
         public Office Origin { get; set; }

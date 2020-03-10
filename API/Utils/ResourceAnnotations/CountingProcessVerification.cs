@@ -31,13 +31,14 @@ namespace API.Utils.ResourceAnnotations
 
                 var notificationDuplicates = movement.Bags
                     .SelectMany(b => b.Notifications)
-                    .GroupBy(n => n.DenominationTypeId)
+                    .GroupBy(n => new {n.DenominationTypeId, n.NotificationTypeId})
                     .Where(id => id.Skip(1).Any())
                     .SelectMany(id => id);
                 
                 if(notificationDuplicates.Any())
                     return new ValidationResult("Notifications must be unique");
 
+                
                 counter++;   
             }
 

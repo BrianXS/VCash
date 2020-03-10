@@ -8,6 +8,7 @@ using API.Resources.Outgoing.OfficeMovementResources;
 using API.Services.Database;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Repositories.Implementations
 {
@@ -58,7 +59,9 @@ namespace API.Repositories.Implementations
                 return new BadRequestObjectResult("Invalid Request");
             
             var originOffice = _dbContext.Offices
-                .FirstOrDefault(x => x.Id.Equals(movement.OriginId));
+                .Where(x => x.Id.Equals(movement.OriginId))
+                .Include(x => x.City)
+                .FirstOrDefault();
 
             if (originOffice == null || originOffice.IsFund)
                 return new BadRequestObjectResult("Invalid Origin");
@@ -85,7 +88,9 @@ namespace API.Repositories.Implementations
                 return new BadRequestObjectResult("Invalid Request");
             
             var originOffice = _dbContext.Offices
-                .FirstOrDefault(x => x.Id.Equals(movement.OriginId));
+                .Where(x => x.Id.Equals(movement.OriginId))
+                .Include(x => x.City)
+                .FirstOrDefault();
 
             if (originOffice == null || originOffice.IsFund)
                 return new BadRequestObjectResult("Invalid Origin");
@@ -107,17 +112,26 @@ namespace API.Repositories.Implementations
         public IActionResult CreateCheckInWithCustody(OfficeCheckInRequest movement)
         {
             var originOffice = _dbContext.Offices
-                .FirstOrDefault(x => x.Id.Equals(movement.OriginId));
+                .Where(x => x.Id.Equals(movement.OriginId))
+                .Include(x => x.City)
+                .FirstOrDefault();
 
             if (originOffice == null || originOffice.IsFund)
                 return new BadRequestObjectResult("Invalid Origin");
             
             var destinationOffice = _dbContext.Offices
-                .FirstOrDefault(x => x.Id.Equals(movement.DestinationId));
+                .Where(x => x.Id.Equals(movement.DestinationId))
+                .Include(x => x.City)
+                .FirstOrDefault();
 
             if (destinationOffice == null || destinationOffice.IsFund)
                 return new BadRequestObjectResult("Invalid Destination");
+            
+            
+            if (!originOffice.City.BranchId.Equals(destinationOffice.City.BranchId))
+                return new BadRequestObjectResult("Offices must be in the same branch");
 
+            
             _dbContext.Movements.Add(_mapper.Map<Movement>(movement));
             _dbContext.SaveChanges();
             
@@ -127,8 +141,11 @@ namespace API.Repositories.Implementations
         public ActionResult<OfficeCheckInResponse> UpdateCheckInWithCustody(int id, OfficeCheckInRequest movement)
         {
             var existingMovement = _dbContext.Movements.FirstOrDefault(x => x.Id.Equals(id));
+            
             var originOffice = _dbContext.Offices
-                .FirstOrDefault(x => x.Id.Equals(movement.OriginId));
+                .Where(x => x.Id.Equals(movement.OriginId))
+                .Include(x => x.City)
+                .FirstOrDefault();
 
             if (existingMovement == null)
                 return new BadRequestObjectResult("Invalid Request");
@@ -137,11 +154,18 @@ namespace API.Repositories.Implementations
                 return new BadRequestObjectResult("Invalid Origin");
             
             var destinationOffice = _dbContext.Offices
-                .FirstOrDefault(x => x.Id.Equals(movement.DestinationId));
+                .Where(x => x.Id.Equals(movement.DestinationId))
+                .Include(x => x.City)
+                .FirstOrDefault();
 
             if (destinationOffice == null || destinationOffice.IsFund)
                 return new BadRequestObjectResult("Invalid Destination");
+            
+            
+            if (!originOffice.City.BranchId.Equals(destinationOffice.City.BranchId))
+                return new BadRequestObjectResult("Offices must be in the same branch");
 
+            
             _mapper.Map(_mapper.Map<Movement>(movement), existingMovement);
             _dbContext.Movements.Update(existingMovement);
             _dbContext.SaveChanges();
@@ -152,17 +176,26 @@ namespace API.Repositories.Implementations
         public IActionResult CreateLogisticsOnlyCheckIn(OfficeCheckInRequest movement)
         {
             var originOffice = _dbContext.Offices
-                .FirstOrDefault(x => x.Id.Equals(movement.OriginId));
+                .Where(x => x.Id.Equals(movement.OriginId))
+                .Include(x => x.City)
+                .FirstOrDefault();
 
             if (originOffice == null || originOffice.IsFund)
                 return new BadRequestObjectResult("Invalid Origin");
             
             var destinationOffice = _dbContext.Offices
-                .FirstOrDefault(x => x.Id.Equals(movement.DestinationId));
+                .Where(x => x.Id.Equals(movement.DestinationId))
+                .Include(x => x.City)
+                .FirstOrDefault();
 
             if (destinationOffice == null || destinationOffice.IsFund)
                 return new BadRequestObjectResult("Invalid Destination");
+            
+            
+            if (!originOffice.City.BranchId.Equals(destinationOffice.City.BranchId))
+                return new BadRequestObjectResult("Offices must be in the same branch");
 
+            
             _dbContext.Movements.Add(_mapper.Map<Movement>(movement));
             _dbContext.SaveChanges();
             
@@ -172,8 +205,11 @@ namespace API.Repositories.Implementations
         public ActionResult<OfficeCheckInResponse> UpdateLogisticsOnlyCheckIn(int id, OfficeCheckInRequest movement)
         {
             var existingMovement = _dbContext.Movements.FirstOrDefault(x => x.Id.Equals(id));
+            
             var originOffice = _dbContext.Offices
-                .FirstOrDefault(x => x.Id.Equals(movement.OriginId));
+                .Where(x => x.Id.Equals(movement.OriginId))
+                .Include(x => x.City)
+                .FirstOrDefault();
             
             if (existingMovement == null)
                 return new BadRequestObjectResult("Invalid Request");
@@ -182,11 +218,18 @@ namespace API.Repositories.Implementations
                 return new BadRequestObjectResult("Invalid Origin");
             
             var destinationOffice = _dbContext.Offices
-                .FirstOrDefault(x => x.Id.Equals(movement.DestinationId));
+                .Where(x => x.Id.Equals(movement.DestinationId))
+                .Include(x => x.City)
+                .FirstOrDefault();
 
             if (destinationOffice == null || destinationOffice.IsFund)
                 return new BadRequestObjectResult("Invalid Destination");
+            
+            
+            if (!originOffice.City.BranchId.Equals(destinationOffice.City.BranchId))
+                return new BadRequestObjectResult("Offices must be in the same branch");
 
+            
             _mapper.Map(_mapper.Map<Movement>(movement), existingMovement);
             _dbContext.Movements.Update(existingMovement);
             _dbContext.SaveChanges();
@@ -197,14 +240,18 @@ namespace API.Repositories.Implementations
         public IActionResult CreateIncomingCheckIn(OfficeCheckInRequest movement)
         {
             var originOffice = _dbContext.Offices
-                .FirstOrDefault(x => x.Id.Equals(movement.OriginId));
+                .Where(x => x.Id.Equals(movement.OriginId))
+                .Include(x => x.City)
+                .FirstOrDefault();
 
             if (originOffice == null || originOffice.IsFund)
                 return new BadRequestObjectResult("Invalid Origin");
             
             
             var destinationOffice = _dbContext.Offices
-                .FirstOrDefault(x => x.Id.Equals(movement.DestinationId));
+                .Where(x => x.Id.Equals(movement.DestinationId))
+                .Include(x => x.City)
+                .FirstOrDefault();
 
             if (destinationOffice == null || !destinationOffice.IsFund)
                 return new BadRequestObjectResult("Invalid destination");
@@ -217,6 +264,11 @@ namespace API.Repositories.Implementations
             if (fund == null || fund.ClosedAt.CompareTo(movement.ServiceDate) >= 0)
                 return new NotFoundObjectResult("No funds were found");
 
+            
+            if (!originOffice.City.BranchId.Equals(destinationOffice.City.BranchId))
+                return new BadRequestObjectResult("Offices must be in the same branch");
+
+            
             _dbContext.Movements.Add(_mapper.Map<Movement>(movement));
             _dbContext.SaveChanges();
             
@@ -226,10 +278,12 @@ namespace API.Repositories.Implementations
         public ActionResult<OfficeCheckInResponse> UpdateIncomingCheckIn(int id, OfficeCheckInRequest movement)
         {
             var existingMovement = _dbContext.Movements.FirstOrDefault(x => x.Id.Equals(id));
+            
             var originOffice = _dbContext.Offices
-                .FirstOrDefault(x => x.Id.Equals(movement.OriginId));
-            
-            
+                .Where(x => x.Id.Equals(movement.OriginId))
+                .Include(x => x.City)
+                .FirstOrDefault();
+
             if (existingMovement == null)
                 return new BadRequestObjectResult("Invalid Request");
 
@@ -238,7 +292,9 @@ namespace API.Repositories.Implementations
             
             
             var destinationOffice = _dbContext.Offices
-                .FirstOrDefault(x => x.Id.Equals(movement.DestinationId));
+                .Where(x => x.Id.Equals(movement.DestinationId))
+                .Include(x => x.City)
+                .FirstOrDefault();
 
             if (destinationOffice == null || !destinationOffice.IsFund)
                 return new BadRequestObjectResult("Invalid destination");
@@ -250,7 +306,12 @@ namespace API.Repositories.Implementations
             
             if (fund == null || fund.ClosedAt.CompareTo(movement.ServiceDate) >= 0)
                 return new NotFoundObjectResult("No Funds Were Found");
+            
+            
+            if (!originOffice.City.BranchId.Equals(destinationOffice.City.BranchId))
+                return new BadRequestObjectResult("Offices must be in the same branch");
 
+            
             _mapper.Map(_mapper.Map<Movement>(movement), existingMovement);
             _dbContext.Movements.Update(existingMovement);
             _dbContext.SaveChanges();
@@ -261,7 +322,9 @@ namespace API.Repositories.Implementations
         public IActionResult CreateOutgoingCheckIn(OfficeCheckInRequest movement)
         {
             var originOffice = _dbContext.Offices
-                .FirstOrDefault(x => x.Id.Equals(movement.OriginId));
+                .Where(x => x.Id.Equals(movement.OriginId))
+                .Include(x => x.City)
+                .FirstOrDefault();
             
             if (originOffice == null || !originOffice.IsFund)
                 return new BadRequestObjectResult("Invalid Origin");
@@ -276,11 +339,18 @@ namespace API.Repositories.Implementations
             
             
             var destinationOffice = _dbContext.Offices
-                .FirstOrDefault(x => x.Id.Equals(movement.DestinationId));
+                .Where(x => x.Id.Equals(movement.DestinationId))
+                .Include(x => x.City)
+                .FirstOrDefault();
 
             if (destinationOffice == null || destinationOffice.IsFund)
                 return new BadRequestObjectResult("Invalid destination");
+            
+            
+            if (!originOffice.City.BranchId.Equals(destinationOffice.City.BranchId))
+                return new BadRequestObjectResult("Offices must be in the same branch");
 
+            
             _dbContext.Movements.Add(_mapper.Map<Movement>(movement));
             _dbContext.SaveChanges();
             
@@ -291,12 +361,14 @@ namespace API.Repositories.Implementations
         {
             var existingMovement = _dbContext.Movements.FirstOrDefault(x => x.Id.Equals(id));
             
+            var originOffice = _dbContext.Offices
+                .Where(x => x.Id.Equals(movement.OriginId))
+                .Include(x => x.City)
+                .FirstOrDefault();
+            
             if (existingMovement == null)
                 return new BadRequestObjectResult("Invalid Request");
 
-            var originOffice = _dbContext.Offices
-                .FirstOrDefault(x => x.Id.Equals(movement.OriginId));
-            
             if (originOffice == null || !originOffice.IsFund)
                 return new BadRequestObjectResult("Invalid Origin");
             
@@ -310,10 +382,17 @@ namespace API.Repositories.Implementations
             
             
             var destinationOffice = _dbContext.Offices
-                .FirstOrDefault(x => x.Id.Equals(movement.DestinationId));
+                .Where(x => x.Id.Equals(movement.DestinationId))
+                .Include(x => x.City)
+                .FirstOrDefault();
 
             if (destinationOffice == null || destinationOffice.IsFund)
                 return new BadRequestObjectResult("Invalid destination");
+
+
+            if (!originOffice.City.BranchId.Equals(destinationOffice.City.BranchId))
+                return new BadRequestObjectResult("Offices must be in the same branch");
+            
 
             _mapper.Map(_mapper.Map<Movement>(movement), existingMovement);
             _dbContext.Movements.Update(existingMovement);

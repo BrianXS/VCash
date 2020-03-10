@@ -654,7 +654,7 @@ namespace API.Migrations
                     b.Property<int>("BusinessUnit")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Counted")
+                    b.Property<bool>("OfficeToOffice")
                         .HasColumnType("bit");
 
                     b.Property<decimal>("CountedBanknotes")

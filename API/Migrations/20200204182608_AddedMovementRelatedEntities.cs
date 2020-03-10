@@ -58,7 +58,7 @@ namespace API.Migrations
                     CountedCashInWords = table.Column<string>(nullable: true),
                     Failed = table.Column<bool>(nullable: false),
                     Custody = table.Column<bool>(nullable: false),
-                    Counted = table.Column<bool>(nullable: false),
+                    OfficeToOffice = table.Column<bool>(nullable: false),
                     OriginId = table.Column<int>(nullable: false),
                     DestinationId = table.Column<int>(nullable: false),
                     FailureId = table.Column<int>(nullable: false),
