@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(VcashDbContext))]
-    [Migration("20200204182608_AddedMovementRelatedEntities")]
-    partial class AddedMovementRelatedEntities
+    [Migration("20200311234755_AddedAdministrativeAndOfficeMovementRelatedTables")]
+    partial class AddedAdministrativeAndOfficeMovementRelatedTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,7 +28,7 @@ namespace API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AtmBatteryId")
+                    b.Property<int?>("AtmBatteryId")
                         .HasColumnType("int");
 
                     b.Property<int>("Brand")
@@ -61,7 +61,7 @@ namespace API.Migrations
                     b.ToTable("ATMs");
                 });
 
-            modelBuilder.Entity("API.Entities.AtmBattery", b =>
+            modelBuilder.Entity("API.Entities.ATMBattery", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -278,7 +278,7 @@ namespace API.Migrations
 
                     b.HasIndex("MovementId");
 
-                    b.ToTable("Cheque");
+                    b.ToTable("Cheques");
                 });
 
             modelBuilder.Entity("API.Entities.City", b =>
@@ -313,8 +313,11 @@ namespace API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Name")
-                        .HasColumnType("int");
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -392,6 +395,9 @@ namespace API.Migrations
 
                     b.Property<int>("OfficeId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("ClosedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("CustomerId", "OfficeId");
 
@@ -654,9 +660,6 @@ namespace API.Migrations
                     b.Property<int>("BusinessUnit")
                         .HasColumnType("int");
 
-                    b.Property<bool>("OfficeToOffice")
-                        .HasColumnType("bit");
-
                     b.Property<decimal>("CountedBanknotes")
                         .HasColumnType("decimal(18, 2)");
 
@@ -710,6 +713,9 @@ namespace API.Migrations
 
                     b.Property<int>("MovementType")
                         .HasColumnType("int");
+
+                    b.Property<bool>("OfficeToOffice")
+                        .HasColumnType("bit");
 
                     b.Property<int>("OriginId")
                         .HasColumnType("int");
@@ -948,6 +954,9 @@ namespace API.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<string>("Names")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NormalizedEmail")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -969,6 +978,9 @@ namespace API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surnames")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -1138,11 +1150,9 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Entities.ATM", b =>
                 {
-                    b.HasOne("API.Entities.AtmBattery", "AtmBattery")
+                    b.HasOne("API.Entities.ATMBattery", "AtmBattery")
                         .WithMany("Atms")
-                        .HasForeignKey("AtmBatteryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AtmBatteryId");
 
                     b.HasOne("API.Entities.Office", "Office")
                         .WithMany()

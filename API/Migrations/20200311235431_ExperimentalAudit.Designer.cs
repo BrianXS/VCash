@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(VcashDbContext))]
-    [Migration("20200203155336_AddedAdministrativeTables")]
-    partial class AddedAdministrativeTables
+    [Migration("20200311235431_ExperimentalAudit")]
+    partial class ExperimentalAudit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,7 +28,7 @@ namespace API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AtmBatteryId")
+                    b.Property<int?>("AtmBatteryId")
                         .HasColumnType("int");
 
                     b.Property<int>("Brand")
@@ -61,7 +61,7 @@ namespace API.Migrations
                     b.ToTable("ATMs");
                 });
 
-            modelBuilder.Entity("API.Entities.AtmBattery", b =>
+            modelBuilder.Entity("API.Entities.ATMBattery", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -74,6 +74,108 @@ namespace API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AtmBatteries");
+                });
+
+            modelBuilder.Entity("API.Entities.Bag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("ArrivalDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("BagSerial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("CountedCash")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<decimal>("DeclaredCash")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<int>("MovementId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SealSerial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MovementId");
+
+                    b.ToTable("Bags");
+                });
+
+            modelBuilder.Entity("API.Entities.BagDenomination", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BagId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Bundle")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DenominationTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Singles")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalCountedCash")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BagId");
+
+                    b.HasIndex("DenominationTypeId");
+
+                    b.ToTable("BagDenominations");
+                });
+
+            modelBuilder.Entity("API.Entities.BagNotification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BagId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DenominationTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NotificationTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Total")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BagId");
+
+                    b.HasIndex("DenominationTypeId");
+
+                    b.HasIndex("NotificationTypeId");
+
+                    b.ToTable("BagNotifications");
                 });
 
             modelBuilder.Entity("API.Entities.Branch", b =>
@@ -144,6 +246,41 @@ namespace API.Migrations
                     b.ToTable("Cashiers");
                 });
 
+            modelBuilder.Entity("API.Entities.Cheque", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("ArrivalDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("BagSerial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Bank")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ChequeSerial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("DeclaredDocumentValue")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<int>("MovementId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SealSerial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MovementId");
+
+                    b.ToTable("Cheques");
+                });
+
             modelBuilder.Entity("API.Entities.City", b =>
                 {
                     b.Property<int>("Id")
@@ -175,11 +312,14 @@ namespace API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-                    
+
                     b.Property<string>("Code")
                         .HasColumnType("nvarchar(max)");
-                    
+
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -258,8 +398,8 @@ namespace API.Migrations
 
                     b.Property<int>("OfficeId")
                         .HasColumnType("int");
-                    
-                    b.Property<int>("ClosedAt")
+
+                    b.Property<DateTime>("ClosedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("CustomerId", "OfficeId");
@@ -267,6 +407,39 @@ namespace API.Migrations
                     b.HasIndex("OfficeId");
 
                     b.ToTable("OfficesAndFunds");
+                });
+
+            modelBuilder.Entity("API.Entities.DenominationType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("BankNote")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Currency")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("NewSeries")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("UnitsPerContainer")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Value")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DenominationTypes");
                 });
 
             modelBuilder.Entity("API.Entities.Employee", b =>
@@ -331,6 +504,125 @@ namespace API.Migrations
                     b.ToTable("Employees");
                 });
 
+            modelBuilder.Entity("API.Entities.Envelope", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("ArrivalDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("BagSerial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CashierId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClientSerial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("CountedCash")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<decimal>("CountedDocumentValue")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<decimal>("DeclaredCash")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<decimal>("DeclaredDocumentValue")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<string>("EnvelopeSerial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MovementId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SealSerial")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CashierId");
+
+                    b.HasIndex("MovementId");
+
+                    b.ToTable("Envelopes");
+                });
+
+            modelBuilder.Entity("API.Entities.EnvelopeDenomination", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Bundle")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DenominationTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EnvelopeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Singles")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalCountedCash")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DenominationTypeId");
+
+                    b.HasIndex("EnvelopeId");
+
+                    b.ToTable("EnvelopeDenominations");
+                });
+
+            modelBuilder.Entity("API.Entities.EnvelopeNotification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DenominationTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EnvelopeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NotificationTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Total")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DenominationTypeId");
+
+                    b.HasIndex("EnvelopeId");
+
+                    b.HasIndex("NotificationTypeId");
+
+                    b.ToTable("EnvelopeNotifications");
+                });
+
             modelBuilder.Entity("API.Entities.Failure", b =>
                 {
                     b.Property<int>("Id")
@@ -347,6 +639,153 @@ namespace API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Failures");
+                });
+
+            modelBuilder.Entity("API.Entities.Movement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("AmmountOfBanknoteKits")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AmmountOfCoinKits")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AmmountOfContainers")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BusinessUnit")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("CountedBanknotes")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<decimal>("CountedCash")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<string>("CountedCashInWords")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("CountedCoins")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<int>("Currency")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Custody")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("DeclaredBankNotes")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<decimal>("DeclaredCash")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<string>("DeclaredCashInWords")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("DeclaredCoins")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<int>("DestinationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("EndTime")
+                        .HasColumnType("time");
+
+                    b.Property<bool>("Failed")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("FailureId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("GeneralNotification")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MainVehicleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MovementType")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("OfficeToOffice")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("OriginId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PayrollNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SecondaryVehicleId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ServiceDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ServiceNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ServiceStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiceType")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("StartTime")
+                        .HasColumnType("time");
+
+                    b.Property<decimal>("TotalDifference")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<int>("ValueType")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DestinationId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("FailureId");
+
+                    b.HasIndex("MainVehicleId");
+
+                    b.HasIndex("OriginId");
+
+                    b.HasIndex("SecondaryVehicleId");
+
+                    b.ToTable("Movements");
+                });
+
+            modelBuilder.Entity("API.Entities.NotificationType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Symbol")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NotificationTypes");
                 });
 
             modelBuilder.Entity("API.Entities.Office", b =>
@@ -518,6 +957,9 @@ namespace API.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<string>("Names")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NormalizedEmail")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
@@ -539,6 +981,9 @@ namespace API.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Surnames")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -708,15 +1153,58 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Entities.ATM", b =>
                 {
-                    b.HasOne("API.Entities.AtmBattery", "AtmBattery")
+                    b.HasOne("API.Entities.ATMBattery", "AtmBattery")
                         .WithMany("Atms")
-                        .HasForeignKey("AtmBatteryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AtmBatteryId");
 
                     b.HasOne("API.Entities.Office", "Office")
                         .WithMany()
                         .HasForeignKey("OfficeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("API.Entities.Bag", b =>
+                {
+                    b.HasOne("API.Entities.Movement", "Movement")
+                        .WithMany("Bags")
+                        .HasForeignKey("MovementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("API.Entities.BagDenomination", b =>
+                {
+                    b.HasOne("API.Entities.Bag", "Bag")
+                        .WithMany("Denominations")
+                        .HasForeignKey("BagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.DenominationType", "DenominationType")
+                        .WithMany()
+                        .HasForeignKey("DenominationTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("API.Entities.BagNotification", b =>
+                {
+                    b.HasOne("API.Entities.Bag", "Bag")
+                        .WithMany("Notifications")
+                        .HasForeignKey("BagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.DenominationType", "DenominationType")
+                        .WithMany()
+                        .HasForeignKey("DenominationTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.NotificationType", "NotificationType")
+                        .WithMany()
+                        .HasForeignKey("NotificationTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -726,6 +1214,15 @@ namespace API.Migrations
                     b.HasOne("API.Entities.Customer", "Customer")
                         .WithMany("Cashiers")
                         .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("API.Entities.Cheque", b =>
+                {
+                    b.HasOne("API.Entities.Movement", "Movement")
+                        .WithMany("Cheques")
+                        .HasForeignKey("MovementId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -780,6 +1277,96 @@ namespace API.Migrations
                     b.HasOne("API.Entities.Branch", "Branch")
                         .WithMany()
                         .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("API.Entities.Envelope", b =>
+                {
+                    b.HasOne("API.Entities.Cashier", "Cashier")
+                        .WithMany()
+                        .HasForeignKey("CashierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Movement", "Movement")
+                        .WithMany("Envelopes")
+                        .HasForeignKey("MovementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("API.Entities.EnvelopeDenomination", b =>
+                {
+                    b.HasOne("API.Entities.DenominationType", "DenominationType")
+                        .WithMany()
+                        .HasForeignKey("DenominationTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Envelope", "Envelope")
+                        .WithMany("Denominations")
+                        .HasForeignKey("EnvelopeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("API.Entities.EnvelopeNotification", b =>
+                {
+                    b.HasOne("API.Entities.DenominationType", "DenominationType")
+                        .WithMany()
+                        .HasForeignKey("DenominationTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Envelope", "Envelope")
+                        .WithMany("Notifications")
+                        .HasForeignKey("EnvelopeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.NotificationType", "NotificationType")
+                        .WithMany()
+                        .HasForeignKey("NotificationTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("API.Entities.Movement", b =>
+                {
+                    b.HasOne("API.Entities.Office", "Destination")
+                        .WithMany()
+                        .HasForeignKey("DestinationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Failure", "Failure")
+                        .WithMany()
+                        .HasForeignKey("FailureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Vehicle", "MainVehicle")
+                        .WithMany()
+                        .HasForeignKey("MainVehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Office", "Origin")
+                        .WithMany()
+                        .HasForeignKey("OriginId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Vehicle", "SecondaryVehicle")
+                        .WithMany()
+                        .HasForeignKey("SecondaryVehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

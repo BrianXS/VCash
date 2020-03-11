@@ -1,4 +1,6 @@
+using System.Linq;
 using API.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -7,11 +9,11 @@ namespace API.Services.Database
 {
     public class VcashDbContext : IdentityDbContext<User, Role, int>
     {
-        public VcashDbContext(DbContextOptions options) : base(options) { }
-
-        /// <summary>
-        /// Administrative Entities
-        /// </summary>
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public VcashDbContext(DbContextOptions options, IHttpContextAccessor httpContextAccessor) : base(options)
+        {
+            _httpContextAccessor = httpContextAccessor;
+        }
         public DbSet<Branch> Branches { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
@@ -60,6 +62,28 @@ namespace API.Services.Database
             builder.Entity<CustomerFund>()
                 .HasOne(internalEntity => internalEntity.Office)
                 .WithMany(externalEntity => externalEntity.CustomerFunds);
+        }
+
+        public override int SaveChanges()
+        {
+            ChangeTracker.DetectChanges();
+            
+            var modified = ChangeTracker.Entries()
+                .Where(x => x.State == EntityState.Added 
+                            || x.State == EntityState.Modified 
+                            || x.State == EntityState.Deleted);
+
+            var updatingUser = _httpContextAccessor.HttpContext.User.Identity.Name;
+            
+            foreach (var item in modified)
+            {
+                if (item.Entity is IAuditable entity)
+                {
+                    item.CurrentValues[nameof(IAuditable.UpdatedBy)] = updatingUser;
+                }
+            }
+
+            return base.SaveChanges();
         }
     }
 }
