@@ -33,6 +33,7 @@ namespace API.Services.Database
 
 
         public DbSet<Movement> Movements { get; set; }
+        public DbSet<Cheque> Cheques { get; set; }
 
         public DbSet<Bag> Bags { get; set; }
         public DbSet<BagDenomination> BagDenominations { get; set; }

@@ -94,6 +94,33 @@ namespace API.Repositories.Implementations
             
             if(storedMovement.ValueType == ValueType.Envelope && !movement.Envelopes.Any() && (movement.Bags.Any() || movement.Cheques.Any()))
                 return new BadRequestObjectResult("The valuetype is not the same as the request value type");
+            
+            
+            _mapper.Map(movement, storedMovement);
+
+            if (storedMovement.Bags.Any())
+            {
+                storedMovement.Bags.ForEach(x => x.MovementId = storedMovement.Id);
+                _dbContext.Bags.AddRange(storedMovement.Bags);
+                _dbContext.SaveChanges();
+            }
+            
+            if (storedMovement.Cheques.Any())
+            {
+                storedMovement.Cheques.ForEach(x => x.MovementId = storedMovement.Id);
+                _dbContext.Cheques.AddRange(storedMovement.Cheques);
+                _dbContext.SaveChanges();
+            }
+            
+            if (storedMovement.Envelopes.Any())
+            {
+                storedMovement.Envelopes.ForEach(x => x.MovementId = storedMovement.Id);
+                _dbContext.Envelopes.AddRange(storedMovement.Envelopes);
+                _dbContext.SaveChanges();
+            }
+
+            _dbContext.Movements.Update(storedMovement);
+            _dbContext.SaveChanges();
 
             return new OkObjectResult("Counting processed successfully");
         }
@@ -126,7 +153,52 @@ namespace API.Repositories.Implementations
             
             if(storedMovement.ValueType == ValueType.Envelope && !movement.Envelopes.Any() && (movement.Bags.Any() || movement.Cheques.Any()))
                 return new BadRequestObjectResult("The valuetype is not the same as the request value type");
+            
+            
+            if (storedMovement.Bags.Any())
+            {
+                _dbContext.Bags.RemoveRange(storedMovement.Bags);
+                _dbContext.SaveChanges();
+            }
+            
+            if (storedMovement.Cheques.Any())
+            {
+                _dbContext.Cheques.RemoveRange(storedMovement.Cheques);
+                _dbContext.SaveChanges();
+            }
+            
+            if (storedMovement.Envelopes.Any())
+            {
+                _dbContext.Envelopes.RemoveRange(storedMovement.Envelopes);
+                _dbContext.SaveChanges();
+            }
 
+            _mapper.Map(movement, storedMovement);
+
+            if (storedMovement.Bags.Any())
+            {
+                storedMovement.Bags.ForEach(x => x.MovementId = storedMovement.Id);
+                _dbContext.Bags.AddRange(storedMovement.Bags);
+                _dbContext.SaveChanges();
+            }
+            
+            if (storedMovement.Cheques.Any())
+            {
+                storedMovement.Cheques.ForEach(x => x.MovementId = storedMovement.Id);
+                _dbContext.Cheques.AddRange(storedMovement.Cheques);
+                _dbContext.SaveChanges();
+            }
+            
+            if (storedMovement.Envelopes.Any())
+            {
+                storedMovement.Envelopes.ForEach(x => x.MovementId = storedMovement.Id);
+                _dbContext.Envelopes.AddRange(storedMovement.Envelopes);
+                _dbContext.SaveChanges();
+            }
+
+            _dbContext.Movements.Update(storedMovement);
+            _dbContext.SaveChanges();
+            
             return new OkObjectResult("Counting processed successfully");
         }
 
@@ -158,6 +230,32 @@ namespace API.Repositories.Implementations
             
             if(storedMovement.ValueType == ValueType.Envelope && !movement.Envelopes.Any() && (movement.Bags.Any() || movement.Cheques.Any()))
                 return new BadRequestObjectResult("The valuetype is not the same as the request value type");
+            
+            _mapper.Map(movement, storedMovement);
+
+            if (storedMovement.Bags.Any())
+            {
+                storedMovement.Bags.ForEach(x => x.MovementId = storedMovement.Id);
+                _dbContext.Bags.AddRange(storedMovement.Bags);
+                _dbContext.SaveChanges();
+            }
+            
+            if (storedMovement.Cheques.Any())
+            {
+                storedMovement.Cheques.ForEach(x => x.MovementId = storedMovement.Id);
+                _dbContext.Cheques.AddRange(storedMovement.Cheques);
+                _dbContext.SaveChanges();
+            }
+            
+            if (storedMovement.Envelopes.Any())
+            {
+                storedMovement.Envelopes.ForEach(x => x.MovementId = storedMovement.Id);
+                _dbContext.Envelopes.AddRange(storedMovement.Envelopes);
+                _dbContext.SaveChanges();
+            }
+
+            _dbContext.Movements.Update(storedMovement);
+            _dbContext.SaveChanges();
 
             return new OkObjectResult("Counting processed successfully");
         }
@@ -190,6 +288,50 @@ namespace API.Repositories.Implementations
             
             if(storedMovement.ValueType == ValueType.Envelope && !movement.Envelopes.Any() && (movement.Bags.Any() || movement.Cheques.Any()))
                 return new BadRequestObjectResult("The valuetype is not the same as the request value type");
+            
+            if (storedMovement.Bags.Any())
+            {
+                _dbContext.Bags.RemoveRange(storedMovement.Bags);
+                _dbContext.SaveChanges();
+            }
+            
+            if (storedMovement.Cheques.Any())
+            {
+                _dbContext.Cheques.RemoveRange(storedMovement.Cheques);
+                _dbContext.SaveChanges();
+            }
+            
+            if (storedMovement.Envelopes.Any())
+            {
+                _dbContext.Envelopes.RemoveRange(storedMovement.Envelopes);
+                _dbContext.SaveChanges();
+            }
+
+            _mapper.Map(movement, storedMovement);
+
+            if (storedMovement.Bags.Any())
+            {
+                storedMovement.Bags.ForEach(x => x.MovementId = storedMovement.Id);
+                _dbContext.Bags.AddRange(storedMovement.Bags);
+                _dbContext.SaveChanges();
+            }
+            
+            if (storedMovement.Cheques.Any())
+            {
+                storedMovement.Cheques.ForEach(x => x.MovementId = storedMovement.Id);
+                _dbContext.Cheques.AddRange(storedMovement.Cheques);
+                _dbContext.SaveChanges();
+            }
+            
+            if (storedMovement.Envelopes.Any())
+            {
+                storedMovement.Envelopes.ForEach(x => x.MovementId = storedMovement.Id);
+                _dbContext.Envelopes.AddRange(storedMovement.Envelopes);
+                _dbContext.SaveChanges();
+            }
+
+            _dbContext.Movements.Update(storedMovement);
+            _dbContext.SaveChanges();
 
             return new OkObjectResult("Counting processed successfully");
         }
