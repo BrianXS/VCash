@@ -8,7 +8,7 @@ namespace API.Entities
 {
     
     //TODO: Routes to be added
-    public class Office
+    public class Office : IAuditable
     {
         public int Id { get; set; }
         
@@ -55,5 +55,9 @@ namespace API.Entities
         public ICollection<CustomerFund> CustomerFunds { get; set; }
         
         public bool Active { get; set; }
+        
+        
+        public string UpdatedBy { get; set; }
+        public DateTime UpdatedOn { get; set; }
     }
 }

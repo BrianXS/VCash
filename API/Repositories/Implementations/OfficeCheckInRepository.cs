@@ -25,24 +25,24 @@ namespace API.Repositories.Implementations
         
         public OfficeCheckInResponse FindById(int id)
         {
-            var movement = _dbContext.Movements.FirstOrDefault(x => x.Id.Equals(id));
+            var movement = _dbContext.OfficeMovements.FirstOrDefault(x => x.Id.Equals(id));
             return _mapper.Map<OfficeCheckInResponse>(movement);
         }
 
-        public Movement FindMovementById(int id)
+        public OfficeMovement FindMovementById(int id)
         {
-            return _dbContext.Movements.FirstOrDefault(x => x.Id.Equals(id));
+            return _dbContext.OfficeMovements.FirstOrDefault(x => x.Id.Equals(id));
         }
 
         public List<OfficeCheckInResponse> GetAll()
         {
-            var results = _dbContext.Movements.ToList();
+            var results = _dbContext.OfficeMovements.ToList();
             return _mapper.Map<List<OfficeCheckInResponse>>(results);
         }
 
         public List<OfficeCheckInResponse> FindByOptions(int branchId, DateTime from, DateTime until)
         {
-            var movements = _dbContext.Movements
+            var movements = _dbContext.OfficeMovements
                 .Where(x => x.Destination.City.BranchId.Equals(branchId))
                 .Where(x => x.ServiceDate.CompareTo(from) >= 0)
                 .Where(x => x.ServiceDate.CompareTo(until) <= 0)
@@ -73,7 +73,7 @@ namespace API.Repositories.Implementations
             if (fund == null || fund.ClosedAt.CompareTo(movement.ServiceDate) >= 0)
                 return new NotFoundObjectResult("No Funds Were Found");
 
-            _dbContext.Movements.Add(_mapper.Map<Movement>(movement));
+            _dbContext.OfficeMovements.Add(_mapper.Map<OfficeMovement>(movement));
             _dbContext.SaveChanges();
             
             return new OkObjectResult("Movement processed successfully");
@@ -81,7 +81,7 @@ namespace API.Repositories.Implementations
 
         public ActionResult<OfficeCheckInResponse> UpdateCheckInWithFailure(int id, OfficeCheckInRequest movement)
         {
-            var existingMovement = _dbContext.Movements.FirstOrDefault(x => x.Id.Equals(id));
+            var existingMovement = _dbContext.OfficeMovements.FirstOrDefault(x => x.Id.Equals(id));
             var failure = _dbContext.Failures.FirstOrDefault(x => x.Id.Equals(movement.FailureId));
 
             if (!movement.Failed || failure == null || existingMovement == null)
@@ -102,8 +102,8 @@ namespace API.Repositories.Implementations
             if (fund == null || fund.ClosedAt.CompareTo(movement.ServiceDate) >= 0)
                 return new NotFoundObjectResult("No Funds Were Found");
 
-            _mapper.Map(_mapper.Map<Movement>(movement), existingMovement);
-            _dbContext.Movements.Update(existingMovement);
+            _mapper.Map(_mapper.Map<OfficeMovement>(movement), existingMovement);
+            _dbContext.OfficeMovements.Update(existingMovement);
             _dbContext.SaveChanges();
             
             return new OkObjectResult(existingMovement);
@@ -132,7 +132,7 @@ namespace API.Repositories.Implementations
                 return new BadRequestObjectResult("Offices must be in the same branch");
 
             
-            _dbContext.Movements.Add(_mapper.Map<Movement>(movement));
+            _dbContext.OfficeMovements.Add(_mapper.Map<OfficeMovement>(movement));
             _dbContext.SaveChanges();
             
             return new OkObjectResult("Movement processed successfully");
@@ -140,7 +140,7 @@ namespace API.Repositories.Implementations
 
         public ActionResult<OfficeCheckInResponse> UpdateCheckInWithCustody(int id, OfficeCheckInRequest movement)
         {
-            var existingMovement = _dbContext.Movements.FirstOrDefault(x => x.Id.Equals(id));
+            var existingMovement = _dbContext.OfficeMovements.FirstOrDefault(x => x.Id.Equals(id));
             
             var originOffice = _dbContext.Offices
                 .Where(x => x.Id.Equals(movement.OriginId))
@@ -166,8 +166,8 @@ namespace API.Repositories.Implementations
                 return new BadRequestObjectResult("Offices must be in the same branch");
 
             
-            _mapper.Map(_mapper.Map<Movement>(movement), existingMovement);
-            _dbContext.Movements.Update(existingMovement);
+            _mapper.Map(_mapper.Map<OfficeMovement>(movement), existingMovement);
+            _dbContext.OfficeMovements.Update(existingMovement);
             _dbContext.SaveChanges();
             
             return new OkObjectResult(existingMovement);
@@ -196,7 +196,7 @@ namespace API.Repositories.Implementations
                 return new BadRequestObjectResult("Offices must be in the same branch");
 
             
-            _dbContext.Movements.Add(_mapper.Map<Movement>(movement));
+            _dbContext.OfficeMovements.Add(_mapper.Map<OfficeMovement>(movement));
             _dbContext.SaveChanges();
             
             return new OkObjectResult("Movement processed successfully");
@@ -204,7 +204,7 @@ namespace API.Repositories.Implementations
 
         public ActionResult<OfficeCheckInResponse> UpdateLogisticsOnlyCheckIn(int id, OfficeCheckInRequest movement)
         {
-            var existingMovement = _dbContext.Movements.FirstOrDefault(x => x.Id.Equals(id));
+            var existingMovement = _dbContext.OfficeMovements.FirstOrDefault(x => x.Id.Equals(id));
             
             var originOffice = _dbContext.Offices
                 .Where(x => x.Id.Equals(movement.OriginId))
@@ -230,8 +230,8 @@ namespace API.Repositories.Implementations
                 return new BadRequestObjectResult("Offices must be in the same branch");
 
             
-            _mapper.Map(_mapper.Map<Movement>(movement), existingMovement);
-            _dbContext.Movements.Update(existingMovement);
+            _mapper.Map(_mapper.Map<OfficeMovement>(movement), existingMovement);
+            _dbContext.OfficeMovements.Update(existingMovement);
             _dbContext.SaveChanges();
             
             return new OkObjectResult(existingMovement);
@@ -269,7 +269,7 @@ namespace API.Repositories.Implementations
                 return new BadRequestObjectResult("Offices must be in the same branch");
 
             
-            _dbContext.Movements.Add(_mapper.Map<Movement>(movement));
+            _dbContext.OfficeMovements.Add(_mapper.Map<OfficeMovement>(movement));
             _dbContext.SaveChanges();
             
             return new OkObjectResult("Movement processed successfully");
@@ -277,7 +277,7 @@ namespace API.Repositories.Implementations
 
         public ActionResult<OfficeCheckInResponse> UpdateIncomingCheckIn(int id, OfficeCheckInRequest movement)
         {
-            var existingMovement = _dbContext.Movements.FirstOrDefault(x => x.Id.Equals(id));
+            var existingMovement = _dbContext.OfficeMovements.FirstOrDefault(x => x.Id.Equals(id));
             
             var originOffice = _dbContext.Offices
                 .Where(x => x.Id.Equals(movement.OriginId))
@@ -312,8 +312,8 @@ namespace API.Repositories.Implementations
                 return new BadRequestObjectResult("Offices must be in the same branch");
 
             
-            _mapper.Map(_mapper.Map<Movement>(movement), existingMovement);
-            _dbContext.Movements.Update(existingMovement);
+            _mapper.Map(_mapper.Map<OfficeMovement>(movement), existingMovement);
+            _dbContext.OfficeMovements.Update(existingMovement);
             _dbContext.SaveChanges();
             
             return new OkObjectResult(existingMovement);
@@ -351,7 +351,7 @@ namespace API.Repositories.Implementations
                 return new BadRequestObjectResult("Offices must be in the same branch");
 
             
-            _dbContext.Movements.Add(_mapper.Map<Movement>(movement));
+            _dbContext.OfficeMovements.Add(_mapper.Map<OfficeMovement>(movement));
             _dbContext.SaveChanges();
             
             return new OkObjectResult("Movement processed successfully");
@@ -359,7 +359,7 @@ namespace API.Repositories.Implementations
 
         public ActionResult<OfficeCheckInResponse> UpdateOutgoingCheckIn(int id, OfficeCheckInRequest movement)
         {
-            var existingMovement = _dbContext.Movements.FirstOrDefault(x => x.Id.Equals(id));
+            var existingMovement = _dbContext.OfficeMovements.FirstOrDefault(x => x.Id.Equals(id));
             
             var originOffice = _dbContext.Offices
                 .Where(x => x.Id.Equals(movement.OriginId))
@@ -394,16 +394,16 @@ namespace API.Repositories.Implementations
                 return new BadRequestObjectResult("Offices must be in the same branch");
             
 
-            _mapper.Map(_mapper.Map<Movement>(movement), existingMovement);
-            _dbContext.Movements.Update(existingMovement);
+            _mapper.Map(_mapper.Map<OfficeMovement>(movement), existingMovement);
+            _dbContext.OfficeMovements.Update(existingMovement);
             _dbContext.SaveChanges();
             
             return new OkObjectResult("Movement processed successfully");
         }
 
-        public void DeleteCheckIn(Movement movement)
+        public void DeleteCheckIn(OfficeMovement officeMovement)
         {
-            _dbContext.Movements.Remove(movement);
+            _dbContext.OfficeMovements.Remove(officeMovement);
             _dbContext.SaveChanges();
         }
     }

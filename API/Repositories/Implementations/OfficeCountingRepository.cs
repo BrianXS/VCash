@@ -26,7 +26,7 @@ namespace API.Repositories.Implementations
         }
         public ActionResult<CountingProcessResponse> FindById(int id)
         {
-            var movement = _dbContext.Movements.FirstOrDefault(x => x.Id.Equals(id));
+            var movement = _dbContext.OfficeMovements.FirstOrDefault(x => x.Id.Equals(id));
 
             if (movement == null)
                 return new NotFoundObjectResult("Movement not found");
@@ -34,9 +34,9 @@ namespace API.Repositories.Implementations
             return new OkObjectResult(_mapper.Map<CountingProcessResponse>(movement));
         }
 
-        public ActionResult<Movement> FindMovementById(int id)
+        public ActionResult<OfficeMovement> FindMovementById(int id)
         {
-            var movement = _dbContext.Movements.FirstOrDefault(x => x.Id.Equals(id));
+            var movement = _dbContext.OfficeMovements.FirstOrDefault(x => x.Id.Equals(id));
 
             if (movement == null)
                 return new NotFoundObjectResult("Movement not found");
@@ -46,7 +46,7 @@ namespace API.Repositories.Implementations
 
         public List<CountingProcessResponse> GetAll()
         {
-            var countedMovements = _dbContext.Movements
+            var countedMovements = _dbContext.OfficeMovements
                 .Where(x => x.Envelopes.Any() 
                             || x.Bags.Any() 
                             || x.Cheques.Any())
@@ -57,7 +57,7 @@ namespace API.Repositories.Implementations
 
         public List<CountingProcessResponse> FindByOptions(int branchId, DateTime from, DateTime until)
         {
-            var movements = _dbContext.Movements
+            var movements = _dbContext.OfficeMovements
                 .Where(x => x.Destination.City.BranchId.Equals(branchId))
                 .Where(x => x.ServiceDate.CompareTo(from) >= 0)
                 .Where(x => x.ServiceDate.CompareTo(until) <= 0)
@@ -68,7 +68,7 @@ namespace API.Repositories.Implementations
 
         public IActionResult CountIncomingService(int id, CountingProcessRequest movement)
         {
-            var storedMovement = _dbContext.Movements
+            var storedMovement = _dbContext.OfficeMovements
                 .Include(x => x.Bags)
                 .Include(x => x.Cheques)
                 .Include(x => x.Envelopes)
@@ -119,7 +119,7 @@ namespace API.Repositories.Implementations
                 _dbContext.SaveChanges();
             }
 
-            _dbContext.Movements.Update(storedMovement);
+            _dbContext.OfficeMovements.Update(storedMovement);
             _dbContext.SaveChanges();
 
             return new OkObjectResult("Counting processed successfully");
@@ -127,7 +127,7 @@ namespace API.Repositories.Implementations
 
         public ActionResult<CountingProcessResponse> UpdateIncomingService(int id, CountingProcessRequest movement)
         {
-            var storedMovement = _dbContext.Movements
+            var storedMovement = _dbContext.OfficeMovements
                 .Include(x => x.Bags)
                 .Include(x => x.Cheques)
                 .Include(x => x.Envelopes)
@@ -196,7 +196,7 @@ namespace API.Repositories.Implementations
                 _dbContext.SaveChanges();
             }
 
-            _dbContext.Movements.Update(storedMovement);
+            _dbContext.OfficeMovements.Update(storedMovement);
             _dbContext.SaveChanges();
             
             return new OkObjectResult("Counting processed successfully");
@@ -204,7 +204,7 @@ namespace API.Repositories.Implementations
 
         public IActionResult CountOutgoingService(int id, CountingProcessRequest movement)
         {
-            var storedMovement = _dbContext.Movements
+            var storedMovement = _dbContext.OfficeMovements
                 .Include(x => x.Bags)
                 .Include(x => x.Cheques)
                 .Include(x => x.Envelopes)
@@ -254,7 +254,7 @@ namespace API.Repositories.Implementations
                 _dbContext.SaveChanges();
             }
 
-            _dbContext.Movements.Update(storedMovement);
+            _dbContext.OfficeMovements.Update(storedMovement);
             _dbContext.SaveChanges();
 
             return new OkObjectResult("Counting processed successfully");
@@ -262,7 +262,7 @@ namespace API.Repositories.Implementations
 
         public ActionResult<CountingProcessResponse> UpdateOutgoingService(int id, CountingProcessRequest movement)
         {
-            var storedMovement = _dbContext.Movements
+            var storedMovement = _dbContext.OfficeMovements
                 .Include(x => x.Bags)
                 .Include(x => x.Cheques)
                 .Include(x => x.Envelopes)
@@ -330,15 +330,15 @@ namespace API.Repositories.Implementations
                 _dbContext.SaveChanges();
             }
 
-            _dbContext.Movements.Update(storedMovement);
+            _dbContext.OfficeMovements.Update(storedMovement);
             _dbContext.SaveChanges();
 
             return new OkObjectResult("Counting processed successfully");
         }
 
-        public void Delete(Movement movement)
+        public void Delete(OfficeMovement officeMovement)
         {
-            _dbContext.Movements.Remove(movement);
+            _dbContext.OfficeMovements.Remove(officeMovement);
             _dbContext.SaveChanges();
         }
     }

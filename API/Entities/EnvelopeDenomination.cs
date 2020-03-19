@@ -1,8 +1,9 @@
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Entities
 {
-    public class EnvelopeDenomination
+    public class EnvelopeDenomination : IAuditable
     {
         public int Id { get; set; }
         public int Quantity { get; set; }
@@ -18,5 +19,9 @@ namespace API.Entities
 
         public int EnvelopeId { get; set; }
         public Envelope Envelope { get; set; }
+        
+        
+        public string UpdatedBy { get; set; }
+        public DateTime UpdatedOn { get; set; }
     }
 }

@@ -1,9 +1,10 @@
+using System;
 using System.Collections.Generic;
 using API.Enums;
 
 namespace API.Entities
 {
-    public class Customer
+    public class Customer : IAuditable
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -37,5 +38,8 @@ namespace API.Entities
         public ICollection<CustomerFund> CustomerFunds { get; set; }
         
         public bool Active { get; set; }
+        
+        public string UpdatedBy { get; set; }
+        public DateTime UpdatedOn { get; set; }
     }
 }

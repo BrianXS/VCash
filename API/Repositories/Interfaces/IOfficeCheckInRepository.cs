@@ -11,7 +11,7 @@ namespace API.Repositories.Interfaces
     public interface IOfficeCheckInRepository
     {
         OfficeCheckInResponse FindById(int id);
-        Movement FindMovementById(int id);
+        OfficeMovement FindMovementById(int id);
         List<OfficeCheckInResponse> GetAll();
         List<OfficeCheckInResponse> FindByOptions(int branchId, DateTime from, DateTime until);
         IActionResult CreateCheckInWithFailure(OfficeCheckInRequest movement);
@@ -24,6 +24,6 @@ namespace API.Repositories.Interfaces
         ActionResult<OfficeCheckInResponse> UpdateIncomingCheckIn(int id, OfficeCheckInRequest movement);
         IActionResult CreateOutgoingCheckIn(OfficeCheckInRequest movement);
         ActionResult<OfficeCheckInResponse> UpdateOutgoingCheckIn(int id, OfficeCheckInRequest movement);
-        void DeleteCheckIn(Movement movement);
+        void DeleteCheckIn(OfficeMovement officeMovement);
     }
 }

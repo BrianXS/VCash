@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace API.Entities
 {
-    public class Envelope
+    public class Envelope : IAuditable
     {
         public int Id { get; set; }
 
@@ -32,9 +32,13 @@ namespace API.Entities
         public Cashier Cashier { get; set; }
 
         public int MovementId { get; set; }
-        public Movement Movement { get; set; }
+        public OfficeMovement OfficeMovement { get; set; }
         
         public List<EnvelopeDenomination> Denominations { get; set; }
         public List<EnvelopeNotification> Notifications { get; set; }
+        
+        
+        public string UpdatedBy { get; set; }
+        public DateTime UpdatedOn { get; set; }
     }
 }

@@ -1,0 +1,35 @@
+namespace API.Enums
+{
+    public enum DrawerType
+    {
+        F561,
+        F562,
+        F564,
+        F563,
+        F565,
+        F566,
+        Hopper1,
+        Hopper2,
+        Hopper3, 
+        Hopper4,
+        Cassette1,
+        Cassette2,
+        Cassette3,
+        RF561,
+        RF562,
+        RF563,
+        RF564,
+        RF565,
+        RF566,
+        RHopper1,
+        RHopper2,
+        RHopper3,
+        RHopper4,
+        RCassette1,
+        RCassette2,
+        RCassette3,
+        Purga,
+        Box,
+        CoinBack
+    }
+}

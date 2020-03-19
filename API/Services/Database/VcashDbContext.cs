@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using API.Entities;
 using Microsoft.AspNetCore.Http;
@@ -34,7 +35,7 @@ namespace API.Services.Database
         public DbSet<Failure> Failures { get; set; }
 
 
-        public DbSet<Movement> Movements { get; set; }
+        public DbSet<OfficeMovement> OfficeMovements { get; set; }
         public DbSet<Cheque> Cheques { get; set; }
 
         public DbSet<Bag> Bags { get; set; }
@@ -44,7 +45,12 @@ namespace API.Services.Database
         public DbSet<Envelope> Envelopes { get; set; }
         public DbSet<EnvelopeDenomination> EnvelopeDenominations { get; set; }
         public DbSet<EnvelopeNotification> EnvelopeNotifications { get; set; }
+        
+        
 
+        public DbSet<DrawerRange> DrawerRanges { get; set; }
+        public DbSet<Drawer> Drawers { get; set; }
+        
         public DbSet<DenominationType> DenominationTypes { get; set; }
         public DbSet<NotificationType> NotificationTypes { get; set; }
         
@@ -80,6 +86,7 @@ namespace API.Services.Database
                 if (item.Entity is IAuditable entity)
                 {
                     item.CurrentValues[nameof(IAuditable.UpdatedBy)] = updatingUser;
+                    item.CurrentValues[nameof(IAuditable.UpdatedOn)] = DateTime.Now;
                 }
             }
 

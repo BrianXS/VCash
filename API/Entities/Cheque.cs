@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace API.Entities
 {
-    public class Cheque
+    public class Cheque : IAuditable
     {
         public int Id { get; set; }
 
@@ -20,6 +20,10 @@ namespace API.Entities
         public DateTime ArrivalDate { get; set; }
         
         public int MovementId { get; set; }
-        public Movement Movement { get; set; }
+        public OfficeMovement OfficeMovement { get; set; }
+        
+        
+        public string UpdatedBy { get; set; }
+        public DateTime UpdatedOn { get; set; }
     }
 }

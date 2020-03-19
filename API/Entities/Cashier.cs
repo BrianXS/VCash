@@ -1,8 +1,9 @@
+using System;
 using API.Enums;
 
 namespace API.Entities
 {
-    public class Cashier
+    public class Cashier : IAuditable
     {
         public int Id { get; set; }
         public string FullName { get; set; }
@@ -11,5 +12,9 @@ namespace API.Entities
 
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
+        
+        
+        public string UpdatedBy { get; set; }
+        public DateTime UpdatedOn { get; set; }
     }
 }

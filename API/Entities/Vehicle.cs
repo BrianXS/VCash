@@ -1,9 +1,10 @@
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using API.Enums;
 
 namespace API.Entities
 {
-    public class Vehicle
+    public class Vehicle : IAuditable
     {
         public int Id { get; set; }
         public string Model { get; set; }
@@ -22,5 +23,7 @@ namespace API.Entities
         
         public int BranchId { get; set; }
         public Branch Branch { get; set; }
+        public string UpdatedBy { get; set; }
+        public DateTime UpdatedOn { get; set; }
     }
 }

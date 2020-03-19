@@ -1,6 +1,8 @@
+using System;
+
 namespace API.Entities
 {
-    public class EnvelopeNotification
+    public class EnvelopeNotification : IAuditable
     {
         public int Id { get; set; }
         public string Message { get; set; }
@@ -16,5 +18,9 @@ namespace API.Entities
         
         public int EnvelopeId { get; set; }
         public Envelope Envelope { get; set; }
+        
+        
+        public string UpdatedBy { get; set; }
+        public DateTime UpdatedOn { get; set; }
     }
 }

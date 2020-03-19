@@ -4,7 +4,7 @@ using API.Enums.ATM;
 
 namespace API.Entities
 {
-    public class ATM
+    public class ATM : IAuditable
     {
         public int Id { get; set; }
         
@@ -23,5 +23,9 @@ namespace API.Entities
         
         public int? AtmBatteryId { get; set; }
         public ATMBattery AtmBattery { get; set; }
+        
+        
+        public string UpdatedBy { get; set; }
+        public DateTime UpdatedOn { get; set; }
     }
 }

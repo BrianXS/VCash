@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace API.Entities
 {
-    public class Bag
+    public class Bag : IAuditable
     {
         public int Id { get; set; }
         
@@ -20,9 +20,13 @@ namespace API.Entities
         public decimal CountedCash { get; set; }
 
         public int MovementId { get; set; }
-        public Movement Movement { get; set; }
+        public OfficeMovement OfficeMovement { get; set; }
         
         public List<BagDenomination> Denominations { get; set; }
         public List<BagNotification> Notifications { get; set; }
+        
+        
+        public string UpdatedBy { get; set; }
+        public DateTime UpdatedOn { get; set; }
     }
 }

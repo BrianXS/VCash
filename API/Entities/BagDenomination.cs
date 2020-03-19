@@ -1,8 +1,9 @@
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Entities
 {
-    public class BagDenomination
+    public class BagDenomination : IAuditable
     {
         public int Id { get; set; }
         public int Quantity { get; set; }
@@ -18,5 +19,9 @@ namespace API.Entities
 
         public int BagId { get; set; }
         public Bag Bag { get; set; }
+        
+        
+        public string UpdatedBy { get; set; }
+        public DateTime UpdatedOn { get; set; }
     }
 }

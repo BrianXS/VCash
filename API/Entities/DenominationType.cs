@@ -1,9 +1,10 @@
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using API.Enums;
 
 namespace API.Entities
 {
-    public class DenominationType
+    public class DenominationType : IAuditable
     {
         public int Id { get; set; }
         
@@ -18,5 +19,9 @@ namespace API.Entities
         
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Value { get; set; }
+
+        
+        public string UpdatedBy { get; set; }
+        public DateTime UpdatedOn { get; set; }
     }
 }

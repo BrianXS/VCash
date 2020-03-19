@@ -7,7 +7,7 @@ using ValueType = API.Enums.ValueType;
 
 namespace API.Entities
 {
-    public class Movement
+    public class OfficeMovement : IAuditable
     {
         public int Id { get; set; }
 
@@ -81,5 +81,9 @@ namespace API.Entities
         public List<Bag> Bags { get; set; }
 
         public bool Active { get; set; }
+        
+        
+        public string UpdatedBy { get; set; }
+        public DateTime UpdatedOn { get; set; }
     }
 }

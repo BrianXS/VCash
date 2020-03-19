@@ -9,8 +9,8 @@ namespace API.Profiles
     {
         public OfficeCheckInRepository()
         {
-            CreateMap<Movement, OfficeCheckInResponse>();
-            CreateMap<OfficeCheckInRequest, Movement>();
+            CreateMap<OfficeMovement, OfficeCheckInResponse>();
+            CreateMap<OfficeCheckInRequest, OfficeMovement>();
         }
     }
 }
