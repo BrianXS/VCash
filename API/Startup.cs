@@ -62,6 +62,13 @@ namespace API
                         p.RequireClaim(policy.Type, policy.Value));
                 }
             });
+
+            services.AddCors(policies => policies.AddDefaultPolicy(properties =>
+            {
+                properties.AllowAnyOrigin();
+                properties.AllowAnyHeader();
+                properties.AllowAnyMethod();
+            }));
             
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddRouting(options => options.LowercaseUrls = true);
@@ -77,9 +84,11 @@ namespace API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
+            //app.UseHttpsRedirection();
+            
             app.UseRouting();
+            
+            app.UseCors();
 
             app.UseAuthorization();
 

@@ -14,14 +14,8 @@ namespace API.Entities
         public DateTime DispatchDate { get; set; }
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
-
-        public TYPE Type { get; set; }
-        
         public string TrackingCode { get; set; }
         public ServiceStatus ServiceStatus { get; set; }
-
-        
-        
         public List<ATMMovementDrawers> Drawerses { get; set; }
     }
 }

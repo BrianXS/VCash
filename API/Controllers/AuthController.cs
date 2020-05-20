@@ -11,6 +11,8 @@ using API.Resources.Incoming.AdministrativeResources;
 using API.Resources.Outgoing;
 using API.Resources.Outgoing.AdministrativeResources;
 using API.Utils;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -99,6 +101,13 @@ namespace API.Controllers
             }
             
             return Unauthorized();
+        }
+
+        [HttpGet("Verify")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public IActionResult Verify()
+        {
+            return Ok();
         }
     }
 }
