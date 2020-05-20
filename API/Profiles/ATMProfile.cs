@@ -15,7 +15,9 @@ namespace API.Profiles
                 .ForMember(to => to.AtmBattery, from => 
                     from.MapFrom(src => src.AtmBattery.Code))
                 .ForMember(to => to.Office, from => 
-                    from.MapFrom(src => src.Office.Name));
+                    from.MapFrom(src => src.Office.Name))
+                .ForMember(to => to.DrawerRange, from => 
+                    from.MapFrom(src => src.DrawerRange.Code));
             
             CreateMap<ATMCreateRequest, ATM>();
             CreateMap<ATMUpdateRequest, ATM>();

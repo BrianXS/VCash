@@ -28,5 +28,6 @@ namespace API.Resources.Incoming.AdministrativeResources
         public int OfficeId { get; set; }
         
         public int? AtmBatteryId { get; set; }
+        public int? DrawerRangeId { get; set; }
     }
 }

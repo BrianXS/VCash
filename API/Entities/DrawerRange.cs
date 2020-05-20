@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using API.Enums;
 
 namespace API.Entities
@@ -10,5 +11,7 @@ namespace API.Entities
 
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
+
+        public List<Drawer> Drawers { get; set; }
     }
 }

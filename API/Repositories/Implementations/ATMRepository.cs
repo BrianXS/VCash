@@ -27,6 +27,7 @@ namespace API.Repositories.Implementations
             var atm = _dbContext.ATMs.Where(x => x.Id.Equals(id))
                 .Include(x => x.Office)
                 .Include(x => x.AtmBattery)
+                .Include(x => x.DrawerRange)
                 .FirstOrDefault();
 
             return _mapper.Map<ATMResponse>(atm);
@@ -39,7 +40,11 @@ namespace API.Repositories.Implementations
 
         public List<ATMResponse> GetAllATM()
         {
-            var atms = _dbContext.ATMs.ToList();
+            var atms = _dbContext.ATMs
+                .Include(x => x.Office)
+                .Include(x => x.AtmBattery)
+                .Include(x => x.DrawerRange)
+                .ToList();
             return _mapper.Map<List<ATMResponse>>(atms);
         }
 

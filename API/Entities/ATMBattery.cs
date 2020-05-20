@@ -10,7 +10,6 @@ namespace API.Entities
 
         public List<ATM> Atms { get; set; }
         
-        
         public string UpdatedBy { get; set; }
         public DateTime UpdatedOn { get; set; }
     }
