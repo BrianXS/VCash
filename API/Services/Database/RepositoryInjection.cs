@@ -13,6 +13,7 @@ namespace API.Services.Database
             services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IStateRepository, StateRepository>();
+            services.AddScoped<IDrawerRepository, DrawerRepository>();
             services.AddScoped<IOfficeRepository, OfficeRepository>();
             services.AddScoped<IBranchRepository, BranchRepository>();
             services.AddScoped<ICountryRepository, CountryRepository>();
@@ -22,13 +23,12 @@ namespace API.Services.Database
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IATMBatteryRepostiory, ATMBatteryRepository>();
+            services.AddScoped<IDrawerRangeRepository, DrawerRangeRepository>();
             services.AddScoped<IBusinessTypeRepository, BusinessTypeRepository>();
             services.AddScoped<ICustomerFundRepository, CustomerFundRepository>();
             services.AddScoped<IOfficeCheckInRepository, OfficeCheckInRepository>();
             services.AddScoped<INotificationTypeRepository, NotificationTypeRepository>();
             services.AddScoped<IDenominationTypeRepository, DenominationTypeRepository>();
-
-            
         }
     }
 }
