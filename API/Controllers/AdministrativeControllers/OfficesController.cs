@@ -17,16 +17,28 @@ namespace API.Controllers.AdministrativeControllers
     public class OfficesController : ControllerBase
     {
         private readonly IOfficeRepository _officeRepository;
+        private readonly ICustomerRepository _customerRepository;
 
-        public OfficesController(IOfficeRepository officeRepository)
+        public OfficesController(IOfficeRepository officeRepository,
+            ICustomerRepository customerRepository)
         {
             _officeRepository = officeRepository;
+            _customerRepository = customerRepository;
         }
 
         [HttpGet]
         public ActionResult<List<OfficeResponse>> GetAll()
         {
             return Ok(_officeRepository.GetAllOffices());
+        }
+        
+        [HttpGet("Funds/{id}")]
+        public ActionResult<List<OfficeResponse>> FindAllFundsByClientId(int id)
+        {
+            if (_customerRepository.FindCustomerById(id) == null)
+                return BadRequest();
+            
+            return Ok(_officeRepository.FindAllFundsByClientId(id));
         }
 
         [HttpGet("{id}")]

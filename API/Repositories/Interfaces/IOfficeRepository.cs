@@ -11,6 +11,7 @@ namespace API.Repositories.Interfaces
     {
         OfficeResponse FindOfficeResourceById(int id);
         Office FindOfficeById(int id);
+        List<OfficeResponse> FindAllFundsByClientId(int id);
         List<OfficeResponse> GetAllOffices();
         void CreateOffice(OfficeCreateRequest office);
         OfficeResponse UpdateOffice(int id, OfficeUpdateRequest office);

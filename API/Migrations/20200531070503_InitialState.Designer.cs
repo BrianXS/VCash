@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(VcashDbContext))]
-    [Migration("20200520165537_InitialState")]
+    [Migration("20200531070503_InitialState")]
     partial class InitialState
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -921,9 +921,6 @@ namespace API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Prefix")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Until")

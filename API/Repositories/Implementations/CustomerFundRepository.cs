@@ -65,8 +65,11 @@ namespace API.Repositories.Implementations
 
         public void CreateCustomerFund(CustomerFundCreateRequest customerFund)
         {
-            _dbContext.OfficesAndFunds.Add(_mapper.Map<CustomerFund>(customerFund));
-            _dbContext.SaveChanges();
+            if (FindCustomerFundByCustomerAndOffice(customerFund.CustomerId, customerFund.OfficeId) == null)
+            {
+                _dbContext.OfficesAndFunds.Add(_mapper.Map<CustomerFund>(customerFund));
+                _dbContext.SaveChanges();   
+            }
         }
 
         public CustomerFundResponse UpdateCustomerFund(int customerId, int officeId, CustomerFundUpdateRequest customerFund)

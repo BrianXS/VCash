@@ -8,6 +8,7 @@ using API.Resources.Outgoing;
 using API.Resources.Outgoing.AdministrativeResources;
 using API.Services.Database;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Repositories.Implementations
 {
@@ -24,7 +25,10 @@ namespace API.Repositories.Implementations
         
         public OfficeResponse FindOfficeResourceById(int id)
         {
-            var office = _dbContext.Offices.FirstOrDefault(x => x.Id.Equals(id));
+            var office = _dbContext.Offices
+                .Include(x => x.Customer)
+                .FirstOrDefault(x => x.Id.Equals(id));
+            
             return _mapper.Map<OfficeResponse>(office);
         }
 
@@ -33,9 +37,20 @@ namespace API.Repositories.Implementations
             return _dbContext.Offices.FirstOrDefault(x => x.Id.Equals(id));
         }
 
+        public List<OfficeResponse> FindAllFundsByClientId(int id)
+        {
+            var results = _dbContext.Offices
+                .Where(x => x.CustomerId.Equals(id) && x.IsFund);
+            
+            return _mapper.Map<List<OfficeResponse>>(results);
+        }
+
         public List<OfficeResponse> GetAllOffices()
         {
-            var offices = _dbContext.Offices.ToList();
+            var offices = _dbContext.Offices
+                .Include(x => x.Customer)
+                .ToList();
+            
             return _mapper.Map<List<OfficeResponse>>(offices);
         }
 

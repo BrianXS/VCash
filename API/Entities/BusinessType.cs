@@ -8,10 +8,7 @@ namespace API.Entities
         public int Code { get; set; }
         public string Name { get; set; }
 
-        
         public string UpdatedBy { get; set; }
         public DateTime UpdatedOn { get; set; }
-        
-        //Todo: Add to the fluent api auto generated files, the inverse relationship
     }
 }

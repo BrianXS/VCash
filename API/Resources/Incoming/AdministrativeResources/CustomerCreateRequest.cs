@@ -45,6 +45,6 @@ namespace API.Resources.Incoming.AdministrativeResources
         public string SecondKeyPersonTitle { get; set; }
         
         public bool SubClient { get; set; }
-        public int ParentClient { get; set; }
+        public int? ParentClient { get; set; }
     }
 }

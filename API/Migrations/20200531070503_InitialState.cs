@@ -492,7 +492,6 @@ namespace API.Migrations
                     Name = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
                     Phone = table.Column<string>(nullable: true),
-                    Prefix = table.Column<string>(nullable: true),
                     Coverage = table.Column<int>(nullable: false),
                     Manager = table.Column<string>(nullable: true),
                     ManagerDetails = table.Column<string>(nullable: true),

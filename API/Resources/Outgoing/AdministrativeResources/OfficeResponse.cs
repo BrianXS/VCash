@@ -16,7 +16,6 @@ namespace API.Resources.Outgoing.AdministrativeResources
         public string Name { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
-        public string Prefix { get; set; }
         public Coverage Coverage { get; set; }
 
         public string Manager { get; set; }

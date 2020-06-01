@@ -38,6 +38,7 @@ namespace API.Resources.Incoming.AdministrativeResources
 
         [Required]
         public DateTime From { get; set; }
+        
         public DateTime Until { get; set; }
         
         [Required]
@@ -64,7 +65,6 @@ namespace API.Resources.Incoming.AdministrativeResources
         public string Manager { get; set; }
         public string ManagerDetails { get; set; }
         public string ManagerEmail { get; set; }
-        public string Prefix { get; set; }
         public int? BusinessTypeId { get; set; }
     }
 }

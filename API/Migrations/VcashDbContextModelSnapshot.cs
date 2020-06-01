@@ -921,9 +921,6 @@ namespace API.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Prefix")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("Until")
                         .HasColumnType("datetime2");
 
