@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using API.Entities;
+using API.Enums;
 using API.Repositories.Interfaces;
 using API.Resources.Incoming;
 using API.Resources.Incoming.AdministrativeResources;
@@ -25,6 +26,12 @@ namespace API.Repositories.Implementations
         {
             var denominationType = _dbContext.DenominationTypes.FirstOrDefault(x => x.Id.Equals(id));
             return _mapper.Map<DenominationTypeResponse>(denominationType);
+        }
+
+        public List<DenominationTypeResponse> FindDenominationsByCurrency(Currency currency)
+        {
+            var denominations = _dbContext.DenominationTypes.Where(x => x.Currency.Equals(currency)).ToList();
+            return _mapper.Map<List<DenominationTypeResponse>>(denominations);
         }
 
         public DenominationType FindDenominationTypeById(int id)

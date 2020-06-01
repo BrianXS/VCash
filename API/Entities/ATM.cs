@@ -25,7 +25,7 @@ namespace API.Entities
         public ATMBattery AtmBattery { get; set; }
         
 
-        public int? DrawerRangeId { get; set; }
+        public int DrawerRangeId { get; set; }
         public DrawerRange DrawerRange { get; set; }
         
         public string UpdatedBy { get; set; }

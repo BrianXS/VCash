@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using API.Enums;
 using API.Repositories.Interfaces;
 using API.Resources.Incoming;
 using API.Resources.Incoming.AdministrativeResources;
@@ -36,6 +37,13 @@ namespace API.Controllers.AdministrativeControllers
             if (result == null)
                 return NotFound();
             
+            return Ok(result);
+        }
+        
+        [HttpGet("Currency/{id}")]
+        public ActionResult<DenominationTypeResponse> FindDenominationTypeByCurrency(Currency currency)
+        {
+            var result = _denominationTypeRepository.FindDenominationsByCurrency(currency);
             return Ok(result);
         }
 

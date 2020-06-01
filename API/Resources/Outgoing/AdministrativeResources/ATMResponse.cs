@@ -21,7 +21,7 @@ namespace API.Resources.Outgoing.AdministrativeResources
         public int? AtmBatteryId { get; set; }
         public string AtmBattery { get; set; }
         
-        public int? DrawerRangeId { get; set; }
+        public int DrawerRangeId { get; set; }
         public string DrawerRange { get; set; }
     }
 }

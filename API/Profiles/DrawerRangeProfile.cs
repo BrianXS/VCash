@@ -9,7 +9,8 @@ namespace API.Profiles
     {
         public DrawerRangeProfile()
         {
-            CreateMap<DrawerRange, DrawerRangeResponse>();
+            CreateMap<DrawerRange, DrawerRangeResponse>().ForMember(to => to.Customer,
+                from => from.MapFrom(src => src.Customer.Name));
             CreateMap<DrawerRangeRequest, DrawerRange>();
         }
     }
