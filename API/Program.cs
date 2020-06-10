@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Entities;
+using API.Repositories.Interfaces;
 using API.Services.Database;
+using API.Services.Seeds;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -37,6 +39,15 @@ namespace API
                 
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
                 SeedingClass.SeedUsers(userManager).Wait();
+
+                var countryRepository = scope.ServiceProvider.GetRequiredService<ICountryRepository>();
+                CountrySeed.SeedCountries(countryRepository);
+                
+                var statesRepository = scope.ServiceProvider.GetRequiredService<IStateRepository>();
+                StateSeed.SeedStates(statesRepository);
+                
+                var branchRepository = scope.ServiceProvider.GetRequiredService<IBranchRepository>();
+                BranchSeed.SeedBranches(branchRepository);
             }
         }
     }

@@ -54,6 +54,12 @@ namespace API.Repositories.Implementations
             _dbContext.SaveChanges();
         }
 
+        public void CreateMultipleCountries(List<CountryCreateRequest> countries)
+        {
+            _dbContext.Countries.AddRange(_mapper.Map<List<Country>>(countries));
+            _dbContext.SaveChanges();
+        }
+
         public CountryResponse UpdateCountry(int id, CountryUpdateRequest country)
         {
             var countryToUpdate = _dbContext.Countries.FirstOrDefault(x => x.Id.Equals(id));
@@ -68,6 +74,11 @@ namespace API.Repositories.Implementations
         {
             _dbContext.Countries.Remove(country);
             _dbContext.SaveChanges();
+        }
+
+        public int CountCountries()
+        {
+            return _dbContext.Countries.Count();
         }
     }
 }

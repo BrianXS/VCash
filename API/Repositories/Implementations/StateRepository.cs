@@ -50,6 +50,12 @@ namespace API.Repositories.Implementations
             _dbContext.SaveChanges();
         }
 
+        public void CreateStateRange(List<StateCreateRequest> states)
+        {
+            _dbContext.States.AddRange(_mapper.Map<List<State>>(states));
+            _dbContext.SaveChanges();
+        }
+
         public StateResponse UpdateState(int id, StateUpdateRequest updatedState)
         {
             var stateToUpdate = _dbContext.States.FirstOrDefault(x => x.Id.Equals(id));
@@ -65,6 +71,11 @@ namespace API.Repositories.Implementations
         {
             _dbContext.States.Remove(state);
             _dbContext.SaveChanges();
+        }
+
+        public int CountStates()
+        {
+            return _dbContext.States.Count();
         }
     }
 }

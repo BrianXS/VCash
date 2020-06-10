@@ -45,6 +45,12 @@ namespace API.Repositories.Implementations
             _dbContext.SaveChanges();
         }
 
+        public void CreateBranchRange(List<BranchCreateRequest> branches)
+        {
+            _dbContext.Branches.AddRange(_mapper.Map<List<Branch>>(branches));
+            _dbContext.SaveChanges();
+        }
+
         public BranchResponse UpdateBranch(int id, BranchUpdateRequest updatedBranch)
         {
             var branchToUpdate = _dbContext.Branches.FirstOrDefault(x => x.Id.Equals(id));
@@ -60,6 +66,11 @@ namespace API.Repositories.Implementations
         {
             _dbContext.Branches.Remove(branch);
             _dbContext.SaveChanges();
+        }
+
+        public int CountBranches()
+        {
+            return _dbContext.Branches.Count();
         }
     }
 }

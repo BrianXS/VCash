@@ -78,9 +78,10 @@ namespace API.Services.Database
                 .Where(x => x.State == EntityState.Added 
                             || x.State == EntityState.Modified 
                             || x.State == EntityState.Deleted);
-
-            var updatingUser = _httpContextAccessor.HttpContext.User.Identity.Name;
             
+            var updatingUser = _httpContextAccessor.HttpContext == null ? 
+                "SYSTEM" : _httpContextAccessor.HttpContext.User.Identity.Name;
+
             foreach (var item in modified)
             {
                 if (item.Entity is IAuditable entity)

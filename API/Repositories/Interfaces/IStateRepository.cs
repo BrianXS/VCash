@@ -12,8 +12,10 @@ namespace API.Repositories.Interfaces
         StateResponse FindStateResourceById(int id);
         State FindStateById(int id);
         List<StateResponse> GetAllStates();
-        void CreateState(StateCreateRequest state);
+        void CreateState(StateCreateRequest states);
+        void CreateStateRange(List<StateCreateRequest> state);
         StateResponse UpdateState(int id, StateUpdateRequest state);
         void DeleteState(State state);
+        int CountStates();
     }
 }

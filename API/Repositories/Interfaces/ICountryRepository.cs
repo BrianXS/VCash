@@ -13,7 +13,9 @@ namespace API.Repositories.Interfaces
         CountryResponse FindCountryResourceById(int id);
         Country FindCountryById(int id);
         void CreateCountry(CountryCreateRequest country);
+        void CreateMultipleCountries(List<CountryCreateRequest> countries);
         CountryResponse UpdateCountry(int Id, CountryUpdateRequest country);
         void DeleteCountry(Country country);
+        int CountCountries();
     }
 }
