@@ -49,6 +49,17 @@ namespace API
                 
                 var branchRepository = scope.ServiceProvider.GetRequiredService<IBranchRepository>();
                 BranchSeed.SeedBranches(branchRepository);
+
+                //var cityRepository = scope.ServiceProvider.GetRequiredService<ICityRepository>();
+                //CitySeed.SeedCities(cityRepository);
+                
+                //var employeeRepository = scope.ServiceProvider.GetRequiredService<IEmployeeRepository>();
+                //EmployeeSeed.SeedEmployees(employeeRepository);
+                
+                //var vehicleRepository = scope.ServiceProvider.GetRequiredService<IVehicleRepository>();
+                //VehicleSeed.SeedVehicles(vehicleRepository);
+                
+                
             }
         }
     }

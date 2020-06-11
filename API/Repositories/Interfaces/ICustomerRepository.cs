@@ -13,7 +13,9 @@ namespace API.Repositories.Interfaces
         Customer FindCustomerById(int id);
         List<CustomerResponse> GetAllCustomers();
         void CreateCustomer(CustomerCreateRequest customer);
+        void CreateCustomerRange(List<CustomerCreateRequest> customers);
         CustomerResponse UpdateCustomer(int id, CustomerUpdateRequest updatedCustomer);
         void DeleteCustomer(Customer customer);
+        int CountCusdtomers();
     }
 }

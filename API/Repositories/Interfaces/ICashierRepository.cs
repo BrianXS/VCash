@@ -13,7 +13,9 @@ namespace API.Repositories.Interfaces
         Cashier FindCashierById(int id);
         List<CashierResponse> GetAllCashiers();
         void CreateCashier(CashierCreateRequest cashier);
+        void CreateCashiersRange(List<CashierCreateRequest> cashiers);
         CashierResponse UpdateCashier(int id, CashierUpdateRequest updatedCashier);
         void DeleteCashier(Cashier cashier);
+        int CountCashiers();
     }
 }

@@ -51,6 +51,12 @@ namespace API.Repositories.Implementations
             _dbContext.SaveChanges();
         }
 
+        public void CreateVehicleRange(List<VehicleCreateRequest> vehicles)
+        {
+            _dbContext.Vehicles.AddRange(_mapper.Map<Vehicle>(vehicles));
+            _dbContext.SaveChanges();
+        }
+
         public VehicleResponse UpdateVehicle(int id, VehicleUpdateRequest updatedVehicle)
         {
             var vehicleToUpdate = _dbContext.Vehicles.FirstOrDefault(x => x.Id.Equals(id));
@@ -66,6 +72,11 @@ namespace API.Repositories.Implementations
         {
             _dbContext.Vehicles.Remove(vehicle);
             _dbContext.SaveChanges();
+        }
+
+        public int CountVehicles()
+        {
+            return _dbContext.Vehicles.Count();
         }
     }
 }

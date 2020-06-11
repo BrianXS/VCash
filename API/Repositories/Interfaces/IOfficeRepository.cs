@@ -14,7 +14,9 @@ namespace API.Repositories.Interfaces
         List<OfficeResponse> FindAllFundsByClientId(int id);
         List<OfficeResponse> GetAllOffices();
         void CreateOffice(OfficeCreateRequest office);
+        void CreateOfficesRange(List<OfficeCreateRequest> office);
         OfficeResponse UpdateOffice(int id, OfficeUpdateRequest office);
         void DeleteOffice(Office office);
+        int CountOffices();
     }
 }

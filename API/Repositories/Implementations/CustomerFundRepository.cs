@@ -72,6 +72,12 @@ namespace API.Repositories.Implementations
             }
         }
 
+        public void CreateCustomerFund(List<CustomerFundCreateRequest> customerFunds)
+        {
+            _dbContext.OfficesAndFunds.AddRange(_mapper.Map<List<CustomerFund>>(customerFunds));
+            _dbContext.SaveChanges();
+        }
+
         public CustomerFundResponse UpdateCustomerFund(int customerId, int officeId, CustomerFundUpdateRequest customerFund)
         {
             var fundToUpdate = _dbContext.OfficesAndFunds
@@ -90,6 +96,11 @@ namespace API.Repositories.Implementations
         {
             _dbContext.OfficesAndFunds.Remove(customerFund);
             _dbContext.SaveChanges();
+        }
+
+        public int CountFunds()
+        {
+            return _dbContext.OfficesAndFunds.Count();
         }
     }
 }

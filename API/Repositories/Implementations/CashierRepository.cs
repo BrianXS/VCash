@@ -49,6 +49,12 @@ namespace API.Repositories.Implementations
             _dbContext.SaveChanges();
         }
 
+        public void CreateCashiersRange(List<CashierCreateRequest> cashiers)
+        {
+            _dbContext.Cashiers.AddRange(_mapper.Map<Cashier>(cashiers));
+            _dbContext.SaveChanges();
+        }
+
         public CashierResponse UpdateCashier(int id, CashierUpdateRequest updatedCashier)
         {
             var cashierToUpdate = _dbContext.Cashiers.Include(x => x.Customer)
@@ -66,6 +72,11 @@ namespace API.Repositories.Implementations
         {
             _dbContext.Cashiers.Remove(cashier);
             _dbContext.SaveChanges();
+        }
+
+        public int CountCashiers()
+        {
+            return _dbContext.Cashiers.Count();
         }
     }
 }

@@ -15,7 +15,9 @@ namespace API.Repositories.Interfaces
         DenominationType FindDenominationTypeById(int id);
         List<DenominationTypeResponse> GetAllDenominationTypes();
         void CreateDenominationType(DenominationTypeCreateRequest denominationType);
+        void CreateDenominationTypeRange(List<DenominationTypeCreateRequest> denominations);
         DenominationTypeResponse UpdateDenominationType(int id, DenominationTypeUpdateRequest updatedDenominationType);
         void DeleteDenominationType(DenominationType denominationType);
+        int CountDenominationTypes();
     }
 }

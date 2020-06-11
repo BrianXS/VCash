@@ -51,6 +51,12 @@ namespace API.Repositories.Implementations
             _dbContext.SaveChanges();
         }
 
+        public void CreateDenominationTypeRange(List<DenominationTypeCreateRequest> denominations)
+        {
+            _dbContext.DenominationTypes.AddRange(_mapper.Map<DenominationType>(denominations));
+            _dbContext.SaveChanges();
+        }
+
         public DenominationTypeResponse UpdateDenominationType(int id, DenominationTypeUpdateRequest updatedDenominationType)
         {
             var denominationTypeToUpdate = _dbContext.DenominationTypes.FirstOrDefault(x => x.Id.Equals(id));
@@ -66,6 +72,11 @@ namespace API.Repositories.Implementations
         {
             _dbContext.DenominationTypes.Remove(denominationType);
             _dbContext.SaveChanges();
+        }
+
+        public int CountDenominationTypes()
+        {
+            return _dbContext.DenominationTypes.Count();
         }
     }
 }

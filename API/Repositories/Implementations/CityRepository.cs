@@ -57,6 +57,12 @@ namespace API.Repositories.Implementations
             _dbContext.SaveChanges();
         }
 
+        public void CreateCitiesRange(List<CityCreateRequest> cities)
+        {
+            _dbContext.Cities.AddRange(_mapper.Map<List<City>>(cities));
+            _dbContext.SaveChanges();
+        }
+
         public CityResponse UpdateCity(int id, CityUpdateRequest updatedCity)
         {
             var cityToBeUpdated = _dbContext.Cities.Where(x => x.Id.Equals(id))

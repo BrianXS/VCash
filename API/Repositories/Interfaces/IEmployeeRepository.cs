@@ -13,6 +13,7 @@ namespace API.Repositories.Interfaces
         Employee FindEmployeeById(int id);
         List<EmployeeResponse> GetAllEmployees();
         void CreateEmployee(EmployeeCreateRequest employee);
+        void CreateEmployeeRange(List<EmployeeCreateRequest> employees);
         EmployeeResponse UpdateEmployee(int id, EmployeeUpdateRequest employee);
         void DeleteEmployee(Employee employee);
     }

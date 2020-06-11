@@ -60,6 +60,12 @@ namespace API.Repositories.Implementations
             _dbContext.SaveChanges();
         }
 
+        public void CreateOfficesRange(List<OfficeCreateRequest> office)
+        {
+            _dbContext.Offices.AddRange(_mapper.Map<Office>(office));
+            _dbContext.SaveChanges();
+        }
+
         public OfficeResponse UpdateOffice(int id, OfficeUpdateRequest updatedOffice)
         {
             var officeToUpdate = _dbContext.Offices.FirstOrDefault(x => x.Id.Equals(id));
@@ -75,6 +81,11 @@ namespace API.Repositories.Implementations
         {
             _dbContext.Offices.Remove(office);
             _dbContext.SaveChanges();
+        }
+
+        public int CountOffices()
+        {
+            return _dbContext.Offices.Count();
         }
     }
 }

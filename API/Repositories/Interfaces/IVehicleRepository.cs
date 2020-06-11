@@ -13,7 +13,9 @@ namespace API.Repositories.Interfaces
         Vehicle FindVehicleById(int id);
         List<VehicleResponse> GetAllVehicles();
         void CreateVehicle(VehicleCreateRequest vehicle);
+        void CreateVehicleRange(List<VehicleCreateRequest> vehicles);
         VehicleResponse UpdateVehicle(int id, VehicleUpdateRequest vehicle);
         void DeleteVehicle(Vehicle vehicle);
+        int CountVehicles();
     }
 }

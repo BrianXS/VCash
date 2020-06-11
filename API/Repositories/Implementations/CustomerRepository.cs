@@ -57,6 +57,12 @@ namespace API.Repositories.Implementations
             _dbContext.Customers.Add(_mapper.Map<Customer>(customer));
             _dbContext.SaveChanges();
         }
+        
+        public void CreateCustomerRange(List<CustomerCreateRequest> customer)
+        {
+            _dbContext.Customers.AddRange(_mapper.Map<List<Customer>>(customer));
+            _dbContext.SaveChanges();
+        }
 
         public CustomerResponse UpdateCustomer(int id, CustomerUpdateRequest updatedCustomer)
         {
@@ -72,6 +78,11 @@ namespace API.Repositories.Implementations
         {
             _dbContext.Customers.Remove(customer);
             _dbContext.SaveChanges();
+        }
+
+        public int CountCusdtomers()
+        {
+            return _dbContext.Customers.Count();
         }
     }
 }

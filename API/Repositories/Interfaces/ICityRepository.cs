@@ -13,6 +13,7 @@ namespace API.Repositories.Interfaces
         City FindCityById(int id);
         List<CityResponse> GetAllCities();
         void CreateCity(CityCreateRequest city);
+        void CreateCitiesRange(List<CityCreateRequest> cities);
         CityResponse UpdateCity(int id, CityUpdateRequest updatedCity);
         void DeleteCity(City city);
     }

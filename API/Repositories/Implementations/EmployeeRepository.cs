@@ -50,6 +50,12 @@ namespace API.Repositories.Implementations
             _dbContext.SaveChanges();
         }
 
+        public void CreateEmployeeRange(List<EmployeeCreateRequest> employees)
+        {
+            _dbContext.Employees.AddRange(_mapper.Map<List<Employee>>(employees));
+            _dbContext.SaveChanges();
+        }
+
         public EmployeeResponse UpdateEmployee(int id, EmployeeUpdateRequest updatedEmployee)
         {
             var employeeToUpdate = _dbContext.Employees.FirstOrDefault(x => x.Id.Equals(id));
