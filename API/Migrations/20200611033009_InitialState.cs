@@ -580,7 +580,7 @@ namespace API.Migrations
                     From = table.Column<DateTime>(nullable: false),
                     OfficeId = table.Column<int>(nullable: false),
                     AtmBatteryId = table.Column<int>(nullable: true),
-                    DrawerRangeId = table.Column<int>(nullable: true),
+                    DrawerRangeId = table.Column<int>(nullable: false),
                     UpdatedBy = table.Column<string>(nullable: true),
                     UpdatedOn = table.Column<DateTime>(nullable: false)
                 },
@@ -598,7 +598,7 @@ namespace API.Migrations
                         column: x => x.DrawerRangeId,
                         principalTable: "DrawerRanges",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_ATMs_Offices_OfficeId",
                         column: x => x.OfficeId,

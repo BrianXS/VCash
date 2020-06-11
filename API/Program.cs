@@ -6,6 +6,7 @@ using API.Entities;
 using API.Repositories.Interfaces;
 using API.Services.Database;
 using API.Services.Seeds;
+using API.Services.Seeds.Logic;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;

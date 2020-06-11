@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(VcashDbContext))]
-    [Migration("20200601175154_ModifiedAtmTable")]
-    partial class ModifiedAtmTable
+    [Migration("20200611033009_InitialState")]
+    partial class InitialState
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
