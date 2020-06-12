@@ -7,18 +7,18 @@ using CsvHelper;
 
 namespace API.Services.Seeds.Logic
 {
-    public static class VehicleSeed
+    public static class States
     {
-        public static void SeedVehicles(IVehicleRepository vehicleRepository)
+        public static void SeedStates(IStateRepository stateRepository)
         {
-            if (!vehicleRepository.GetAllVehicles().Any())
+            if (stateRepository.CountStates() == 0)
             {
-                using var stream = new StreamReader(Constants.General.ProjectPath + "VCash/API/Services/Seeds/Data/Employees.csv");
+                using var stream = new StreamReader(Constants.General.ProjectPath + "VCash/API/Services/Seeds/Data/States.csv");
                 using var csv = new CsvReader(stream, CultureInfo.InvariantCulture);
-            
+                
                 csv.Configuration.PrepareHeaderForMatch = (string header, int index) => header.ToLower();
-                var records = csv.GetRecords<VehicleCreateRequest>();
-                vehicleRepository.CreateVehicleRange(records.ToList());
+                var records = csv.GetRecords<StateCreateRequest>();
+                stateRepository.CreateStateRange(records.ToList());   
             }
         }
     }

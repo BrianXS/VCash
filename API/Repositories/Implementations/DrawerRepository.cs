@@ -60,6 +60,12 @@ namespace API.Repositories.Implementations
             _dbContext.SaveChanges();
         }
 
+        public void CreateDrawerRange(List<DrawerRequest> drawerRequests)
+        {
+            _dbContext.Drawers.AddRange(_mapper.Map<List<Drawer>>(drawerRequests));
+            _dbContext.SaveChanges();
+        }
+
         public DrawerResponse UpdateDrawer(int id, DrawerRequest drawer)
         {
             var drawerToChange = _dbContext.Drawers.FirstOrDefault(x => x.Id.Equals(id));
@@ -74,6 +80,11 @@ namespace API.Repositories.Implementations
         {
             _dbContext.Drawers.Remove(drawer);
             _dbContext.SaveChanges();
+        }
+
+        public int CountDrawers()
+        {
+            return _dbContext.Drawers.Count();
         }
     }
 }

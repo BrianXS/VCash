@@ -45,6 +45,12 @@ namespace API.Repositories.Implementations
             _dbContext.SaveChanges();
         }
 
+        public void CreateFailureRange(List<FailureCreateRequest> failures)
+        {
+            _dbContext.Failures.AddRange(_mapper.Map<Failure>(failures));
+            _dbContext.SaveChanges();
+        }
+
         public FailureResponse UpdateFailure(int id, FailureUpdateRequest updatedFailure)
         {
             var failureToUpdate = _dbContext.Failures.FirstOrDefault(x => x.Id.Equals(id));
@@ -60,6 +66,11 @@ namespace API.Repositories.Implementations
         {
             _dbContext.Failures.Remove(failure);
             _dbContext.SaveChanges();
+        }
+
+        public int CountFailures()
+        {
+            return _dbContext.Failures.Count();
         }
     }
 }

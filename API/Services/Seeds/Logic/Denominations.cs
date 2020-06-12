@@ -7,7 +7,7 @@ using CsvHelper;
 
 namespace API.Services.Seeds.Logic
 {
-    public static class DenominationSeed
+    public static class Denominations
     {
         public static void SeedDenominations(IDenominationTypeRepository denominationTypeRepository)
         {

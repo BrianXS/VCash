@@ -40,25 +40,6 @@ namespace API
                 
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
                 SeedingClass.SeedUsers(userManager).Wait();
-
-                var countryRepository = scope.ServiceProvider.GetRequiredService<ICountryRepository>();
-                CountrySeed.SeedCountries(countryRepository);
-                
-                var statesRepository = scope.ServiceProvider.GetRequiredService<IStateRepository>();
-                StateSeed.SeedStates(statesRepository);
-                
-                var branchRepository = scope.ServiceProvider.GetRequiredService<IBranchRepository>();
-                BranchSeed.SeedBranches(branchRepository);
-
-                //var cityRepository = scope.ServiceProvider.GetRequiredService<ICityRepository>();
-                //CitySeed.SeedCities(cityRepository);
-                
-                //var employeeRepository = scope.ServiceProvider.GetRequiredService<IEmployeeRepository>();
-                //EmployeeSeed.SeedEmployees(employeeRepository);
-                
-                //var vehicleRepository = scope.ServiceProvider.GetRequiredService<IVehicleRepository>();
-                //VehicleSeed.SeedVehicles(vehicleRepository);
-                
                 
             }
         }

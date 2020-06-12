@@ -56,6 +56,12 @@ namespace API.Repositories.Implementations
             _dbContext.DrawerRanges.Add(_mapper.Map<DrawerRange>(drawer));
             _dbContext.SaveChanges();
         }
+        
+        public void CreateDrawerRange(List<DrawerRangeRequest> drawers)
+        {
+            _dbContext.DrawerRanges.AddRange(_mapper.Map<List<DrawerRange>>(drawers));
+            _dbContext.SaveChanges();
+        }
 
         public DrawerRangeResponse UpdateDrawerRange(int id, DrawerRangeRequest drawer)
         {
@@ -71,6 +77,11 @@ namespace API.Repositories.Implementations
         {
             _dbContext.DrawerRanges.Remove(drawer);
             _dbContext.SaveChanges();
+        }
+
+        public int CountDrawerRanges()
+        {
+            return _dbContext.DrawerRanges.Count();
         }
     }
 }

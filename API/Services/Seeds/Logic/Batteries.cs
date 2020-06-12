@@ -7,18 +7,18 @@ using CsvHelper;
 
 namespace API.Services.Seeds.Logic
 {
-    public static class CashierSeed
+    public static class Batteries
     {
-        public static void SeedCashiers(ICashierRepository cashierRepository)
+        public static void SeedBatteries(IATMBatteryRepostiory batteryRepostiory)
         {
-            if (cashierRepository.CountCashiers() == 0)
+            if (batteryRepostiory.CountBatteries() == 0)
             {
-                var stream = new StreamReader(Constants.General.ProjectPath + "VCash/API/Services/Seeds/Data/Cashiers.csv");
+                var stream = new StreamReader(Constants.General.ProjectPath + "VCash/API/Services/Seeds/Data/Batteries.csv");
                 using var csv = new CsvReader(stream, new CultureInfo("en-US", false));
             
                 csv.Configuration.PrepareHeaderForMatch = (string header, int index) => header.ToLower();
-                var records = csv.GetRecords<CashierCreateRequest>();
-                cashierRepository.CreateCashiersRange(records.ToList());
+                var records = csv.GetRecords<ATMBatteryCreateRequest>();
+                batteryRepostiory.CreateATMBatteryRange(records.ToList());
             }
         }
     }

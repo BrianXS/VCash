@@ -13,7 +13,9 @@ namespace API.Repositories.Interfaces
         ATM FindATMById(int id);
         List<ATMResponse> GetAllATM();
         void CreateATM(ATMCreateRequest atm);
+        void CreateATMRange(List<ATMCreateRequest> atms);
         ATMResponse UpdateATM(int id, ATMUpdateRequest atm);
         void DeleteATM(ATM atm);
+        int CountAtms();
     }
 }

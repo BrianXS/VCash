@@ -54,6 +54,12 @@ namespace API.Repositories.Implementations
             _dbContext.SaveChanges();
         }
 
+        public void CreateATMRange(List<ATMCreateRequest> atms)
+        {
+            _dbContext.ATMs.AddRange(_mapper.Map<ATM>(atms));
+            _dbContext.SaveChanges();
+        }
+
         public ATMResponse UpdateATM(int id, ATMUpdateRequest updatedATM)
         {
             var atmToUpdate = _dbContext.ATMs.FirstOrDefault(x => x.Id.Equals(id));
@@ -69,6 +75,11 @@ namespace API.Repositories.Implementations
         {
             _dbContext.ATMs.Remove(atm);
             _dbContext.SaveChanges();
+        }
+
+        public int CountAtms()
+        {
+            return _dbContext.ATMs.Count();
         }
     }
 }

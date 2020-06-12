@@ -7,18 +7,18 @@ using CsvHelper;
 
 namespace API.Services.Seeds.Logic
 {
-    public static class CustomerSeed
+    public static class Funds
     {
-        public static void SeedCustomers(ICustomerRepository customerRepository)
+        public static void SeedFunds(ICustomerFundRepository fundRepository)
         {
-            if (customerRepository.CountCusdtomers() == 0)
+            if (fundRepository.CountFunds() == 0)
             {
-                var stream = new StreamReader(Constants.General.ProjectPath + "VCash/API/Services/Seeds/Data/Customers.csv");
+                var stream = new StreamReader(Constants.General.ProjectPath + "VCash/API/Services/Seeds/Data/Funds.csv");
                 using var csv = new CsvReader(stream, new CultureInfo("en-US", false));
             
                 csv.Configuration.PrepareHeaderForMatch = (string header, int index) => header.ToLower();
-                var records = csv.GetRecords<CustomerCreateRequest>();
-                customerRepository.CreateCustomerRange(records.ToList());
+                var records = csv.GetRecords<CustomerFundCreateRequest>();
+                fundRepository.CreateCustomerFundRange(records.ToList());
             }
         }
     }

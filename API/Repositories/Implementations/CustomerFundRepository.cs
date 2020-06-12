@@ -72,6 +72,12 @@ namespace API.Repositories.Implementations
             }
         }
 
+        public void CreateCustomerFundRange(List<CustomerFundCreateRequest> customerFunds)
+        {
+            _dbContext.OfficesAndFunds.AddRange(_mapper.Map<CustomerFund>(customerFunds));
+            _dbContext.SaveChanges();
+        }
+
         public void CreateCustomerFund(List<CustomerFundCreateRequest> customerFunds)
         {
             _dbContext.OfficesAndFunds.AddRange(_mapper.Map<List<CustomerFund>>(customerFunds));

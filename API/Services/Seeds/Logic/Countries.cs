@@ -7,7 +7,7 @@ using CsvHelper;
 
 namespace API.Services.Seeds
 {
-    public static class CountrySeed
+    public static class Countries
     {
         public static void SeedCountries(ICountryRepository countryRepository)
         {

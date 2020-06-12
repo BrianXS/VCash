@@ -7,7 +7,7 @@ using CsvHelper;
 
 namespace API.Services.Seeds.Logic
 {
-    public static class CitySeed
+    public static class Cities
     {
         public static void SeedCities(ICityRepository cityRepository)
         {

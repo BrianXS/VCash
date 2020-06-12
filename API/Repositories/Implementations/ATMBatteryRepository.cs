@@ -48,6 +48,12 @@ namespace API.Repositories.Implementations
             _dbContext.SaveChanges();
         }
 
+        public void CreateATMBatteryRange(List<ATMBatteryCreateRequest> battery)
+        {
+            _dbContext.AtmBatteries.AddRange(_mapper.Map<List<ATMBattery>>(battery));
+            _dbContext.SaveChanges();
+        }
+
         public ATMBatteryResponse UpdateATMBattery(int id, ATMBatteryUpdateRequest updatedBattery)
         {
             var atmBatteryToUpdate = _dbContext.AtmBatteries.FirstOrDefault(x => x.Id.Equals(id));
@@ -63,6 +69,11 @@ namespace API.Repositories.Implementations
         {
             _dbContext.AtmBatteries.Remove(branch);
             _dbContext.SaveChanges();
+        }
+
+        public int CountBatteries()
+        {
+            return _dbContext.AtmBatteries.Count();
         }
     }
 }

@@ -11,7 +11,9 @@ namespace API.Repositories.Interfaces
         DrawerRangeResponse FindDrawerRangeResourceById(int id);
         DrawerRange FindDrawerRangeById(int id);
         void CreateDrawerRange(DrawerRangeRequest drawerRangeRequest);
+        void CreateDrawerRange(List<DrawerRangeRequest> drawerRangeRequest);
         DrawerRangeResponse UpdateDrawerRange(int Id, DrawerRangeRequest drawerRangeRequest);
         void DeleteDrawerRange(DrawerRange drawerRange);
+        int CountDrawerRanges();
     }
 }

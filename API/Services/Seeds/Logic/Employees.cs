@@ -7,7 +7,7 @@ using CsvHelper;
 
 namespace API.Services.Seeds.Logic
 {
-    public static class EmployeeSeed
+    public static class Employees
     {
         public static void SeedEmployees(IEmployeeRepository employeeRepository)
         {

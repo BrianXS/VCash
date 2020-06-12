@@ -13,7 +13,9 @@ namespace API.Repositories.Interfaces
         ATMBattery FindATMBatteryById(int id);
         List<ATMBatteryResponse> GetAllATMBatteries();
         void CreateATMBattery(ATMBatteryCreateRequest battery);
+        void CreateATMBatteryRange(List<ATMBatteryCreateRequest> battery);
         ATMBatteryResponse UpdateATMBattery(int id, ATMBatteryUpdateRequest battery);
         void DeleteATMBattery(ATMBattery battery);
+        int CountBatteries();
     }
 }

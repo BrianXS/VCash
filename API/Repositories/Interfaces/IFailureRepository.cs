@@ -13,7 +13,9 @@ namespace API.Repositories.Interfaces
         Failure FindFailureById(int id);
         List<FailureResponse> GetAllFailures();
         void CreateFailure(FailureCreateRequest failure);
+        void CreateFailureRange(List<FailureCreateRequest> failures);
         FailureResponse UpdateFailure(int id, FailureUpdateRequest failure);
         void DeleteFailure(Failure failure);
+        int CountFailures();
     }
 }
