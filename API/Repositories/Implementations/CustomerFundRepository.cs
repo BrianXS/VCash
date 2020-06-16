@@ -74,7 +74,8 @@ namespace API.Repositories.Implementations
 
         public void CreateCustomerFundRange(List<CustomerFundCreateRequest> customerFunds)
         {
-            _dbContext.OfficesAndFunds.AddRange(_mapper.Map<CustomerFund>(customerFunds));
+            customerFunds = customerFunds.OrderBy(x => x.CustomerId).ToList();
+            _dbContext.OfficesAndFunds.AddRange(_mapper.Map<List<CustomerFund>>(customerFunds));
             _dbContext.SaveChanges();
         }
 

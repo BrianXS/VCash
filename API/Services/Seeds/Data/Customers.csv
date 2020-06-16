@@ -1,0 +1,15 @@
+Name,CorporateName,Address,Website,Phone,DocumentType,Document,HeadquartersId,InvoicingCityId,FirstKeyPerson,FirstKeyPersonTitle,SecondKeyPerson,SecondKeyPersonTitle,SubClient,ParentClient
+Bancolombia,Bancolombia,Calle 100 #72 - 5,N/A,501 0210,0,800.000.00-0,604,604,Richardo Asdrubal,CEO,Richie Acosta,CEO,0,
+Efecty,Efecty,Calle 100 #72 - 6,N/A,502 0210,0,800.000.00-1,604,604,Richardo Asdrubal,CEO,Richie Acosta,CEO,0,
+Colchones Spring,Colchones Spring,Calle 100 #72 - 7,N/A,503 0210,0,800.000.00-2,604,604,Richardo Asdrubal,CEO,Richie Acosta,CEO,0,
+PyP Ingenieros,PyP Ingenieros,Calle 100 #72 - 8,N/A,504 0210,0,800.000.00-3,604,604,Richardo Asdrubal,CEO,Richie Acosta,CEO,0,
+Movistar,Movistar,Calle 100 #72 - 9,N/A,505 0210,0,800.000.00-4,604,604,Richardo Asdrubal,CEO,Richie Acosta,CEO,1,4
+Nuestra IPS,Nuestra IPS,Calle 100 #72 - 10,N/A,506 0210,0,800.000.00-5,604,604,Richardo Asdrubal,CEO,Richie Acosta,CEO,0,
+Acemar,Acemar,Calle 100 #72 - 11,N/A,507 0210,0,800.000.00-6,604,604,Richardo Asdrubal,CEO,Richie Acosta,CEO,0,
+Cadena,Cadena,Calle 100 #72 - 12,N/A,508 0210,0,800.000.00-7,604,604,Richardo Asdrubal,CEO,Richie Acosta,CEO,0,
+ILKO,ILKO,Calle 100 #72 - 13,N/A,509 0210,0,800.000.00-8,604,604,Richardo Asdrubal,CEO,Richie Acosta,CEO,0,
+Colsubsidio,Colsubsidio,Calle 100 #72 - 14,N/A,510 0210,0,800.000.00-9,604,604,Richardo Asdrubal,CEO,Richie Acosta,CEO,0,
+Colcard (Transcaribe),Colcard (Transcaribe),Calle 100 #72 - 15,N/A,511 0210,0,800.000.00-10,604,604,Richardo Asdrubal,CEO,Richie Acosta,CEO,0,
+Prueba Cliente Amparado,Prueba Cliente Amparado,Calle 100 #72 - 16,N/A,512 0210,0,800.000.00-11,604,604,Richardo Asdrubal,CEO,Richie Acosta,CEO,1,1
+Banco Prueba,Banco Prueba,Calle 100 #72 - 17,N/A,513 0210,0,800.000.00-12,604,604,Richardo Asdrubal,CEO,Richie Acosta,CEO,0,
+KOBA,KOBA,Calle 100 #72 - 18,N/A,514 0210,0,800.000.00-13,604,604,Richardo Asdrubal,CEO,Richie Acosta,CEO,1,1

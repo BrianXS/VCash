@@ -53,7 +53,7 @@ namespace API.Repositories.Implementations
 
         public void CreateVehicleRange(List<VehicleCreateRequest> vehicles)
         {
-            _dbContext.Vehicles.AddRange(_mapper.Map<Vehicle>(vehicles));
+            _dbContext.Vehicles.AddRange(_mapper.Map<List<Vehicle>>(vehicles));
             _dbContext.SaveChanges();
         }
 

@@ -5,8 +5,11 @@ namespace API.Resources.Incoming.AdministrativeResources
     public class CityUpdateRequest
     {
         [Required]
-        public string Name { get; set; }
+        public string Code { get; set; }
         
+        [Required]
+        public string Name { get; set; }
+
         [Required]
         public int StateId { get; set; }
         

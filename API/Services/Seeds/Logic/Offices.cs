@@ -15,7 +15,7 @@ namespace API.Services.Seeds.Logic
             {
                 var stream = new StreamReader(Constants.General.ProjectPath + "VCash/API/Services/Seeds/Data/Offices.csv");
                 using var csv = new CsvReader(stream, new CultureInfo("en-US", false));
-            
+                csv.Configuration.TypeConverterOptionsCache.GetOptions<int?>().NullValues.Add("null");
                 csv.Configuration.PrepareHeaderForMatch = (string header, int index) => header.ToLower();
                 var records = csv.GetRecords<OfficeCreateRequest>();
                 officeRepository.CreateOfficesRange(records.ToList());

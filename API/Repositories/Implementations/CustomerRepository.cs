@@ -59,7 +59,8 @@ namespace API.Repositories.Implementations
         }
         
         public void CreateCustomerRange(List<CustomerCreateRequest> customer)
-        {
+        { 
+            customer.Reverse();
             _dbContext.Customers.AddRange(_mapper.Map<List<Customer>>(customer));
             _dbContext.SaveChanges();
         }

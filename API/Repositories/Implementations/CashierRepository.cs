@@ -51,7 +51,7 @@ namespace API.Repositories.Implementations
 
         public void CreateCashiersRange(List<CashierCreateRequest> cashiers)
         {
-            _dbContext.Cashiers.AddRange(_mapper.Map<Cashier>(cashiers));
+            _dbContext.Cashiers.AddRange(_mapper.Map<List<Cashier>>(cashiers));
             _dbContext.SaveChanges();
         }
 

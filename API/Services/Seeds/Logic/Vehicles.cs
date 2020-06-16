@@ -13,7 +13,7 @@ namespace API.Services.Seeds.Logic
         {
             if (!vehicleRepository.GetAllVehicles().Any())
             {
-                using var stream = new StreamReader(Constants.General.ProjectPath + "VCash/API/Services/Seeds/Data/Employees.csv");
+                using var stream = new StreamReader(Constants.General.ProjectPath + "VCash/API/Services/Seeds/Data/Vehicles.csv");
                 using var csv = new CsvReader(stream, CultureInfo.InvariantCulture);
             
                 csv.Configuration.PrepareHeaderForMatch = (string header, int index) => header.ToLower();

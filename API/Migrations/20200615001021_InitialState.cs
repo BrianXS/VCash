@@ -370,6 +370,7 @@ namespace API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Code = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     StateId = table.Column<int>(nullable: false),
                     BranchId = table.Column<int>(nullable: false),

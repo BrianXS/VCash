@@ -1,0 +1,26 @@
+Code,Name,Value,BankNote,NewSeries,Currency,UnitsPerContainer
+1000,Moneda de Mil Pesos ,"1,000.00",0,0,0,1000
+$500P,Moneda de Quinientos Pesos Pequeña,500.00,0,1,0,2000
+$500G,Moneda de Quinientos Pesos Grande,500.00,0,0,0,2000
+$200P,Moneda de Doscientos Pesos Pequeña,200.00,0,1,0,2000
+$200G,Moneda de Doscientos Pesos Grande,200.00,0,0,0,2000
+$100P,Moneda de Cien Pesos Pequeña,100.00,0,1,0,2000
+$100G,Moneda de Cien Pesos Grande,100.00,0,0,0,2000
+$50P,Moneda de Cincuenta Pesos Pequeña,50.00,0,1,0,2000
+$50G,Moneda de Cincuenta Pesos Grande,50.00,0,0,0,2000
+$ 20,Moneda de Veinte Pesos,20.00,0,0,0,1000
+$ 10,Moneda de Diez Pesos,10.00,0,0,0,1000
+$ 5,Moneda de Cinco Pesos,5.00,0,0,0,1000
+$ 1,Moneda de Un Peso,2.00,0,0,0,1000
+$100.000N,Billete de Cien Mil Pesos Nueva Familia,"100,000.00",1,1,0,100
+$50.000N,Billete de Cincuenta Mil Pesos Nueva Familia,"50,000.00",1,1,0,100
+$50.000A,Billete de Cincuenta Mil Pesos Antigua Familia,"50,000.00",1,0,0,100
+$20.000N,Billete de Veinte Mil Pesos Nueva Familia,"20,000.00",1,1,0,100
+$20.000A,Billete de Veinte Mil Pesos Antigua Familia,"20,000.00",1,0,0,100
+$10.000N,Billete de Diez Mil Pesos Nueva Familia,"10,000.00",1,1,0,100
+$10.000A,Billete de Diez Mil Pesos Antigua Familia,"10,000.00",1,0,0,100
+$5.000N,Billete de Cinco Mil Pesos Nueva Familia,"5,000.00",1,1,0,100
+$5.000A,Billete de Cinco Mil Pesos Antigua Familia,"5,000.00",1,0,0,100
+$2.000N,Billete de Dos Mil Pesos Nueva Familia,"2,000.00",1,1,0,100
+$2.000A,Billete de Dos Mil Pesos Antigua Familia,"2,000.00",1,0,0,100
+$1.000A,Billete de Mil Pesos ,"1,000.00",1,0,0,100

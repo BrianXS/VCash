@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using API.Entities;
@@ -15,11 +16,15 @@ namespace API.Repositories.Implementations
     public class OfficeRepository : IOfficeRepository
     {
         private readonly VcashDbContext _dbContext;
+        private readonly ICustomerFundRepository _customerFundRepository;
         private readonly IMapper _mapper;
 
-        public OfficeRepository(VcashDbContext dbContext, IMapper mapper)
+        public OfficeRepository(VcashDbContext dbContext, 
+            ICustomerFundRepository customerFundRepository, 
+            IMapper mapper)
         {
             _dbContext = dbContext;
+            _customerFundRepository = customerFundRepository;
             _mapper = mapper;
         }
         
@@ -62,8 +67,19 @@ namespace API.Repositories.Implementations
 
         public void CreateOfficesRange(List<OfficeCreateRequest> office)
         {
-            _dbContext.Offices.AddRange(_mapper.Map<Office>(office));
+            var requestsToItems = _mapper.Map<List<Office>>(office);
+            _dbContext.Offices.AddRange(requestsToItems);
             _dbContext.SaveChanges();
+
+            var funds = requestsToItems.Where(x => x.IsFund);
+            foreach (var item in funds)
+            {
+                _customerFundRepository.CreateCustomerFund(new CustomerFundCreateRequest
+                {
+                    CustomerId = item.CustomerId,
+                    OfficeId = item.Id
+                });
+            }
         }
 
         public OfficeResponse UpdateOffice(int id, OfficeUpdateRequest updatedOffice)

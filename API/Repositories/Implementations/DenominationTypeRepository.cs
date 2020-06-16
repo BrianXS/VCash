@@ -53,7 +53,7 @@ namespace API.Repositories.Implementations
 
         public void CreateDenominationTypeRange(List<DenominationTypeCreateRequest> denominations)
         {
-            _dbContext.DenominationTypes.AddRange(_mapper.Map<DenominationType>(denominations));
+            _dbContext.DenominationTypes.AddRange(_mapper.Map<List<DenominationType>>(denominations));
             _dbContext.SaveChanges();
         }
 

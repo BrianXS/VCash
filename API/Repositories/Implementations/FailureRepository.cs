@@ -47,7 +47,7 @@ namespace API.Repositories.Implementations
 
         public void CreateFailureRange(List<FailureCreateRequest> failures)
         {
-            _dbContext.Failures.AddRange(_mapper.Map<Failure>(failures));
+            _dbContext.Failures.AddRange(_mapper.Map<List<Failure>>(failures));
             _dbContext.SaveChanges();
         }
 

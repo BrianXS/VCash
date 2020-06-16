@@ -12,7 +12,6 @@ namespace API.Resources.Incoming.AdministrativeResources
         [Required]
         public string FirstLastName { get; set; }
         
-        [Required]
         public string SecondLastName { get; set; }
         
         [Required]
@@ -44,6 +43,7 @@ namespace API.Resources.Incoming.AdministrativeResources
         
         [Required]
         public DateTime From { get; set; }
+        
         public DateTime Until { get; set; }
         
         [Required]

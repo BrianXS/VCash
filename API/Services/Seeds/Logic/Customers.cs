@@ -15,7 +15,6 @@ namespace API.Services.Seeds.Logic
             {
                 var stream = new StreamReader(Constants.General.ProjectPath + "VCash/API/Services/Seeds/Data/Customers.csv");
                 using var csv = new CsvReader(stream, new CultureInfo("en-US", false));
-            
                 csv.Configuration.PrepareHeaderForMatch = (string header, int index) => header.ToLower();
                 var records = csv.GetRecords<CustomerCreateRequest>();
                 customerRepository.CreateCustomerRange(records.ToList());

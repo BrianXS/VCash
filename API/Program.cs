@@ -41,6 +41,7 @@ namespace API
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
                 SeedingClass.SeedUsers(userManager).Wait();
                 
+                Seed.Data(scope);
             }
         }
     }
