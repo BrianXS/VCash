@@ -36,10 +36,10 @@ namespace API
             using (var scope = host.Services.CreateScope())
             {
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<Role>>();
-                SeedingClass.SeedRoles(roleManager).Wait();
+                UsersAndRoles.SeedRoles(roleManager).Wait();
                 
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
-                SeedingClass.SeedUsers(userManager).Wait();
+                UsersAndRoles.SeedUsers(userManager).Wait();
                 
                 Seed.Data(scope);
             }

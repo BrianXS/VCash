@@ -13,11 +13,11 @@ namespace API.Controllers.OfficeMovementControllers
     [Route("OfficeMovements/[controller]")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, 
                Policy = Constants.Roles.Administrator)]
-    public class CheckInController : ControllerBase
+    public class IncomingController : ControllerBase
     {
         private readonly IOfficeCheckInRepository _officeCheckInRepository;
 
-        public CheckInController(IOfficeCheckInRepository officeCheckInRepository)
+        public IncomingController(IOfficeCheckInRepository officeCheckInRepository)
         {
             _officeCheckInRepository = officeCheckInRepository;
         }
@@ -97,6 +97,14 @@ namespace API.Controllers.OfficeMovementControllers
             
             _officeCheckInRepository.DeleteCheckIn(movement);
             return Ok();
+        }
+        
+        [HttpGet("Verify/{payRollNumber}")]
+
+        public ActionResult<bool> VerifyUniquenessOfPayrollNumber(string payRollNumber)
+        {
+            return Ok(_officeCheckInRepository
+                .VerifyUniquenessOfIncomingMovement(payRollNumber));
         }
     }
 }

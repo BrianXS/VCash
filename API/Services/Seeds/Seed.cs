@@ -47,13 +47,13 @@ namespace API.Services.Seeds
             Ranges.SeedRanges(drawerRangeRepository);
 
             /*var drawersRepository = scope.ServiceProvider.GetService<IDrawerRepository>();
-            Drawers.SeedDrawers(drawersRepository);*/
+            Drawers.SeedDrawers(drawersRepository);
 
             var batteriesRepository = scope.ServiceProvider.GetRequiredService<IATMBatteryRepostiory>();
             Batteries.SeedBatteries(batteriesRepository);
 
             var atmRepository = scope.ServiceProvider.GetRequiredService<IATMRepository>();
-            Atm.SeedAtms(atmRepository);
+            Atm.SeedAtms(atmRepository);*/
         }
     }
 }

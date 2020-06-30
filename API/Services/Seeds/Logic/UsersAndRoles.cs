@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace API.Services.Database
 {
-    public static class SeedingClass
+    public static class UsersAndRoles
     {
         public static async Task SeedUsers(UserManager<User> userManager)
         {

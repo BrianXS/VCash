@@ -40,6 +40,13 @@ namespace API.Repositories.Implementations
             return _mapper.Map<List<OfficeCheckInResponse>>(results);
         }
 
+        public bool VerifyUniquenessOfIncomingMovement(string payrollNumber)
+        {
+            return _dbContext
+                .OfficeMovements
+                .Any(x => x.PayrollNumber.Equals(payrollNumber));
+        }
+
         public List<OfficeCheckInResponse> FindByOptions(int branchId, DateTime from, DateTime until)
         {
             var movements = _dbContext.OfficeMovements

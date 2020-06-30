@@ -13,6 +13,7 @@ namespace API.Repositories.Interfaces
         OfficeCheckInResponse FindById(int id);
         OfficeMovement FindMovementById(int id);
         List<OfficeCheckInResponse> GetAll();
+        bool VerifyUniquenessOfIncomingMovement(string payrollNumber);
         List<OfficeCheckInResponse> FindByOptions(int branchId, DateTime from, DateTime until);
         IActionResult CreateCheckInWithFailure(OfficeCheckInRequest movement);
         ActionResult<OfficeCheckInResponse> UpdateCheckInWithFailure(int id, OfficeCheckInRequest movement);
