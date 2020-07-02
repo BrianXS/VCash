@@ -12,6 +12,7 @@ namespace API.Repositories.Interfaces
         OfficeResponse FindOfficeResourceById(int id);
         Office FindOfficeById(int id);
         List<OfficeResponse> FindAllFundsByClientId(int id);
+        List<OfficeResponse> FindAllOfficesByClientIdAndBranchId(int clientId, int branchId);
         List<OfficeResponse> GetAllOffices();
         void CreateOffice(OfficeCreateRequest office);
         void CreateOfficesRange(List<OfficeCreateRequest> office);

@@ -32,6 +32,15 @@ namespace API.Controllers.AdministrativeControllers
             return Ok(_officeRepository.GetAllOffices());
         }
         
+        [HttpGet("ByClientIdAndBranchId/{clientId}/{branchId}")]
+        public ActionResult<List<OfficeResponse>> FindAllOfficesByClientIdAndBranchId(int clientId, int branchId)
+        {
+            if (_customerRepository.FindCustomerById(clientId) == null)
+                return BadRequest();
+            
+            return Ok(_officeRepository.FindAllOfficesByClientIdAndBranchId(clientId, branchId));
+        }
+        
         [HttpGet("Funds/{id}")]
         public ActionResult<List<OfficeResponse>> FindAllFundsByClientId(int id)
         {

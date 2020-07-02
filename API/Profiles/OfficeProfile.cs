@@ -13,7 +13,10 @@ namespace API.Profiles
         {
             CreateMap<Office, OfficeResponse>().ForMember(to => to.Customer,
                 from => 
-                    from.MapFrom(src => src.Customer.Name));
+                    from.MapFrom(src => src.Customer.Name))
+                .ForMember(to => to.City,
+                    from => 
+                        from.MapFrom(src => src.City.Name));
             
             CreateMap<OfficeCreateRequest, Office>();
             CreateMap<OfficeUpdateRequest, Office>();

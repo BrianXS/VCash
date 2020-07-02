@@ -50,6 +50,17 @@ namespace API.Repositories.Implementations
             return _mapper.Map<List<OfficeResponse>>(results);
         }
 
+        public List<OfficeResponse> FindAllOfficesByClientIdAndBranchId(int clientId, int branchId)
+        {
+            var results = _dbContext.Offices
+                .Include(x => x.City)
+                .Where(x => x.CustomerId.Equals(clientId)
+                            && x.City.BranchId == branchId
+                            && !x.IsFund);
+            
+            return _mapper.Map<List<OfficeResponse>>(results);
+        }
+
         public List<OfficeResponse> GetAllOffices()
         {
             var offices = _dbContext.Offices
