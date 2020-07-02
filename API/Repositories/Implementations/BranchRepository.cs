@@ -8,6 +8,7 @@ using API.Resources.Outgoing;
 using API.Resources.Outgoing.AdministrativeResources;
 using API.Services.Database;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Repositories.Implementations
 {
@@ -36,6 +37,17 @@ namespace API.Repositories.Implementations
         public List<BranchResponse> GetAllBranches()
         {
             var branches = _dbContext.Branches.ToList();
+            return _mapper.Map<List<BranchResponse>>(branches);
+        }
+
+        public List<BranchResponse> GetAllBranchesByUserId(int userId)
+        {
+            var branches = _dbContext.UserBranches
+                .Include(x => x.Branch)
+                .Where(x => x.UserId == userId)
+                .Select(x => x.Branch)
+                .ToList();
+            
             return _mapper.Map<List<BranchResponse>>(branches);
         }
 

@@ -18,7 +18,7 @@ namespace API.Services.Seeds.Logic
             
                 csv.Configuration.PrepareHeaderForMatch = (string header, int index) => header.ToLower();
                 var records = csv.GetRecords<BranchCreateRequest>();
-                branchRepository.CreateBranchRange(records.ToList());
+                branchRepository.CreateBranchRange(records.Reverse().ToList());
             }
         }
     }

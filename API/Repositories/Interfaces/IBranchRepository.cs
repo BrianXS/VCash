@@ -12,6 +12,7 @@ namespace API.Repositories.Interfaces
         BranchResponse FindBranchResponseById(int id);
         Branch FindBranchById(int id);
         List<BranchResponse> GetAllBranches();
+        List<BranchResponse> GetAllBranchesByUserId(int userId);
         void CreateBranch(BranchCreateRequest branch);
         void CreateBranchRange(List<BranchCreateRequest> branches);
         BranchResponse UpdateBranch(int id, BranchUpdateRequest branch);

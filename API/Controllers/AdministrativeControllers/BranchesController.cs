@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using API.Entities;
 using API.Repositories.Interfaces;
 using API.Resources.Incoming;
 using API.Resources.Incoming.AdministrativeResources;
@@ -6,6 +8,7 @@ using API.Resources.Outgoing;
 using API.Resources.Outgoing.AdministrativeResources;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.AdministrativeControllers
@@ -17,10 +20,12 @@ namespace API.Controllers.AdministrativeControllers
     public class BranchesController : ControllerBase
     {
         private readonly IBranchRepository _branchRepository;
+        private readonly UserManager<User> _userManager;
 
-        public BranchesController(IBranchRepository branchRepository)
+        public BranchesController(IBranchRepository branchRepository, UserManager<User> userManager)
         {
             _branchRepository = branchRepository;
+            _userManager = userManager;
         }
         
         [HttpGet("{id}")]
@@ -38,6 +43,15 @@ namespace API.Controllers.AdministrativeControllers
         public ActionResult<List<BranchResponse>> GetAll()
         {
             return Ok(_branchRepository.GetAllBranches());
+        }
+        
+        [HttpGet("ByUser")]
+        public async Task<ActionResult<List<BranchResponse>>> GetAllBranchesByUser()
+        {
+            var currentUserName = HttpContext.User.Identity.Name;
+            var currentUser = await _userManager.FindByNameAsync(currentUserName);
+            
+            return Ok(_branchRepository.GetAllBranchesByUserId(currentUser.Id));
         }
         
         [HttpPost]

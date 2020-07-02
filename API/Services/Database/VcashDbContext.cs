@@ -16,6 +16,8 @@ namespace API.Services.Database
             _httpContextAccessor = httpContextAccessor;
         }
         public DbSet<Branch> Branches { get; set; }
+
+        public DbSet<UserBranch> UserBranches { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
 
@@ -58,6 +60,7 @@ namespace API.Services.Database
         {
             base.OnModelCreating(builder);
             
+            
             builder.Entity<CustomerFund>()
                 .HasKey(entity => new { entity.CustomerId, entity.OfficeId });
 
@@ -68,6 +71,18 @@ namespace API.Services.Database
             builder.Entity<CustomerFund>()
                 .HasOne(internalEntity => internalEntity.Office)
                 .WithMany(externalEntity => externalEntity.CustomerFunds);
+            
+            
+            builder.Entity<UserBranch>()
+                .HasKey(entity => new { entity.UserId, entity.BranchId });
+
+            builder.Entity<UserBranch>()
+                .HasOne(internalEntity => internalEntity.User)
+                .WithMany(externalEntity => externalEntity.UserBranches);
+            
+            builder.Entity<UserBranch>()
+                .HasOne(internalEntity => internalEntity.Branch)
+                .WithMany(externalEntity => externalEntity.UserBranches);
         }
 
         public override int SaveChanges()
