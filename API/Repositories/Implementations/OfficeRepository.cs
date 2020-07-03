@@ -55,8 +55,7 @@ namespace API.Repositories.Implementations
             var results = _dbContext.Offices
                 .Include(x => x.City)
                 .Where(x => x.CustomerId.Equals(clientId)
-                            && x.City.BranchId == branchId
-                            && !x.IsFund);
+                            && x.City.BranchId == branchId );
             
             return _mapper.Map<List<OfficeResponse>>(results);
         }
