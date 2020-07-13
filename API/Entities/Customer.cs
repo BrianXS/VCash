@@ -35,7 +35,7 @@ namespace API.Entities
         public List<Office> Offices { get; set; }
         public List<Cashier> Cashiers { get; set; }
 
-        public ICollection<CustomerFund> CustomerFunds { get; set; }
+        public List<CustomerFund> CustomerFunds { get; set; }
         
         public bool Active { get; set; }
         

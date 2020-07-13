@@ -51,7 +51,7 @@ namespace API.Entities
         public int? BusinessTypeId { get; set; }
         public BusinessType BusinessType { get; set; }
 
-        public ICollection<CustomerFund> CustomerFunds { get; set; }
+        public CustomerFund CustomerFunds { get; set; }
         
         public bool Active { get; set; }
         

@@ -13,6 +13,7 @@ namespace API.Repositories.Interfaces
         Office FindOfficeById(int id);
         List<OfficeResponse> FindAllFundsByClientId(int id);
         List<OfficeResponse> FindAllOfficesByClientIdAndBranchId(int clientId, int branchId);
+        List<OfficeResponse> FindAllFundsByClientIdAndBranchId(int clientId, int branchId);
         List<OfficeResponse> GetAllOffices();
         void CreateOffice(OfficeCreateRequest office);
         void CreateOfficesRange(List<OfficeCreateRequest> office);

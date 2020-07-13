@@ -52,6 +52,14 @@ namespace API.Repositories.Implementations
             return _mapper.Map<List<CustomerResponse>>(customers);
         }
 
+        public List<CustomerResponse> GetAllCustomersWithoutRelationships()
+        {
+            var customers = _dbContext.Customers
+                .ToList();
+            
+            return _mapper.Map<List<CustomerResponse>>(customers);
+        }
+
         public void CreateCustomer(CustomerCreateRequest customer)
         {
             _dbContext.Customers.Add(_mapper.Map<Customer>(customer));

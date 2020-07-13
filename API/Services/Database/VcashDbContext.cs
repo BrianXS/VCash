@@ -70,7 +70,7 @@ namespace API.Services.Database
             
             builder.Entity<CustomerFund>()
                 .HasOne(internalEntity => internalEntity.Office)
-                .WithMany(externalEntity => externalEntity.CustomerFunds);
+                .WithOne(externalEntity => externalEntity.CustomerFunds);
             
             
             builder.Entity<UserBranch>()

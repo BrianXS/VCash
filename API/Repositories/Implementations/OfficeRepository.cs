@@ -55,7 +55,20 @@ namespace API.Repositories.Implementations
             var results = _dbContext.Offices
                 .Include(x => x.City)
                 .Where(x => x.CustomerId.Equals(clientId)
-                            && x.City.BranchId == branchId );
+                            && x.City.BranchId == branchId
+                            && !x.IsFund);
+            
+            return _mapper.Map<List<OfficeResponse>>(results);
+        }
+        
+        public List<OfficeResponse> FindAllFundsByClientIdAndBranchId(int clientId, int branchId)
+        {
+            var results = _dbContext.Offices
+                .Include(x => x.City)
+                .Where(x => x.CustomerId.Equals(clientId)
+                            && x.City.BranchId == branchId
+                            && x.IsFund
+                            && DateTime.Compare(DateTime.Now.Date, x.CustomerFunds.ClosedAt.Date) > 0);
             
             return _mapper.Map<List<OfficeResponse>>(results);
         }

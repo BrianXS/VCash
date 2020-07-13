@@ -40,6 +40,12 @@ namespace API.Controllers.AdministrativeControllers
             return Ok(_customerRepository.GetAllCustomers());
         }
         
+        [HttpGet("WithoutRelationships")]
+        public ActionResult<List<CustomerResponse>> GetAllCustomersWithoutRelationships()
+        {
+            return Ok(_customerRepository.GetAllCustomersWithoutRelationships());
+        }
+        
         [HttpPost]
         public IActionResult CreateCustomer(CustomerCreateRequest request)
         {

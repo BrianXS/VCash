@@ -57,8 +57,8 @@ namespace API.Controllers.OfficeMovementControllers
             if (movement.MovementType == MovementType.Deposit)
                 return _officeCheckInRepository.CreateIncomingCheckIn(movement);
                 
-            if (movement.MovementType == MovementType.Dispatch)
-                return _officeCheckInRepository.CreateOutgoingCheckIn(movement);
+            /*if (movement.MovementType == MovementType.Dispatch)
+                return _officeCheckInRepository.CreateOutgoingCheckIn(movement);*/
 
             return BadRequest("The request didn't fulfill any of the conditions to be processed");
         }
