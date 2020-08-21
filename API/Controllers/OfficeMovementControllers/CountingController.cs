@@ -10,8 +10,7 @@ namespace API.Controllers.OfficeMovementControllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, 
-        Policy = Constants.Roles.Administrator)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = Constants.Roles.Administrator)]
     public class CountingController : ControllerBase
     {
         private readonly IOfficeCountingRepository _countingRepository;

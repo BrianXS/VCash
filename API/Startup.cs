@@ -2,10 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.ServiceModel;
 using System.Threading.Tasks;
 using API.Entities;
 using API.Services.Database;
 using API.Services.Policies;
+using API.Services.Soap.Services.Implementation;
+using API.Services.Soap.Services.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -19,6 +22,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SoapCore;
 
 namespace API
 {
@@ -76,6 +80,7 @@ namespace API
             services.AddControllers();
             
             RepositoryInjection.Initialize(services);
+            services.AddSingleton<ITicketDemoService, TicketDemoService>();
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -93,7 +98,13 @@ namespace API
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.UseSoapEndpoint<ITicketDemoService>("/Service.asmx", 
+                    new BasicHttpBinding(),
+                    SoapSerializer.XmlSerializer);
+            });
         }
     }
 }
