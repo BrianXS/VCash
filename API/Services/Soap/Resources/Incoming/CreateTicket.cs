@@ -1,4 +1,6 @@
+using System;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 namespace API.Services.Soap.Resources.Incoming
 {
@@ -7,6 +9,9 @@ namespace API.Services.Soap.Resources.Incoming
     {
         [DataMember]
         public string TicketSourceNumber { get; set; }
+
+        [DataMember]
+        public int TicketNumberGenerated { get; set; }
         
         [DataMember]
         public string AppoinmentDateTime { get; set; }
@@ -24,7 +29,7 @@ namespace API.Services.Soap.Resources.Incoming
         public string CustomerCode { get; set; }
         
         [DataMember]
-        public string ServiceLine { get; set; }
+        public int ServiceLine { get; set; }
         
         [DataMember]
         public string ProductLine { get; set; }
@@ -45,9 +50,9 @@ namespace API.Services.Soap.Resources.Incoming
         public string Password { get; set; }
         
         [DataMember]
-        public string IdVisita { get; set; }
+        public int IdVisita { get; set; }
         
-        [DataMember]
-        public string IdPrioridad { get; set; }
+        [DataMember(IsRequired = false)]
+        public int IdPrioridad { get; set; }
     }
 }

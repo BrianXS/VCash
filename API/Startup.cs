@@ -80,7 +80,7 @@ namespace API
             services.AddControllers();
             
             RepositoryInjection.Initialize(services);
-            services.AddSingleton<ITicketDemoService, TicketDemoService>();
+            services.AddSingleton<ITicketService, TicketService>();
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -101,7 +101,7 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.UseSoapEndpoint<ITicketDemoService>("/Service.asmx", 
+                endpoints.UseSoapEndpoint<ITicketService>("/Service.asmx", 
                     new BasicHttpBinding(),
                     SoapSerializer.XmlSerializer);
             });

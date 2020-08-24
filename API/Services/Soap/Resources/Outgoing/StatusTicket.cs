@@ -3,17 +3,17 @@ using System.Runtime.Serialization;
 namespace API.Services.Soap.Resources.Outgoing
 {
     [DataContract]
-    public class CreateTicket
+    public class StatusTicket
     {
         [DataMember]
         public string ResultCode { get; set; }
-        
+
         [DataMember]
         public string ResultDescription { get; set; }
-        
+
         [DataMember]
         public string TicketNumberGenerated { get; set; }
-        
+
         [DataMember]
         public string TicketSourceNumber { get; set; }
         
@@ -21,6 +21,15 @@ namespace API.Services.Soap.Resources.Outgoing
         public string DateTimeATT { get; set; }
         
         [DataMember]
-        public string Responsable { get; set; }
+        public string Comments { get; set; }
+        
+        [DataMember]
+        public string DateTimeClosed { get; set; }
+        
+        [DataMember]
+        public string Status { get; set; }
+        
+        [DataMember]
+        public string CodeStatus { get; set; }
     }
 }
