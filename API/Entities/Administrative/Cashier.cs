@@ -1,7 +1,7 @@
 using System;
 using API.Enums;
 
-namespace API.Entities
+namespace API.Entities.Administrative
 {
     public class Cashier : IAuditable
     {

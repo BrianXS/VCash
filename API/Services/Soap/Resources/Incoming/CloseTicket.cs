@@ -1,5 +1,7 @@
 using System;
+using System.Globalization;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 namespace API.Services.Soap.Resources.Incoming
 {
@@ -16,7 +18,7 @@ namespace API.Services.Soap.Resources.Incoming
         public string Comments { get; set; }
         
         [DataMember]
-        public DateTime DateTimeClosed { get; set; }
+        public string DateTimeClosed { get; set; }
         
         [DataMember]
         public string Type { get; set; }
@@ -26,5 +28,9 @@ namespace API.Services.Soap.Resources.Incoming
         
         [DataMember]
         public string Password { get; set; }
+
+        [XmlIgnore]
+        public DateTime _dateTimeClosed
+            => DateTime.ParseExact(DateTimeClosed, "yyyy-MM-dd hh:mm", CultureInfo.CurrentCulture);
     }
 }

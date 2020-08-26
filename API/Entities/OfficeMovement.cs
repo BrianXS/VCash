@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using API.Entities.Administrative;
 using API.Enums;
 using API.Enums.ATM;
 using ValueType = API.Enums.ValueType;

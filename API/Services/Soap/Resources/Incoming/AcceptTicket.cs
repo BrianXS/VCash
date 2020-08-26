@@ -1,5 +1,7 @@
 using System;
+using System.Globalization;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 
 namespace API.Services.Soap.Resources.Incoming
 {
@@ -13,12 +15,16 @@ namespace API.Services.Soap.Resources.Incoming
         public int TicketNumberGenerated { get; set; }
 
         [DataMember]
-        public DateTime DateTimeAccepted { get; set; }
+        public string DateTimeAccepted { get; set; }
 
         [DataMember]
         public string User { get; set; }
 
         [DataMember]
         public string Password { get; set; }
+
+        [XmlIgnore]
+        public DateTime _dateTimeAccepted
+            => DateTime.ParseExact(DateTimeAccepted, "yyyy-MM-dd hh:mm", CultureInfo.InvariantCulture);
     }
 }

@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using API.Entities;
+using API.Entities.Administrative;
 using API.Services.Database;
 using API.Services.Policies;
 using API.Services.Soap.Services.Implementation;
@@ -80,7 +81,7 @@ namespace API
             services.AddControllers();
             
             RepositoryInjection.Initialize(services);
-            services.AddSingleton<ITicketService, TicketService>();
+            services.AddScoped<ITicketService, TicketService>();
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

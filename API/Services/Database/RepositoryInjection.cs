@@ -27,6 +27,7 @@ namespace API.Services.Database
             services.AddScoped<IBusinessTypeRepository, BusinessTypeRepository>();
             services.AddScoped<ICustomerFundRepository, CustomerFundRepository>();
             services.AddScoped<IOfficeCheckInRepository, OfficeCheckInRepository>();
+            services.AddScoped<ITicketDieboldRepository, TicketDieboldRepository>();
             services.AddScoped<INotificationTypeRepository, NotificationTypeRepository>();
             services.AddScoped<IDenominationTypeRepository, DenominationTypeRepository>();
         }

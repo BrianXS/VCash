@@ -1,4 +1,5 @@
 using API.Entities;
+using API.Entities.Administrative;
 
 namespace API.Resources.Outgoing.OfficeMovementResources.CountingProcessDtos
 {

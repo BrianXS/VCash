@@ -67,6 +67,22 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AtmModules",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    ProductLine = table.Column<int>(nullable: false),
+                    Platform = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AtmModules", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Branches",
                 columns: table => new
                 {
@@ -168,6 +184,45 @@ namespace API.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_NotificationTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TicketConcepts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Code = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Platform = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TicketConcepts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TicketsDiebold",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    View = table.Column<int>(nullable: false),
+                    Priority = table.Column<int>(nullable: false),
+                    TicketSourceNumber = table.Column<string>(nullable: true),
+                    TicketNumberGenerated = table.Column<int>(nullable: false),
+                    IsAppointment = table.Column<bool>(nullable: false),
+                    AppointmentDate = table.Column<DateTime>(nullable: false),
+                    Status = table.Column<string>(nullable: true),
+                    ProblemDescription = table.Column<string>(nullable: true),
+                    EquipmentCode = table.Column<string>(nullable: true),
+                    CustomerCode = table.Column<string>(nullable: true),
+                    ServiceLine = table.Column<string>(nullable: true),
+                    ProductLine = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TicketsDiebold", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -308,6 +363,30 @@ namespace API.Migrations
                         name: "FK_Employees_Branches_BranchId",
                         column: x => x.BranchId,
                         principalTable: "Branches",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserBranches",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(nullable: false),
+                    BranchId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserBranches", x => new { x.UserId, x.BranchId });
+                    table.ForeignKey(
+                        name: "FK_UserBranches_Branches_BranchId",
+                        column: x => x.BranchId,
+                        principalTable: "Branches",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_UserBranches_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                 });
@@ -582,6 +661,7 @@ namespace API.Migrations
                     OfficeId = table.Column<int>(nullable: false),
                     AtmBatteryId = table.Column<int>(nullable: true),
                     DrawerRangeId = table.Column<int>(nullable: false),
+                    EquipmentCode = table.Column<string>(nullable: true),
                     UpdatedBy = table.Column<string>(nullable: true),
                     UpdatedOn = table.Column<DateTime>(nullable: false)
                 },
@@ -1169,12 +1249,18 @@ namespace API.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_OfficesAndFunds_OfficeId",
                 table: "OfficesAndFunds",
-                column: "OfficeId");
+                column: "OfficeId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_States_CountryId",
                 table: "States",
                 column: "CountryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserBranches_BranchId",
+                table: "UserBranches",
+                column: "BranchId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vehicles_BranchId",
@@ -1198,6 +1284,9 @@ namespace API.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "AtmModules");
 
             migrationBuilder.DropTable(
                 name: "ATMs");
@@ -1224,10 +1313,16 @@ namespace API.Migrations
                 name: "OfficesAndFunds");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "TicketConcepts");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "TicketsDiebold");
+
+            migrationBuilder.DropTable(
+                name: "UserBranches");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AtmBatteries");
@@ -1246,6 +1341,9 @@ namespace API.Migrations
 
             migrationBuilder.DropTable(
                 name: "NotificationTypes");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Cashiers");

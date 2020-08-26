@@ -1,4 +1,5 @@
 using System;
+using API.Entities.Administrative;
 
 namespace API.Entities
 {

@@ -1,6 +1,9 @@
 using System;
 using System.Linq;
 using API.Entities;
+using API.Entities.Administrative;
+using API.Entities.AtmMaintenance;
+using API.Services.Soap.Resources.Outgoing;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -48,14 +51,18 @@ namespace API.Services.Database
         public DbSet<EnvelopeDenomination> EnvelopeDenominations { get; set; }
         public DbSet<EnvelopeNotification> EnvelopeNotifications { get; set; }
         
-        
 
         public DbSet<DrawerRange> DrawerRanges { get; set; }
         public DbSet<Drawer> Drawers { get; set; }
         
         public DbSet<DenominationType> DenominationTypes { get; set; }
         public DbSet<NotificationType> NotificationTypes { get; set; }
-        
+
+
+        public DbSet<TicketDiebold> TicketsDiebold { get; set; }
+        public DbSet<TicketConcept> TicketConcepts { get; set; }
+        public DbSet<AtmModule> AtmModules { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

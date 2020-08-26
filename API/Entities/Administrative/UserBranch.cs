@@ -1,4 +1,4 @@
-namespace API.Entities
+namespace API.Entities.Administrative
 {
     public class UserBranch
     {

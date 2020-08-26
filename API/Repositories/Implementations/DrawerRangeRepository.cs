@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using API.Entities;
+using API.Entities.Administrative;
 using API.Repositories.Interfaces;
 using API.Resources.Incoming;
 using API.Resources.Incoming.AdministrativeResources;

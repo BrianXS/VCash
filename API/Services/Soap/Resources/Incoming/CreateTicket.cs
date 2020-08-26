@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
@@ -44,7 +45,7 @@ namespace API.Services.Soap.Resources.Incoming
         public string Type { get; set; }
         
         [DataMember]
-        public string User { get; set; }
+        public string User { get; set; } 
         
         [DataMember]
         public string Password { get; set; }
@@ -54,5 +55,16 @@ namespace API.Services.Soap.Resources.Incoming
         
         [DataMember(IsRequired = false)]
         public int IdPrioridad { get; set; }
+        
+        
+        //Casted Items
+        
+        [XmlIgnore] 
+        public DateTime _appoinmentDateTime 
+            => DateTime.ParseExact(AppoinmentDateTime, "yyyy-MM-dd hh:mm", CultureInfo.InvariantCulture);
+        
+        [XmlIgnore] 
+        public bool _appointment 
+            => bool.Parse(Appoinment.ToLower());
     }
 }

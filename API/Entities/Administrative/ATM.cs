@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using API.Entities.Administrative;
 using API.Enums.ATM;
 
 namespace API.Entities
@@ -17,9 +18,11 @@ namespace API.Entities
         public Mode Mode { get; set; }
 
         public DateTime From { get; set; }
-
+        
+        
         public int OfficeId { get; set; }
         public Office Office { get; set; }
+        
         
         public int? AtmBatteryId { get; set; }
         public ATMBattery AtmBattery { get; set; }
@@ -27,6 +30,10 @@ namespace API.Entities
 
         public int DrawerRangeId { get; set; }
         public DrawerRange DrawerRange { get; set; }
+        
+        
+        public string EquipmentCode { get; set; }
+        
         
         public string UpdatedBy { get; set; }
         public DateTime UpdatedOn { get; set; }

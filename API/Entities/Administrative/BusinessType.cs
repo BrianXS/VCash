@@ -1,6 +1,6 @@
 using System;
 
-namespace API.Entities
+namespace API.Entities.Administrative
 {
     public class BusinessType : IAuditable
     {

@@ -1,5 +1,6 @@
 using System;
 using System.Xml;
+using API.Repositories.Interfaces;
 using API.Services.Soap.Resources.Incoming;
 using API.Services.Soap.Services.Interfaces;
 using AcceptTicket = API.Services.Soap.Resources.Outgoing.AcceptTicket;
@@ -13,34 +14,49 @@ namespace API.Services.Soap.Services.Implementation
 {
     public class TicketService : ITicketService
     {
+        private readonly ITicketDieboldRepository _ticketDieboldRepository;
+
+        public TicketService(ITicketDieboldRepository ticketDieboldRepository)
+        {
+            _ticketDieboldRepository = ticketDieboldRepository;
+        }
         public CreateTicket Create_Ticket(Resources.Incoming.CreateTicket createTicket)
         {
+            // todo: verify credentials
+            // todo: no existe el equipo en docbase
+            // todo: verify campo type
+            // todo: No existe el módulo en el equipo
+            // todo: No se encontró generador de servicio activo
+            // todo: No existe contrato para la línea de servicio
+            // todo: Ya existe un ticket en Docbase para el ticket Cliente
+            // todo: Ya existe un Ticket en Docbase para el módulo.
+            _ticketDieboldRepository.CreateTicket(createTicket);
             return new CreateTicket();
         }
 
         public AcceptTicket Accepted_Ticket(Resources.Incoming.AcceptTicket acceptTicket)
         {
-            throw new NotImplementedException();
+            return new AcceptTicket();
         }
 
         public CloseTicket Close_Ticket(Resources.Incoming.CloseTicket closeTicket)
         {
-            throw new NotImplementedException();
+            return new CloseTicket();
         }
 
         public ChangeTicket Change_Ticket(Resources.Incoming.ChangeTicket changeTicket)
         {
-            throw new NotImplementedException();
+            return new ChangeTicket();
         }
 
         public StatusTicket Status_Ticket(Resources.Incoming.StatusTicket statusTicket)
         {
-            throw new NotImplementedException();
+            return new StatusTicket();
         }
 
         public ReadAtm Read_Ticket_Atm(Resources.Incoming.ReadAtm readAtm)
         {
-            throw new NotImplementedException();
+            return new ReadAtm();
         }
     }
 }

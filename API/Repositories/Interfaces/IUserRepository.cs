@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using API.Entities;
+using API.Entities.Administrative;
 using API.Resources.Incoming;
 using API.Resources.Incoming.AdministrativeResources;
 using API.Resources.Outgoing;

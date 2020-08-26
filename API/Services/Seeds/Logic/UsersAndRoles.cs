@@ -4,6 +4,7 @@ using System.Reflection.Metadata;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using API.Entities;
+using API.Entities.Administrative;
 using Microsoft.AspNetCore.Identity;
 
 namespace API.Services.Database

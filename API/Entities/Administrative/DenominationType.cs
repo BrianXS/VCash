@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using API.Enums;
 
-namespace API.Entities
+namespace API.Entities.Administrative
 {
     public class DenominationType : IAuditable
     {

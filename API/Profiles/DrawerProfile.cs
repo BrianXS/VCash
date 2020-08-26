@@ -1,4 +1,5 @@
 using API.Entities;
+using API.Entities.Administrative;
 using API.Resources.Incoming.AdministrativeResources;
 using API.Resources.Outgoing.AdministrativeResources;
 using AutoMapper;

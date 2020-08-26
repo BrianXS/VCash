@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using API.Enums;
 
-namespace API.Entities
+namespace API.Entities.Administrative
 {
     public class DrawerRange
     {

@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using API.Enums;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-namespace API.Entities
+namespace API.Entities.Administrative
 {
-    
     //TODO: Routes to be added
     public class Office : IAuditable
     {
