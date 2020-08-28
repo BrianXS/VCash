@@ -4,7 +4,6 @@ using API.Enums;
 
 namespace API.Entities.Administrative
 {
-    //TODO: Routes to be added
     public class Office : IAuditable
     {
         public int Id { get; set; }

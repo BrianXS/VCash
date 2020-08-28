@@ -15,9 +15,9 @@ namespace API.Controllers.AdministrativeControllers
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Policy = Constants.Roles.Administrator)]
     public class ATMBatteriesController : ControllerBase
     {
-        private readonly IATMBatteryRepostiory _ATMBatteryRepository;
+        private readonly IAtmBatteryRepostiory _ATMBatteryRepository;
 
-        public ATMBatteriesController(IATMBatteryRepostiory ATMBatteryRepository)
+        public ATMBatteriesController(IAtmBatteryRepostiory ATMBatteryRepository)
         {
             _ATMBatteryRepository = ATMBatteryRepository;
         }

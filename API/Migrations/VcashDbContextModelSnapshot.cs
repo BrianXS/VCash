@@ -895,11 +895,17 @@ namespace API.Migrations
                     b.Property<DateTime>("AppointmentDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("ConceptId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CustomerCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EquipmentCode")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FailingModuleId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsAppointment")
                         .HasColumnType("bit");
@@ -929,6 +935,10 @@ namespace API.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ConceptId");
+
+                    b.HasIndex("FailingModuleId");
 
                     b.ToTable("TicketsDiebold");
                 });
@@ -1627,6 +1637,21 @@ namespace API.Migrations
                     b.HasOne("API.Entities.Administrative.Branch", "Branch")
                         .WithMany()
                         .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("API.Entities.AtmMaintenance.TicketDiebold", b =>
+                {
+                    b.HasOne("API.Entities.AtmMaintenance.TicketConcept", "Concept")
+                        .WithMany()
+                        .HasForeignKey("ConceptId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.AtmMaintenance.AtmModule", "FailingModule")
+                        .WithMany()
+                        .HasForeignKey("FailingModuleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

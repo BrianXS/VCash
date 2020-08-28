@@ -11,8 +11,8 @@ namespace API.Services.Soap.Resources.Incoming
         [DataMember]
         public string TicketSourceNumber { get; set; }
 
-        [DataMember]
-        public int TicketNumberGenerated { get; set; }
+        [DataMember(IsRequired = false)]
+        public string TicketNumberGenerated { get; set; }
         
         [DataMember]
         public string AppoinmentDateTime { get; set; }

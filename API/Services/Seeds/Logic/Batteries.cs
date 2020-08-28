@@ -9,7 +9,7 @@ namespace API.Services.Seeds.Logic
 {
     public static class Batteries
     {
-        public static void SeedBatteries(IATMBatteryRepostiory batteryRepostiory)
+        public static void SeedBatteries(IAtmBatteryRepostiory batteryRepostiory)
         {
             if (batteryRepostiory.CountBatteries() == 0)
             {

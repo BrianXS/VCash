@@ -1,6 +1,7 @@
 using API.Repositories.Implementations;
 using API.Repositories.Interfaces;
 using API.Resources.Incoming;
+using API.Resources.Incoming.AtmMaintenanceResources;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace API.Services.Database
@@ -9,7 +10,7 @@ namespace API.Services.Database
     {
         public static void Initialize(IServiceCollection services)
         {
-            services.AddScoped<IATMRepository, ATMRepository>();
+            services.AddScoped<IATMRepository, AtmRepository>();
             services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IStateRepository, StateRepository>();
@@ -22,11 +23,13 @@ namespace API.Services.Database
             services.AddScoped<ICashierRepository, CashierRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
-            services.AddScoped<IATMBatteryRepostiory, ATMBatteryRepository>();
+            services.AddScoped<IAtmModuleRepository, AtmModuleRepository>();
+            services.AddScoped<IAtmBatteryRepostiory, AtmBatteryRepository>();
             services.AddScoped<IDrawerRangeRepository, DrawerRangeRepository>();
             services.AddScoped<IBusinessTypeRepository, BusinessTypeRepository>();
             services.AddScoped<ICustomerFundRepository, CustomerFundRepository>();
             services.AddScoped<IOfficeCheckInRepository, OfficeCheckInRepository>();
+            services.AddScoped<ITicketConceptRepository, TicketConceptRepository>();
             services.AddScoped<ITicketDieboldRepository, TicketDieboldRepository>();
             services.AddScoped<INotificationTypeRepository, NotificationTypeRepository>();
             services.AddScoped<IDenominationTypeRepository, DenominationTypeRepository>();

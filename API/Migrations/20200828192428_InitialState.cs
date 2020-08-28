@@ -202,30 +202,6 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TicketsDiebold",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    View = table.Column<int>(nullable: false),
-                    Priority = table.Column<int>(nullable: false),
-                    TicketSourceNumber = table.Column<string>(nullable: true),
-                    TicketNumberGenerated = table.Column<int>(nullable: false),
-                    IsAppointment = table.Column<bool>(nullable: false),
-                    AppointmentDate = table.Column<DateTime>(nullable: false),
-                    Status = table.Column<string>(nullable: true),
-                    ProblemDescription = table.Column<string>(nullable: true),
-                    EquipmentCode = table.Column<string>(nullable: true),
-                    CustomerCode = table.Column<string>(nullable: true),
-                    ServiceLine = table.Column<string>(nullable: true),
-                    ProductLine = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TicketsDiebold", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -439,6 +415,44 @@ namespace API.Migrations
                         name: "FK_States_Countries_CountryId",
                         column: x => x.CountryId,
                         principalTable: "Countries",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TicketsDiebold",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    View = table.Column<int>(nullable: false),
+                    Priority = table.Column<int>(nullable: false),
+                    TicketSourceNumber = table.Column<string>(nullable: true),
+                    TicketNumberGenerated = table.Column<int>(nullable: false),
+                    IsAppointment = table.Column<bool>(nullable: false),
+                    AppointmentDate = table.Column<DateTime>(nullable: false),
+                    ConceptId = table.Column<int>(nullable: false),
+                    FailingModuleId = table.Column<int>(nullable: false),
+                    Status = table.Column<string>(nullable: true),
+                    ProblemDescription = table.Column<string>(nullable: true),
+                    EquipmentCode = table.Column<string>(nullable: true),
+                    CustomerCode = table.Column<string>(nullable: true),
+                    ServiceLine = table.Column<string>(nullable: true),
+                    ProductLine = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TicketsDiebold", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TicketsDiebold_TicketConcepts_ConceptId",
+                        column: x => x.ConceptId,
+                        principalTable: "TicketConcepts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_TicketsDiebold_AtmModules_FailingModuleId",
+                        column: x => x.FailingModuleId,
+                        principalTable: "AtmModules",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                 });
@@ -1258,6 +1272,16 @@ namespace API.Migrations
                 column: "CountryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TicketsDiebold_ConceptId",
+                table: "TicketsDiebold",
+                column: "ConceptId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TicketsDiebold_FailingModuleId",
+                table: "TicketsDiebold",
+                column: "FailingModuleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserBranches_BranchId",
                 table: "UserBranches",
                 column: "BranchId");
@@ -1286,9 +1310,6 @@ namespace API.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "AtmModules");
-
-            migrationBuilder.DropTable(
                 name: "ATMs");
 
             migrationBuilder.DropTable(
@@ -1311,9 +1332,6 @@ namespace API.Migrations
 
             migrationBuilder.DropTable(
                 name: "OfficesAndFunds");
-
-            migrationBuilder.DropTable(
-                name: "TicketConcepts");
 
             migrationBuilder.DropTable(
                 name: "TicketsDiebold");
@@ -1341,6 +1359,12 @@ namespace API.Migrations
 
             migrationBuilder.DropTable(
                 name: "NotificationTypes");
+
+            migrationBuilder.DropTable(
+                name: "TicketConcepts");
+
+            migrationBuilder.DropTable(
+                name: "AtmModules");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

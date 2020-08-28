@@ -1,8 +1,11 @@
 using System;
 using System.Xml;
+using API.Entities.AtmMaintenance;
+using API.Enums.ATM;
 using API.Repositories.Interfaces;
 using API.Services.Soap.Resources.Incoming;
 using API.Services.Soap.Services.Interfaces;
+using AutoMapper;
 using AcceptTicket = API.Services.Soap.Resources.Outgoing.AcceptTicket;
 using ChangeTicket = API.Services.Soap.Resources.Outgoing.ChangeTicket;
 using CloseTicket = API.Services.Soap.Resources.Outgoing.CloseTicket;
@@ -14,24 +17,26 @@ namespace API.Services.Soap.Services.Implementation
 {
     public class TicketService : ITicketService
     {
+        private readonly IMapper _mapper;
         private readonly ITicketDieboldRepository _ticketDieboldRepository;
+        private readonly IAtmModuleRepository _atmModuleRepository;
+        private readonly ITicketConceptRepository _ticketConceptRepository;
 
-        public TicketService(ITicketDieboldRepository ticketDieboldRepository)
+        public TicketService(IMapper mapper, 
+            ITicketDieboldRepository ticketDieboldRepository,
+            IAtmModuleRepository atmModuleRepository,
+            ITicketConceptRepository ticketConceptRepository)
         {
+            _mapper = mapper;
             _ticketDieboldRepository = ticketDieboldRepository;
+            _atmModuleRepository = atmModuleRepository;
+            _ticketConceptRepository = ticketConceptRepository;
         }
+        
+        //Todo: Add validations.
         public CreateTicket Create_Ticket(Resources.Incoming.CreateTicket createTicket)
         {
-            // todo: verify credentials
-            // todo: no existe el equipo en docbase
-            // todo: verify campo type
-            // todo: No existe el módulo en el equipo
-            // todo: No se encontró generador de servicio activo
-            // todo: No existe contrato para la línea de servicio
-            // todo: Ya existe un ticket en Docbase para el ticket Cliente
-            // todo: Ya existe un Ticket en Docbase para el módulo.
-            _ticketDieboldRepository.CreateTicket(createTicket);
-            return new CreateTicket();
+            return _ticketDieboldRepository.CreateTicket(createTicket);
         }
 
         public AcceptTicket Accepted_Ticket(Resources.Incoming.AcceptTicket acceptTicket)

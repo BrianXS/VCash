@@ -21,7 +21,7 @@ namespace API.Services.Soap.Services.Interfaces
     {
         [OperationContract]
         CreateOutgoingTicket Create_Ticket(CreateIncomingTicket createTicket);
-        
+
         [OperationContract]
         AcceptOutgoingTicket Accepted_Ticket(AcceptIncomingTicket acceptTicket);
         

@@ -7,7 +7,7 @@ using API.Resources.Outgoing.AdministrativeResources;
 
 namespace API.Repositories.Interfaces
 {
-    public interface IATMBatteryRepostiory
+    public interface IAtmBatteryRepostiory
     {
         ATMBatteryResponse FindATMBatteryResponseById(int id);
         ATMBattery FindATMBatteryById(int id);

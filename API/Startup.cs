@@ -82,6 +82,8 @@ namespace API
             
             RepositoryInjection.Initialize(services);
             services.AddScoped<ITicketService, TicketService>();
+
+            services.AddSoapCore();
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

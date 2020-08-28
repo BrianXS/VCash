@@ -54,6 +54,12 @@ namespace API.Services.Seeds
 
             var atmRepository = scope.ServiceProvider.GetRequiredService<IATMRepository>();
             Atm.SeedAtms(atmRepository);*/
+            
+            var atmModulesRepository = scope.ServiceProvider.GetService<IAtmModuleRepository>();
+            AtmModules.SeedAtmModules(atmModulesRepository);
+            
+            var ticketConceptsRepository = scope.ServiceProvider.GetService<ITicketConceptRepository>();
+            TicketConcepts.SeetTicketConcepts(ticketConceptsRepository);
         }
     }
 }

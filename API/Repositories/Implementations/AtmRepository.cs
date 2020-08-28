@@ -12,12 +12,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Repositories.Implementations
 {
-    public class ATMRepository : IATMRepository
+    public class AtmRepository : IATMRepository
     {
         private readonly VcashDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public ATMRepository(VcashDbContext dbContext, IMapper mapper)
+        public AtmRepository(VcashDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
