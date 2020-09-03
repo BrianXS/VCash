@@ -202,6 +202,21 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TicketStatuses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Code = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Platform = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TicketStatuses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -415,44 +430,6 @@ namespace API.Migrations
                         name: "FK_States_Countries_CountryId",
                         column: x => x.CountryId,
                         principalTable: "Countries",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TicketsDiebold",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    View = table.Column<int>(nullable: false),
-                    Priority = table.Column<int>(nullable: false),
-                    TicketSourceNumber = table.Column<string>(nullable: true),
-                    TicketNumberGenerated = table.Column<int>(nullable: false),
-                    IsAppointment = table.Column<bool>(nullable: false),
-                    AppointmentDate = table.Column<DateTime>(nullable: false),
-                    ConceptId = table.Column<int>(nullable: false),
-                    FailingModuleId = table.Column<int>(nullable: false),
-                    Status = table.Column<string>(nullable: true),
-                    ProblemDescription = table.Column<string>(nullable: true),
-                    EquipmentCode = table.Column<string>(nullable: true),
-                    CustomerCode = table.Column<string>(nullable: true),
-                    ServiceLine = table.Column<string>(nullable: true),
-                    ProductLine = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TicketsDiebold", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TicketsDiebold_TicketConcepts_ConceptId",
-                        column: x => x.ConceptId,
-                        principalTable: "TicketConcepts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_TicketsDiebold_AtmModules_FailingModuleId",
-                        column: x => x.FailingModuleId,
-                        principalTable: "AtmModules",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                 });
@@ -814,6 +791,57 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TicketsDiebold",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    View = table.Column<int>(nullable: false),
+                    Priority = table.Column<int>(nullable: false),
+                    TicketSourceNumber = table.Column<string>(nullable: true),
+                    TicketNumberGenerated = table.Column<int>(nullable: false),
+                    IsAppointment = table.Column<bool>(nullable: false),
+                    AppointmentDate = table.Column<DateTime>(nullable: false),
+                    ConceptId = table.Column<int>(nullable: false),
+                    FailingModuleId = table.Column<int>(nullable: false),
+                    StatusId = table.Column<int>(nullable: false),
+                    OfficeId = table.Column<int>(nullable: false),
+                    ProblemDescription = table.Column<string>(nullable: true),
+                    EquipmentCode = table.Column<string>(nullable: true),
+                    CustomerCode = table.Column<string>(nullable: true),
+                    ServiceLine = table.Column<string>(nullable: true),
+                    ProductLine = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TicketsDiebold", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TicketsDiebold_TicketConcepts_ConceptId",
+                        column: x => x.ConceptId,
+                        principalTable: "TicketConcepts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_TicketsDiebold_AtmModules_FailingModuleId",
+                        column: x => x.FailingModuleId,
+                        principalTable: "AtmModules",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_TicketsDiebold_Offices_OfficeId",
+                        column: x => x.OfficeId,
+                        principalTable: "Offices",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_TicketsDiebold_TicketStatuses_StatusId",
+                        column: x => x.StatusId,
+                        principalTable: "TicketStatuses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Bags",
                 columns: table => new
                 {
@@ -1086,6 +1114,13 @@ namespace API.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AtmModules_Description_Platform",
+                table: "AtmModules",
+                columns: new[] { "Description", "Platform" },
+                unique: true,
+                filter: "[Description] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ATMs_AtmBatteryId",
                 table: "ATMs",
                 column: "AtmBatteryId");
@@ -1282,6 +1317,29 @@ namespace API.Migrations
                 column: "FailingModuleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TicketsDiebold_OfficeId",
+                table: "TicketsDiebold",
+                column: "OfficeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TicketsDiebold_StatusId",
+                table: "TicketsDiebold",
+                column: "StatusId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TicketsDiebold_TicketNumberGenerated",
+                table: "TicketsDiebold",
+                column: "TicketNumberGenerated",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TicketStatuses_Code_Platform",
+                table: "TicketStatuses",
+                columns: new[] { "Code", "Platform" },
+                unique: true,
+                filter: "[Code] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserBranches_BranchId",
                 table: "UserBranches",
                 column: "BranchId");
@@ -1365,6 +1423,9 @@ namespace API.Migrations
 
             migrationBuilder.DropTable(
                 name: "AtmModules");
+
+            migrationBuilder.DropTable(
+                name: "TicketStatuses");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

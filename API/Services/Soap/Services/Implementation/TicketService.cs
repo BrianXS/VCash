@@ -38,10 +38,11 @@ namespace API.Services.Soap.Services.Implementation
         {
             return _ticketDieboldRepository.CreateTicket(createTicket);
         }
-
+        
+        //Todo: This method is not supposed to be received rather it is meant to be sent
         public AcceptTicket Accepted_Ticket(Resources.Incoming.AcceptTicket acceptTicket)
         {
-            return new AcceptTicket();
+            return _ticketDieboldRepository.AcceptTicket(acceptTicket);
         }
 
         public CloseTicket Close_Ticket(Resources.Incoming.CloseTicket closeTicket)
@@ -61,7 +62,7 @@ namespace API.Services.Soap.Services.Implementation
 
         public ReadAtm Read_Ticket_Atm(Resources.Incoming.ReadAtm readAtm)
         {
-            return new ReadAtm();
+            return _ticketDieboldRepository.FindTicketsByAtm(readAtm);
         }
     }
 }

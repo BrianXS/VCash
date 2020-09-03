@@ -38,9 +38,9 @@ namespace API.Repositories.Implementations
             return _dbContext.AtmModules.FirstOrDefault(x => x.Id == id);
         }
 
-        public AtmModule FindAtmModuleByNameAndPlatform(string name, Brand platform)
+        public AtmModule FindAtmModuleByDescriptionAndPlatform(string name, Brand platform)
         {
-            return _dbContext.AtmModules.FirstOrDefault(x => x.Name == name && x.Platform == platform);
+            return _dbContext.AtmModules.FirstOrDefault(x => x.Description == name && x.Platform == platform);
         }
 
         public List<AtmModuleResponse> GetAllAtmModules()

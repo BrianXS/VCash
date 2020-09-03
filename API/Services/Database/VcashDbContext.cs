@@ -60,13 +60,13 @@ namespace API.Services.Database
 
 
         public DbSet<TicketDiebold> TicketsDiebold { get; set; }
+        public DbSet<TicketStatus> TicketStatuses { get; set; }
         public DbSet<TicketConcept> TicketConcepts { get; set; }
         public DbSet<AtmModule> AtmModules { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            
             
             builder.Entity<CustomerFund>()
                 .HasKey(entity => new { entity.CustomerId, entity.OfficeId });
@@ -90,6 +90,22 @@ namespace API.Services.Database
             builder.Entity<UserBranch>()
                 .HasOne(internalEntity => internalEntity.Branch)
                 .WithMany(externalEntity => externalEntity.UserBranches);
+
+            builder.Entity<TicketDiebold>()
+                .HasIndex(x => x.TicketNumberGenerated)
+                .IsUnique();
+            
+            builder.Entity<AtmModule>()
+                .HasIndex(x => new { x.Description, x.Platform })
+                .IsUnique();
+            
+            builder.Entity<TicketStatus>()
+                .HasIndex(x => new { x.Code, x.Platform })
+                .IsUnique();
+            
+            builder.Entity<TicketStatus>()
+                .HasIndex(x => new { x.Code, x.Platform })
+                .IsUnique();
         }
 
         public override int SaveChanges()

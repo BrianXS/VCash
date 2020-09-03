@@ -16,7 +16,7 @@ namespace API.Repositories.Interfaces
     {
         AtmModuleResponse FindAtmModuleResponseById(int id);
         AtmModule FindAtmModuleById(int id);
-        AtmModule FindAtmModuleByNameAndPlatform(string name, Brand platform);
+        AtmModule FindAtmModuleByDescriptionAndPlatform(string name, Brand platform);
         List<AtmModuleResponse> GetAllAtmModules();
         void CreateAtmModule(AtmModuleRequest atmModule);
         void CreateAtmModulesRange(List<AtmModuleRequest> atmModules);

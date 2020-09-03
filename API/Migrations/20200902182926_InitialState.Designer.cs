@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(VcashDbContext))]
-    [Migration("20200828192428_InitialState")]
+    [Migration("20200902182926_InitialState")]
     partial class InitialState
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -850,7 +850,7 @@ namespace API.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -862,6 +862,10 @@ namespace API.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Description", "Platform")
+                        .IsUnique()
+                        .HasFilter("[Description] IS NOT NULL");
 
                     b.ToTable("AtmModules");
                 });
@@ -912,6 +916,9 @@ namespace API.Migrations
                     b.Property<bool>("IsAppointment")
                         .HasColumnType("bit");
 
+                    b.Property<int>("OfficeId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Priority")
                         .HasColumnType("int");
 
@@ -924,8 +931,8 @@ namespace API.Migrations
                     b.Property<string>("ServiceLine")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
 
                     b.Property<int>("TicketNumberGenerated")
                         .HasColumnType("int");
@@ -942,7 +949,39 @@ namespace API.Migrations
 
                     b.HasIndex("FailingModuleId");
 
+                    b.HasIndex("OfficeId");
+
+                    b.HasIndex("StatusId");
+
+                    b.HasIndex("TicketNumberGenerated")
+                        .IsUnique();
+
                     b.ToTable("TicketsDiebold");
+                });
+
+            modelBuilder.Entity("API.Entities.AtmMaintenance.TicketStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Platform")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code", "Platform")
+                        .IsUnique()
+                        .HasFilter("[Code] IS NOT NULL");
+
+                    b.ToTable("TicketStatuses");
                 });
 
             modelBuilder.Entity("API.Entities.Bag", b =>
@@ -1654,6 +1693,18 @@ namespace API.Migrations
                     b.HasOne("API.Entities.AtmMaintenance.AtmModule", "FailingModule")
                         .WithMany()
                         .HasForeignKey("FailingModuleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Administrative.Office", "Office")
+                        .WithMany()
+                        .HasForeignKey("OfficeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.AtmMaintenance.TicketStatus", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

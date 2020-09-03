@@ -27,6 +27,7 @@ namespace API.Services.Database
             services.AddScoped<IAtmBatteryRepostiory, AtmBatteryRepository>();
             services.AddScoped<IDrawerRangeRepository, DrawerRangeRepository>();
             services.AddScoped<IBusinessTypeRepository, BusinessTypeRepository>();
+            services.AddScoped<ITicketStatusRepository, TicketStatusRepository>();
             services.AddScoped<ICustomerFundRepository, CustomerFundRepository>();
             services.AddScoped<IOfficeCheckInRepository, OfficeCheckInRepository>();
             services.AddScoped<ITicketConceptRepository, TicketConceptRepository>();

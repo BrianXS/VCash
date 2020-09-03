@@ -1,4 +1,5 @@
 using System;
+using API.Entities.Administrative;
 
 namespace API.Entities.AtmMaintenance
 {
@@ -20,8 +21,13 @@ namespace API.Entities.AtmMaintenance
 
         public int FailingModuleId { get; set; }
         public AtmModule FailingModule { get; set; }
+
+        public int StatusId { get; set; }
+        public TicketStatus Status { get; set; }
+
+        public int OfficeId { get; set; }
+        public Office Office { get; set; }
         
-        public string Status { get; set; }
         public string ProblemDescription { get; set; } 
 
         public string EquipmentCode { get; set; } 
